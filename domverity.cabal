@@ -1,0 +1,21 @@
+name:                domverity
+version:             0.1.0.0
+-- synopsis:
+-- description:
+homepage:            https://github.com/dom-verity/domverity#readme
+license:             BSD3
+license-file:        LICENSE
+author:              Dom Verity
+maintainer:          dom.verity@gmail.com
+copyright:           Copyright ©2021 Dominic Verity
+category:            Unclassified
+build-type:          Simple
+extra-source-files:  README.md
+cabal-version:       >=1.10
+
+executable domverity
+  main-is:             site.hs
+  default-language:    Haskell2010
+  ghc-options:         -threaded
+  build-depends:       base >= 4.7 && < 5,
+                       hakyll
