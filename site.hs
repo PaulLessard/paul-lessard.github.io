@@ -145,7 +145,8 @@ siteCtx =
     defaultContext
 
 baseCtx =
-    constField "baseurl" "http://localhost:8000"
+    constField "baseurl" "https://dom-verity.github.io"
+    -- constField "baseurl" "http://localhost:8000"
 
 --------------------------------------------------------------------------------
 
