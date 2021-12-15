@@ -134,11 +134,13 @@ feedConfig = FeedConfiguration
 siteCtx :: Context String
 siteCtx =
     baseCtx `mappend`
-    constField "site_description" "Synthetic Perspectives" `mappend`
+    constField "site-description" "Synthetic Perspectives" `mappend`
     constField "site-url" "https://dom-verity.github.io" `mappend`
     constField "tagline" "Life, the Universe, and Higher Categories" `mappend`
     constField "site-title" "Em/Prof. Dominic Verity" `mappend`
     constField "copy-year" "2021" `mappend`
+    constField "site-author" "Dom Verity" `mappend`
+    constField "site-email" "dominic.verity@mq.edu.au" `mappend`
     constField "github-repo" "https://github.com/dom-verity/dom-verity.github.io" `mappend`
     defaultContext
 
