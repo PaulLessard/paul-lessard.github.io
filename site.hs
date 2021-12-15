@@ -122,11 +122,11 @@ postsPageId n = fromFilePath $ if (n == 1) then "index.html" else show n ++ "/in
 
 feedConfig :: FeedConfiguration
 feedConfig = FeedConfiguration
-    { feedTitle       = "lanyon-hakyll: Lanyon Theme on Hakyll"
-    , feedDescription = "A Fork of Lanyon based on Poole"
-    , feedAuthorName  = "Heuna Kim"
-    , feedAuthorEmail = "ai@heuna-kim.net"
-    , feedRoot        = "https://github.com/hahey/lanyon-hakyll"
+    { feedTitle       = "synthetic"
+    , feedDescription = "A blog about higher category theory and life"
+    , feedAuthorName  = "Dominic Verity"
+    , feedAuthorEmail = "dominic.verity@mq.edu.au"
+    , feedRoot        = "https://dom-verity.github.io"
     }
 
 --------------------------------------------------------------------------------
@@ -134,12 +134,12 @@ feedConfig = FeedConfiguration
 siteCtx :: Context String
 siteCtx =
     baseCtx `mappend`
-    constField "site_description" "Lanyon Theme on Hakyll" `mappend`
-    constField "site-url" "https://github.com/hahey/lanyon-hakyll" `mappend`
-    constField "tagline" "A Fork of Lanyon based on Poole" `mappend`
-    constField "site-title" "lanyon-hakyll" `mappend`
-    constField "copy-year" "2020" `mappend`
-    constField "github-repo" "https://github.com/hahey/lanyon-hakyll" `mappend`
+    constField "site_description" "Synthetic Perspectives" `mappend`
+    constField "site-url" "https://dom-verity.github.io" `mappend`
+    constField "tagline" "Life, the Universe, and Higher Categories" `mappend`
+    constField "site-title" "Em/Prof. Dominic Verity" `mappend`
+    constField "copy-year" "2021" `mappend`
+    constField "github-repo" "https://github.com/dom-verity/dom-verity.github.io" `mappend`
     defaultContext
 
 baseCtx =
