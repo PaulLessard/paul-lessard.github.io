@@ -10,10 +10,11 @@
       $endif$
     </span>
     $body$
+
+    $if(tags)$
+    <div itemprop="keywords" class="tags">
+        $tags$
+    </div>
+    $endif$
 </div>
 
-$if(tags)$
-<div itemprop="keywords" class="tags">
-    $tags$
-</div>
-$endif$

@@ -175,7 +175,7 @@ postCtxWithTags tags = makeTagsField "tags" tags `mappend` postCtx
 renderTagLink :: String -> Maybe FilePath -> Maybe H.Html
 renderTagLink _   Nothing         = Nothing
 renderTagLink tag (Just filePath) = Just $
-    H.a ! A.title (H.stringValue ("All pages tagged '"++tag++"'."))
+    H.a ! A.title (H.stringValue ("All posts tagged '"++tag++"'."))
         ! A.href (toValue $ toUrl filePath)
         ! A.class_ "tag"
         $ toHtml tag
