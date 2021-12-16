@@ -351,6 +351,29 @@ a.sidebar-nav-item:focus {
   color: inherit;
 }
 
+/* Tag block */
+.tags {
+  overflow: hidden;
+  font-family: "Roboto", Helvetica, Arial, sans-serif;
+  color: #cccccc;
+  text-align: center;
+  border: 2px dotted #eeeeee;
+  border-radius: 3px;
+  padding: 5px 5px 8px;
+  height: auto;
+  display: inline-block;
+}
+
+/* Tag */
+.tag {
+  padding: 1px 4px;
+  margin: 5px;
+  border: 1px solid #eeeeee;
+  background: #f5f5f5 none repeat scroll 0% 0%;
+  border-radius: 15px;
+  font-size: smaller;
+}
+
 
 /*
  * Pagination

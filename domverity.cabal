@@ -19,5 +19,6 @@ executable domverity
   ghc-options:       -threaded
   build-depends:     base >= 4.7 && < 5
                   ,  hakyll == 4.15.*
+                  ,  blaze-html == 0.9.*
                   ,  containers == 0.6.*
                   ,  filepath == 1.4.*

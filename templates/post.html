@@ -12,20 +12,8 @@
     $body$
 </div>
 
-$if(related_posts)$
-<div class="related">
-  <h2>Related posts</h2>
-  <ul class="related-posts">
-      $for(related_posts)$
-      <li>
-        <h3>
-          <a href="$url$">
-            $title$
-            <small>$date$</small>
-          </a>
-        </h3>
-      </li>
-    $endfor$
-  </ul>
+$if(tags)$
+<div itemprop="keywords" class="tags">
+    $tags$
 </div>
 $endif$

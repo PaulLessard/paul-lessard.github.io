@@ -1,11 +1,17 @@
 --------------------------------------------------------------------------------
 {-# LANGUAGE OverloadedStrings #-}
-import           Data.Monoid                   (mappend)
-import           Data.List                     (sortBy)
+{-# LANGUAGE LambdaCase #-}
+{-# OPTIONS_GHC -Wno-incomplete-patterns #-}
+import           Data.Monoid                   (mappend, mconcat)
+import           Data.List                     (sortBy, intersperse)
 import           Data.Ord                      (comparing)
 import           Hakyll
 import           Control.Monad                 (liftM, forM_)
 import           System.FilePath               (takeBaseName)
+import           Text.Blaze.Html               (toHtml, toValue, (!))
+import qualified Text.Blaze.Html5              as H
+import qualified Text.Blaze.Html5.Attributes   as A
+
 
 --------------------------------------------------------------------------------
 config :: Configuration
@@ -24,7 +30,7 @@ main = hakyllWith config $ do
         compile compressCssCompiler
 
     match "error/*" $ do
-        route $ (gsubRoute "error/" (const "") `composeRoutes` setExtension "html")
+        route $ gsubRoute "error/" (const "") `composeRoutes` setExtension "html"
         compile $ pandocCompiler
             >>= applyAsTemplate siteCtx
             >>= loadAndApplyTemplate "templates/default.html" (baseSidebarCtx <> siteCtx)
@@ -47,23 +53,31 @@ main = hakyllWith config $ do
 
     tags <- buildTags "posts/*" (fromCapture "tags/*.html")
 
+    tagsRules tags $ \ tag pat -> do
+        let title = "Posts tagged \"" ++ tag ++ "\""
+        route idRoute
+        compile $ do
+            posts <- recentFirst =<< loadAll pat
+            let ctx = constField "title" title `mappend`
+                      listField "posts" (postCtxWithTags tags) (return posts) `mappend`
+                      defaultContext
+
+            makeItem ""
+                >>= loadAndApplyTemplate "templates/tag.html" ctx
+                >>= loadAndApplyTemplate "templates/default.html" (baseSidebarCtx <> siteCtx)
+                >>= relativizeUrls
+
     match "posts/*" $ version "meta" $ do
         route   $ setExtension "html"
         compile getResourceBody
 
     match "posts/*" $ do
         route $ setExtension "html"
-        compile $ do
-            posts <- loadAll ("posts/*" .&&. hasVersion "meta")
-            let taggedPostCtx = (tagsField "tags" tags) `mappend`
-                                postCtx `mappend`
-                                (relatedPostsCtx posts 3)
-
-            pandocCompiler
-                >>= saveSnapshot "content"
-                >>= loadAndApplyTemplate "templates/post.html" taggedPostCtx
-                >>= loadAndApplyTemplate "templates/default.html" (baseSidebarCtx <> siteCtx)
-                >>= relativizeUrls
+        compile $ pandocCompiler
+            >>= saveSnapshot "content"
+            >>= loadAndApplyTemplate "templates/post.html" (postCtxWithTags tags)
+            >>= loadAndApplyTemplate "templates/default.html" (baseSidebarCtx <> siteCtx)
+            >>= relativizeUrls
 
     create ["archive.html"] $ do
         route idRoute
@@ -82,10 +96,10 @@ main = hakyllWith config $ do
 
     paginate <- buildPaginateWith postsGrouper "posts/*" postsPageId
 
-    paginateRules paginate $ \page pattern -> do
+    paginateRules paginate $ \ page pat -> do
         route idRoute
         compile $ do
-            posts <- recentFirst =<< loadAllSnapshots (pattern .&&. hasNoVersion) "content"
+            posts <- recentFirst =<< loadAllSnapshots (pat .&&. hasNoVersion) "content"
             let indexCtx =
                     constField "title" (if page == 1 then "Home"
                                                      else "Blog posts, page " ++ show page) `mappend`
@@ -116,7 +130,7 @@ postsGrouper :: (MonadFail m, MonadMetadata m) => [Identifier] -> m [[Identifier
 postsGrouper = liftM (paginateEvery 3) . sortRecentFirst
 
 postsPageId :: PageNumber -> Identifier
-postsPageId n = fromFilePath $ if (n == 1) then "index.html" else show n ++ "/index.html"
+postsPageId n = fromFilePath $ if n == 1 then "index.html" else show n ++ "/index.html"
 
 --------------------------------------------------------------------------------
 
@@ -155,24 +169,45 @@ postCtx =
     dateField "date" "%B %e, %Y" `mappend`
     defaultContext
 
+postCtxWithTags :: Tags -> Context String
+postCtxWithTags tags = makeTagsField "tags" tags `mappend` postCtx
+
+renderTagLink :: String -> Maybe FilePath -> Maybe H.Html
+renderTagLink _   Nothing         = Nothing
+renderTagLink tag (Just filePath) = Just $
+    H.a ! A.title (H.stringValue ("All pages tagged '"++tag++"'."))
+        ! A.href (toValue $ toUrl filePath)
+        ! A.class_ "tag"
+        $ toHtml tag
+
+makeTagsField :: String -> Tags -> Context a
+makeTagsField =
+  tagsFieldWith getTags renderTagLink (mconcat . intersperse ", ")
+
+
+
+--------------------------------------------------------------------------------
+-- Function in this section generate a ranked list of "related" posts
+-- This is currently deprecated in favour of tag based linking.
+
+tagsRulesVersioned :: Tags -> (String -> [Identifier] -> Rules ()) -> Rules ()
 tagsRulesVersioned tags rules =
     forM_ (tagsMap tags) $ \(tag, identifiers) ->
         rulesExtraDependencies [tagsDependency tags] $
             create [tagsMakeId tags tag] $
                 rules tag identifiers
 
-relatedPostsCtx
-  :: [Item String]  -> Int  -> Context String
+relatedPostsCtx :: [Item String]  -> Int  -> Context String
 relatedPostsCtx posts n = listFieldWith "related_posts" postCtx selectPosts
   where
-    rateItem ts i = length . filter (`elem` ts) <$> (getTags $ itemIdentifier i)
+    rateItem ts i = length . filter (`elem` ts) <$> getTags (itemIdentifier i)
     selectPosts s = do
       postTags <- getTags $ itemIdentifier s
       let trimmedItems = filter (not . matchPath s) posts
       take n . reverse <$> sortOnM (rateItem postTags) trimmedItems
 
 matchPath :: Item String -> Item String -> Bool
-matchPath x y = eqOn (toFilePath . itemIdentifier) x y
+matchPath = eqOn (toFilePath . itemIdentifier)
 
 eqOn :: Eq b => (a -> b) -> a -> a -> Bool
 eqOn f x y = f x == f y
@@ -196,10 +231,11 @@ baseNodeCtx =
 baseSidebarCtx = sidebarCtx baseNodeCtx
 
 evalCtxKey :: Context String -> [String] -> Item String -> Compiler String
-evalCtxKey context [key] item = (unContext context key [] item) >>= \cf ->
-        case cf of
-            StringField s -> return s
-            _             -> error $ "Internal error: StringField expected"
+evalCtxKey context [key] item =
+    unContext context key [] item >>=
+    \case
+        StringField s -> return s
+        _             -> error "Internal error: StringField expected"
 
 getMetadataKey :: [String] -> Item String -> Compiler String
 getMetadataKey [key] item = getMetadataField' (itemIdentifier item) key
