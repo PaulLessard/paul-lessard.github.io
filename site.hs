@@ -3,7 +3,7 @@
 {-# LANGUAGE LambdaCase #-}
 {-# OPTIONS_GHC -Wno-incomplete-patterns #-}
 import           Data.Monoid                   (mappend, mconcat)
-import           Data.List                     (sortBy, intersperse)
+import           Data.List                     (sortBy, intersperse, intercalate)
 import           Data.Ord                      (comparing)
 import           Hakyll
 import           Control.Monad                 (liftM, forM_)
@@ -11,6 +11,7 @@ import           System.FilePath               (takeBaseName)
 import           Text.Blaze.Html               (toHtml, toValue, (!))
 import qualified Text.Blaze.Html5              as H
 import qualified Text.Blaze.Html5.Attributes   as A
+import           Text.Blaze.Html.Renderer.String (renderHtml)
 
 
 --------------------------------------------------------------------------------
@@ -79,6 +80,24 @@ main = hakyllWith config $ do
             >>= loadAndApplyTemplate "templates/default.html" (baseSidebarCtx <> siteCtx)
             >>= relativizeUrls
 
+    match "About.markdown" $ do
+        route $ constRoute "index.html"
+        compile $ do
+            posts <- fmap (take 3) . recentFirst
+                        =<< loadAllSnapshots ("posts/*" .&&. hasNoVersion) "content"
+            let indexCtx =
+                    listField "posts" postCtx (return posts) `mappend`
+                    field "tags" (\_ -> renderAllTags tags)   `mappend`
+                    constField "home" ""                     `mappend`
+                    constField "title" "About"               `mappend`
+                    siteCtx
+
+            pandocCompiler
+                >>= loadAndApplyTemplate "templates/index.html" indexCtx
+                >>= loadAndApplyTemplate "templates/page.html" indexCtx
+                >>= loadAndApplyTemplate "templates/default.html" (baseSidebarCtx <> indexCtx)
+                >>= relativizeUrls
+
     create ["archive.html"] $ do
         route idRoute
         compile $ do
@@ -101,16 +120,15 @@ main = hakyllWith config $ do
         compile $ do
             posts <- recentFirst =<< loadAllSnapshots (pat .&&. hasNoVersion) "content"
             let indexCtx =
-                    constField "title" (if page == 1 then "Home"
-                                                     else "Blog posts, page " ++ show page) `mappend`
+                    constField "title" ("Blog posts, page " ++ show page) `mappend`
                     listField "posts" postCtx (return posts) `mappend`
-                    constField "home" "" `mappend`
+                    constField "blog" "" `mappend`
                     paginateContext paginate page `mappend`
                     siteCtx
 
             makeItem ""
                 >>= applyAsTemplate indexCtx
-                >>= loadAndApplyTemplate "templates/index.html" indexCtx
+                >>= loadAndApplyTemplate "templates/blog.html" indexCtx
                 >>= loadAndApplyTemplate "templates/default.html" (baseSidebarCtx <> indexCtx)
                 >>= relativizeUrls
 
@@ -119,18 +137,24 @@ main = hakyllWith config $ do
     create ["atom.xml"] $ do
         route idRoute
         compile $ do
-            let feedCtx = postCtx `mappend`
-                    bodyField "description"
+            let feedCtx = postCtx `mappend` bodyField "description"
             posts <- fmap (take 10) . recentFirst =<< loadAllSnapshots ("posts/*" .&&. hasNoVersion) "content"
             renderAtom feedConfig feedCtx posts
+
+    create ["rss.xml"] $ do
+        route idRoute
+        compile $ do
+            let feedCtx = postCtx `mappend` bodyField "description"
+            posts <- fmap (take 10) . recentFirst =<< loadAllSnapshots ("posts/*" .&&. hasNoVersion) "content"
+            renderRss feedConfig feedCtx posts
 
 --------------------------------------------------------------------------------
 
 postsGrouper :: (MonadFail m, MonadMetadata m) => [Identifier] -> m [[Identifier]]
-postsGrouper = liftM (paginateEvery 3) . sortRecentFirst
+postsGrouper = fmap (paginateEvery 3) . sortRecentFirst
 
 postsPageId :: PageNumber -> Identifier
-postsPageId n = fromFilePath $ if n == 1 then "index.html" else show n ++ "/index.html"
+postsPageId n = fromFilePath $ "blog/page" ++ show n ++ ".html"
 
 --------------------------------------------------------------------------------
 
@@ -172,19 +196,22 @@ postCtx =
 postCtxWithTags :: Tags -> Context String
 postCtxWithTags tags = makeTagsField "tags" tags `mappend` postCtx
 
-renderTagLink :: String -> Maybe FilePath -> Maybe H.Html
-renderTagLink _   Nothing         = Nothing
-renderTagLink tag (Just filePath) = Just $
+makeTagLink :: String -> FilePath -> H.Html
+makeTagLink tag filePath =
     H.a ! A.title (H.stringValue ("All posts tagged '"++tag++"'."))
         ! A.href (toValue $ toUrl filePath)
         ! A.class_ "tag"
         $ toHtml tag
 
+renderAllTags :: Tags -> Compiler String
+renderAllTags = 
+    return . mconcat . intersperse ", " . 
+        fmap (\case (s, _) -> renderHtml $ makeTagLink s ("/tags/" ++ s ++ ".html")) .
+        tagsMap
+
 makeTagsField :: String -> Tags -> Context a
 makeTagsField =
-  tagsFieldWith getTags renderTagLink (mconcat . intersperse ", ")
-
-
+  tagsFieldWith getTags (fmap . makeTagLink) (mconcat . intersperse ", ")
 
 --------------------------------------------------------------------------------
 -- Function in this section generate a ranked list of "related" posts

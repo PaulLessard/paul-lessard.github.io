@@ -10,6 +10,7 @@
 
   <nav class="sidebar-nav">
     <a class="sidebar-nav-item$if(home)$ active$endif$" href="$baseurl$">Home</a>
+    <a class="sidebar-nav-item$if(blog)$ active$endif$" href="$baseurl$/blog/page1.html">Blog</a>
 
     <!--- The code below dynamically generates a sidebar nav of the files in the folder /pages -->
 
@@ -26,12 +27,22 @@
   </nav>
 
   <div class="sidebar-item">
+    &copy; $copy-year$. <a href="mailto:$site-email$">$site-author$</a></br> 
+    All rights reserved.
+    <div>
+      <a type="application/atom+xml" href="$baseurl$/atom.xml">
+        <img src="$baseurl$/images/atom_icon.svg" style="display: inline; width: 32px"/>
+      </a>
+      <a type="application/rss+xml" href="$baseurl$/rss.xml">
+        <img src="$baseurl$/images/rss_icon.svg" style="display: inline; width: 32px"/>
+      </a>
+      <a href="https://github.com/dom-verity">
+        <img src="$baseurl$/images/github_icon.svg" style="display: inline; width: 32px"/>
+      </a>
+    </div>
     <p>
-      &copy; $copy-year$. <a href="mailto:$site-email$">$site-author$</a></br> 
-      All rights reserved.
-    </p>
-    <p>
-        <img src="$baseurl$/images/dom.png" class=logo style="display: inline;"/>
+        <img src="$baseurl$/images/dom.png" class=logo 
+             style="display: block; margin-left:auto; margin-right: auto; width: 60%"/>
         Site created with
         <a href="https://jaspervdj.be/hakyll">Hakyll</a>.
         <br>
@@ -40,5 +51,6 @@
         based on
         <a href="https://lanyon.getpoole.com/">Lanyon</a>.
     </p>
-  </div>
+</div>
+
 </div>
