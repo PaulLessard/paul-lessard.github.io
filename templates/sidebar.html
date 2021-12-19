@@ -22,7 +22,7 @@
 
     <a class="sidebar-nav-item$if(archive)$ active$endif$" href="$baseurl$/archive.html">Archive</a>
 
-    <a class="sidebar-nav-item" href="$github-repo$">GitHub project</a>
+    <a class="sidebar-nav-item" href="$github-repo$" target="_blank" rel="noopener noreferrer">GitHub project</a>
 
   </nav>
 
@@ -36,7 +36,7 @@
       <a class="sidebar-icon" type="application/rss+xml" href="$baseurl$/rss.xml">
         <img class="sidebar-icon" src="$baseurl$/images/rss_icon.svg"/>
       </a>
-      <a class="sidebar-icon" href="https://github.com/dom-verity">
+      <a class="sidebar-icon" href="$github-url$">
         <img class="sidebar-icon" src="$baseurl$/images/github_icon.svg"/>
       </a>
     </div>
@@ -44,7 +44,7 @@
         <img src="$baseurl$/images/dom.png" class=logo 
              style="display: block; margin-left:auto; margin-right: auto; width: 60%"/>
         Site created with
-        <a class="sidebar-icon" href="https://jaspervdj.be/hakyll">Hakyll</a>.
+        <a href="https://jaspervdj.be/hakyll">Hakyll</a>.
         <br>
         Modified theme
         <a href="https://github.com/hahey/lanyon-hakyll">lanyon-hakyll</a>

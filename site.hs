@@ -179,6 +179,7 @@ siteCtx =
     constField "copy-year" "2021" `mappend`
     constField "site-author" "Dom Verity" `mappend`
     constField "site-email" "dominic.verity@mq.edu.au" `mappend`
+    constField "github-url" "https://github.com/dom-verity" `mappend`
     constField "github-repo" "https://github.com/dom-verity/dom-verity.github.io" `mappend`
     defaultContext
 
@@ -205,13 +206,13 @@ makeTagLink tag filePath =
 
 renderAllTags :: Tags -> Compiler String
 renderAllTags = 
-    return . mconcat . intersperse ", " . 
+    return . mconcat . 
         fmap (\case (s, _) -> renderHtml $ makeTagLink s ("/tags/" ++ s ++ ".html")) .
         tagsMap
 
 makeTagsField :: String -> Tags -> Context a
 makeTagsField =
-  tagsFieldWith getTags (fmap . makeTagLink) (mconcat . intersperse ", ")
+  tagsFieldWith getTags (fmap . makeTagLink) mconcat
 
 --------------------------------------------------------------------------------
 -- Function in this section generate a ranked list of "related" posts

@@ -32,7 +32,12 @@
   <link rel="shortcut icon" href="{{ '/public/favicon.ico' | absolute_url }}">
   -->
 
-  <link rel="alternate" type="application/rss+xml" title="RSS" href="https://dom-verity.github.io/atom.xml">
+  <!-- RSS and Atom auto-discovery -->
+  <link rel="alternate" type="application/atom+xml" title="Atom feed for Dom Verity's blog" href="https://dom-verity.github.io/atom.xml">
+  <link rel="alternate" type="application/rss+xml" title="RSS feed for Dom Verity's blog" href="https://dom-verity.github.io/rss.xml">
+
+  <!-- Javascript enabling mathematics in text -->
+  <!-- script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script-->
 
   <!--- deactivate google analytics
   {% if site.google_analytics_id %}
@@ -75,7 +80,7 @@
 
     <a class="sidebar-nav-item" href="https://dom-verity.github.io/archive.html">Archive</a>
 
-    <a class="sidebar-nav-item" href="https://github.com/dom-verity/dom-verity.github.io">GitHub project</a>
+    <a class="sidebar-nav-item" href="https://github.com/dom-verity/dom-verity.github.io" target="_blank" rel="noopener noreferrer">GitHub project</a>
 
   </nav>
 
@@ -96,7 +101,7 @@
     <p>
         <img src="https://dom-verity.github.io/images/dom.png" class="logo" style="display: block; margin-left:auto; margin-right: auto; width: 60%" />
         Site created with
-        <a class="sidebar-icon" href="https://jaspervdj.be/hakyll">Hakyll</a>.
+        <a href="https://jaspervdj.be/hakyll">Hakyll</a>.
         <br>
         Modified theme
         <a href="https://github.com/hahey/lanyon-hakyll">lanyon-hakyll</a>
@@ -138,7 +143,7 @@
 
     
     <div itemprop="keywords" class="tags">
-        <a title="All posts tagged 'Mauris'." href="../tags/Mauris.html" class="tag">Mauris</a>, <a title="All posts tagged 'lorem'." href="../tags/lorem.html" class="tag">lorem</a>
+        <a title="All posts tagged 'Mauris'." href="../tags/Mauris.html" class="tag">Mauris</a><a title="All posts tagged 'lorem'." href="../tags/lorem.html" class="tag">lorem</a>
     </div>
     
 </div>
