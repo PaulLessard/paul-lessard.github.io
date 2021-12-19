@@ -40,9 +40,9 @@ main = hakyllWith config $ do
         route $ setExtension "html"
         compile $ do
             pageName <- takeBaseName . toFilePath <$> getUnderlying
-            let pageCtx = constField pageName "" `mappend`
+            let pageCtx = constField pageName "" <>
                           baseNodeCtx
-            let evalCtx = functionField "get-meta" getMetadataKey `mappend`
+            let evalCtx = functionField "get-meta" getMetadataKey <>
                           functionField "eval" (evalCtxKey pageCtx)
             let activeSidebarCtx = sidebarCtx (evalCtx <> pageCtx)
 
@@ -59,8 +59,8 @@ main = hakyllWith config $ do
         route idRoute
         compile $ do
             posts <- recentFirst =<< loadAll pat
-            let ctx = constField "title" title `mappend`
-                      listField "posts" (postCtxWithTags tags) (return posts) `mappend`
+            let ctx = constField "title" title <>
+                      listField "posts" (postCtxWithTags tags) (return posts) <>
                       defaultContext
 
             makeItem ""
@@ -86,10 +86,10 @@ main = hakyllWith config $ do
             posts <- fmap (take 3) . recentFirst
                         =<< loadAllSnapshots ("posts/*" .&&. hasNoVersion) "content"
             let indexCtx =
-                    listField "posts" postCtx (return posts) `mappend`
-                    field "tags" (\_ -> renderAllTags tags)   `mappend`
-                    constField "home" ""                     `mappend`
-                    constField "title" "About"               `mappend`
+                    listField "posts" postCtx (return posts) <>
+                    field "tags" (\_ -> renderAllTags tags)   <>
+                    constField "home" ""                     <>
+                    constField "title" "About"               <>
                     siteCtx
 
             pandocCompiler
@@ -103,9 +103,9 @@ main = hakyllWith config $ do
         compile $ do
             posts <- recentFirst =<< loadAllSnapshots ("posts/*" .&&. hasNoVersion) "content"
             let archiveCtx =
-                    listField "posts" postCtx (return posts) `mappend`
-                    constField "title" "Archive"             `mappend`
-                    constField "archive" ""                  `mappend`
+                    listField "posts" postCtx (return posts) <>
+                    constField "title" "Archive"             <>
+                    constField "archive" ""                  <>
                     siteCtx
 
             makeItem ""
@@ -120,10 +120,10 @@ main = hakyllWith config $ do
         compile $ do
             posts <- recentFirst =<< loadAllSnapshots (pat .&&. hasNoVersion) "content"
             let indexCtx =
-                    constField "title" ("Blog posts, page " ++ show page) `mappend`
-                    listField "posts" postCtx (return posts) `mappend`
-                    constField "blog" "" `mappend`
-                    paginateContext paginate page `mappend`
+                    constField "title" ("Blog posts, page " ++ show page) <>
+                    listField "posts" postCtx (return posts)              <>
+                    constField "blog" ""                                  <>
+                    paginateContext paginate page                         <>
                     siteCtx
 
             makeItem ""
@@ -137,14 +137,14 @@ main = hakyllWith config $ do
     create ["atom.xml"] $ do
         route idRoute
         compile $ do
-            let feedCtx = postCtx `mappend` bodyField "description"
+            let feedCtx = postCtx <> bodyField "description"
             posts <- fmap (take 10) . recentFirst =<< loadAllSnapshots ("posts/*" .&&. hasNoVersion) "content"
             renderAtom feedConfig feedCtx posts
 
     create ["rss.xml"] $ do
         route idRoute
         compile $ do
-            let feedCtx = postCtx `mappend` bodyField "description"
+            let feedCtx = postCtx <> bodyField "description"
             posts <- fmap (take 10) . recentFirst =<< loadAllSnapshots ("posts/*" .&&. hasNoVersion) "content"
             renderRss feedConfig feedCtx posts
 
@@ -171,31 +171,26 @@ feedConfig = FeedConfiguration
 
 siteCtx :: Context String
 siteCtx =
-    baseCtx `mappend`
-    constField "site-description" "Synthetic Perspectives" `mappend`
-    constField "site-url" "https://dom-verity.github.io" `mappend`
-    constField "tagline" "Life, the Universe, and Higher Categories" `mappend`
-    constField "site-title" "Em/Prof. Dominic Verity" `mappend`
-    constField "copy-year" "2021" `mappend`
-    constField "site-author" "Dom Verity" `mappend`
-    constField "site-email" "dominic.verity@mq.edu.au" `mappend`
-    constField "github-url" "https://github.com/dom-verity" `mappend`
-    constField "github-repo" "https://github.com/dom-verity/dom-verity.github.io" `mappend`
+    constField "site-description" "Synthetic Perspectives"                        <>
+    constField "site-url" "https://dom-verity.github.io"                          <>
+    constField "tagline" "Life, the Universe, and Higher Categories"              <>
+    constField "site-title" "Em/Prof. Dominic Verity"                             <>
+    constField "copy-year" "2021"                                                 <>
+    constField "site-author" "Dom Verity"                                         <>
+    constField "site-email" "dominic.verity@mq.edu.au"                            <>
+    constField "github-url" "https://github.com/dom-verity"                       <>
+    constField "github-repo" "https://github.com/dom-verity/dom-verity.github.io" <>
     defaultContext
-
-baseCtx =
-    constField "baseurl" "https://dom-verity.github.io"
-    -- constField "baseurl" "http://localhost:8000"
 
 --------------------------------------------------------------------------------
 
 postCtx :: Context String
 postCtx =
-    dateField "date" "%B %e, %Y" `mappend`
+    dateField "date" "%B %e, %Y" <>
     defaultContext
 
 postCtxWithTags :: Tags -> Context String
-postCtxWithTags tags = makeTagsField "tags" tags `mappend` postCtx
+postCtxWithTags tags = makeTagsField "tags" tags <> postCtx
 
 makeTagLink :: String -> FilePath -> H.Html
 makeTagLink tag filePath =
@@ -247,14 +242,13 @@ sortOnM f xs = map fst . sortBy (comparing snd) . zip xs <$> mapM f xs
 
 sidebarCtx :: Context String -> Context String
 sidebarCtx nodeCtx =
-    listField "list_pages" nodeCtx (loadAllSnapshots ("pages/*" .&&. hasNoVersion) "page-content") `mappend`
+    listField "list_pages" nodeCtx (loadAllSnapshots ("pages/*" .&&. hasNoVersion) "page-content") <>
     defaultContext
 
 baseNodeCtx :: Context String
 baseNodeCtx =
-    urlField "node-url" `mappend`
-    titleField "title" `mappend`
-    baseCtx
+    urlField "node-url" <>
+    titleField "title"
 
 baseSidebarCtx = sidebarCtx baseNodeCtx
 

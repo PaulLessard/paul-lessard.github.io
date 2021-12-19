@@ -9,18 +9,18 @@
   </div>
 
   <nav class="sidebar-nav">
-    <a class="sidebar-nav-item$if(home)$ active$endif$" href="$baseurl$">Home</a>
-    <a class="sidebar-nav-item$if(blog)$ active$endif$" href="$baseurl$/blog/page1.html">Blog</a>
+    <a class="sidebar-nav-item$if(home)$ active$endif$" href="/">Home</a>
+    <a class="sidebar-nav-item$if(blog)$ active$endif$" href="/blog/page1.html">Blog</a>
 
     <!--- The code below dynamically generates a sidebar nav of the files in the folder /pages -->
 
     $for(list_pages)$
       $if(title)$
-        <a class="sidebar-nav-item$if(eval(title))$ active$endif$" href="$baseurl$$node-url$">$title$</a>
+        <a class="sidebar-nav-item$if(eval(title))$ active$endif$" href="$node-url$">$title$</a>
       $endif$
     $endfor$
 
-    <a class="sidebar-nav-item$if(archive)$ active$endif$" href="$baseurl$/archive.html">Archive</a>
+    <a class="sidebar-nav-item$if(archive)$ active$endif$" href="/archive.html">Archive</a>
 
     <a class="sidebar-nav-item" href="$github-repo$" target="_blank" rel="noopener noreferrer">GitHub project</a>
 
@@ -30,18 +30,18 @@
     &copy; $copy-year$. <a href="mailto:$site-email$">$site-author$</a></br> 
     All rights reserved.
     <div>
-      <a class="sidebar-icon" type="application/atom+xml" href="$baseurl$/atom.xml">
-        <img class="sidebar-icon" src="$baseurl$/images/atom_icon.svg"/>
+      <a class="sidebar-icon" type="application/atom+xml" href="/atom.xml">
+        <img class="sidebar-icon" src="/images/atom_icon.svg"/>
       </a>
-      <a class="sidebar-icon" type="application/rss+xml" href="$baseurl$/rss.xml">
-        <img class="sidebar-icon" src="$baseurl$/images/rss_icon.svg"/>
+      <a class="sidebar-icon" type="application/rss+xml" href="/rss.xml">
+        <img class="sidebar-icon" src="/images/rss_icon.svg"/>
       </a>
       <a class="sidebar-icon" href="$github-url$">
-        <img class="sidebar-icon" src="$baseurl$/images/github_icon.svg"/>
+        <img class="sidebar-icon" src="/images/github_icon.svg"/>
       </a>
     </div>
     <p>
-        <img src="$baseurl$/images/dom.png" class=logo 
+        <img src="/images/dom.png" class=logo 
              style="display: block; margin-left:auto; margin-right: auto; width: 60%"/>
         Site created with
         <a href="https://jaspervdj.be/hakyll">Hakyll</a>.
