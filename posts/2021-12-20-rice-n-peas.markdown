@@ -112,7 +112,7 @@ But don't worry too much if the rice starts stick a little to the bottom of the 
 
 This is the very best accompaniment for any stew or curry. I particularly like to have it with _fricasee chicken_ or _curried goat_, two Jamaican favourites. Indeed curried goat was the very best thing about school lunches when I was a pickney. 
 
-You might also consider getting hold of a bottle of [Pickapepper sauce](http://pickapeppa.com/) for the table when you serve rice 'n' peas. 
+You might also consider getting hold of a bottle of [Pickapeppa sauce](https://pickapeppasauce.co/) to pep up your rice 'n' peas feast; this iconic Jamaican condiment is celebrating its 100^th^ Birthday this year.
 
 I like to make up a big batch of rice 'n' peas and separate it into family serving size containers for the freezer, where it will keep for a couple of months. These can be defrosted and reheated in the microwave or, if you like a bit of a paella style crust, your can defrost and then fry in a frying pan with some butter.
 
