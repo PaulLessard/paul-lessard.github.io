@@ -6,13 +6,13 @@
         $title$
       </a>
     </h1>
-    <span class="post-date">$date$,
-      $if(author)$
-         Posted by $author$
-      $endif$
+    <span class="post-date">
+      $date$$if(author)$, Posted by $author$$endif$
     </span>
 
     $body$
+
+    <a href="$url$">Read more...</a>
   </div>
   $endfor$
 </div>

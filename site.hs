@@ -68,14 +68,13 @@ main = hakyllWith config $ do
                 >>= loadAndApplyTemplate "templates/default.html" (baseSidebarCtx <> siteCtx)
                 >>= relativizeUrls
 
-    match "posts/*" $ version "meta" $ do
-        route   $ setExtension "html"
-        compile getResourceBody
-
     match "posts/*" $ do
         route $ setExtension "html"
         compile $ pandocCompiler
-            >>= saveSnapshot "content"
+            >>= \post -> do  
+                    teaser <- makeTeaser post
+                    saveSnapshot "teaser" teaser
+                    saveSnapshot "content" post
             >>= loadAndApplyTemplate "templates/post.html" (postCtxWithTags tags)
             >>= loadAndApplyTemplate "templates/default.html" (baseSidebarCtx <> siteCtx)
             >>= relativizeUrls
@@ -84,7 +83,7 @@ main = hakyllWith config $ do
         route $ constRoute "index.html"
         compile $ do
             posts <- fmap (take 3) . recentFirst
-                        =<< loadAllSnapshots ("posts/*" .&&. hasNoVersion) "content"
+                        =<< loadAllSnapshots "posts/*" "content"
             let indexCtx =
                     listField "posts" postCtx (return posts) <>
                     field "tags" (\_ -> renderAllTags tags)   <>
@@ -101,7 +100,7 @@ main = hakyllWith config $ do
     create ["archive.html"] $ do
         route idRoute
         compile $ do
-            posts <- recentFirst =<< loadAllSnapshots ("posts/*" .&&. hasNoVersion) "content"
+            posts <- recentFirst =<< loadAllSnapshots "posts/*" "content"
             let archiveCtx =
                     listField "posts" postCtx (return posts) <>
                     constField "title" "Archive"             <>
@@ -118,10 +117,10 @@ main = hakyllWith config $ do
     paginateRules paginate $ \ page pat -> do
         route idRoute
         compile $ do
-            posts <- recentFirst =<< loadAllSnapshots (pat .&&. hasNoVersion) "content"
+            let posts = recentFirst =<< loadAllSnapshots pat "teaser"
             let indexCtx =
                     constField "title" ("Blog posts, page " ++ show page) <>
-                    listField "posts" postCtx (return posts)              <>
+                    listField "posts" postCtx posts                       <>
                     constField "blog" ""                                  <>
                     paginateContext paginate page                         <>
                     siteCtx
@@ -138,23 +137,37 @@ main = hakyllWith config $ do
         route idRoute
         compile $ do
             let feedCtx = postCtx <> bodyField "description"
-            posts <- fmap (take 10) . recentFirst =<< loadAllSnapshots ("posts/*" .&&. hasNoVersion) "content"
+            posts <- fmap (take 10) . recentFirst =<< loadAllSnapshots "posts/*" "teaser"
             renderAtom feedConfig feedCtx posts
 
     create ["rss.xml"] $ do
         route idRoute
         compile $ do
             let feedCtx = postCtx <> bodyField "description"
-            posts <- fmap (take 10) . recentFirst =<< loadAllSnapshots ("posts/*" .&&. hasNoVersion) "content"
+            posts <- fmap (take 10) . recentFirst =<< loadAllSnapshots "posts/*" "teaser"
             renderRss feedConfig feedCtx posts
 
 --------------------------------------------------------------------------------
 
 postsGrouper :: (MonadFail m, MonadMetadata m) => [Identifier] -> m [[Identifier]]
-postsGrouper = fmap (paginateEvery 3) . sortRecentFirst
+postsGrouper = fmap (paginateEvery 5) . sortRecentFirst
 
 postsPageId :: PageNumber -> Identifier
 postsPageId n = fromFilePath $ "blog/page" ++ show n ++ ".html"
+
+makeTeaserWithSeparator :: String -> Item String -> Compiler (Item String)
+makeTeaserWithSeparator separator item =
+    case needlePrefix separator (itemBody item) of
+        Nothing -> fail $
+            "Main: no teaser defined for " ++
+                show (itemIdentifier item)
+        Just t -> return (itemSetBody t item)
+
+teaserSeparator :: String
+teaserSeparator = "<!--more-->"
+
+makeTeaser :: Item String -> Compiler (Item String)
+makeTeaser = makeTeaserWithSeparator teaserSeparator
 
 --------------------------------------------------------------------------------
 
@@ -187,6 +200,7 @@ siteCtx =
 postCtx :: Context String
 postCtx =
     dateField "date" "%B %e, %Y" <>
+    modificationTimeField "modified" "%B %e, %Y" <>
     defaultContext
 
 postCtxWithTags :: Tags -> Context String
@@ -210,39 +224,10 @@ makeTagsField =
   tagsFieldWith getTags (fmap . makeTagLink) mconcat
 
 --------------------------------------------------------------------------------
--- Function in this section generate a ranked list of "related" posts
--- This is currently deprecated in favour of tag based linking.
-
-tagsRulesVersioned :: Tags -> (String -> [Identifier] -> Rules ()) -> Rules ()
-tagsRulesVersioned tags rules =
-    forM_ (tagsMap tags) $ \(tag, identifiers) ->
-        rulesExtraDependencies [tagsDependency tags] $
-            create [tagsMakeId tags tag] $
-                rules tag identifiers
-
-relatedPostsCtx :: [Item String]  -> Int  -> Context String
-relatedPostsCtx posts n = listFieldWith "related_posts" postCtx selectPosts
-  where
-    rateItem ts i = length . filter (`elem` ts) <$> getTags (itemIdentifier i)
-    selectPosts s = do
-      postTags <- getTags $ itemIdentifier s
-      let trimmedItems = filter (not . matchPath s) posts
-      take n . reverse <$> sortOnM (rateItem postTags) trimmedItems
-
-matchPath :: Item String -> Item String -> Bool
-matchPath = eqOn (toFilePath . itemIdentifier)
-
-eqOn :: Eq b => (a -> b) -> a -> a -> Bool
-eqOn f x y = f x == f y
-
-sortOnM :: (Monad m, Ord b) => (a -> m b) -> [a] -> m [a]
-sortOnM f xs = map fst . sortBy (comparing snd) . zip xs <$> mapM f xs
-
---------------------------------------------------------------------------------
 
 sidebarCtx :: Context String -> Context String
 sidebarCtx nodeCtx =
-    listField "list_pages" nodeCtx (loadAllSnapshots ("pages/*" .&&. hasNoVersion) "page-content") <>
+    listField "list_pages" nodeCtx (loadAllSnapshots "pages/*" "page-content") <>
     defaultContext
 
 baseNodeCtx :: Context String
