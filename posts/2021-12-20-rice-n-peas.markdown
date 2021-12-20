@@ -31,7 +31,7 @@ Over the years I have come to appreciate, and revel in, just how much of Uncle B
 <tr><td style="font-family: Roboto; font-size: 50%;">Image (c) 2020 <a href="https://www.sweetandsorrel.com">Sweet and Sorrel</a></td></tr>
 </table>
 
-Those of you who know Jamaica, even in passing, will know that no significant meal is complete without a bowl of ***Rice 'n' Peas***. So there can be no better to honour the memory of Uncle Bob than to share with you his recipe for that iconic Jamaican dish.
+Those of you who know Jamaica, even in passing, will know that no significant meal is complete without a bowl of ***Rice 'n' Peas***. So there can be no better way to honour the memory of Uncle Bob than to share with you his recipe for that iconic Jamaican dish.
 
 You should also know that the "peas" in rice 'n' peas are not peas at all, they are actually Red Kidney Beans (called _red peas_) or sometimes Pigeon Peas (called _gungo peas_). For you see, in Jamaican creole we just don't use the word bean at all; instead anything small, roundish and edible is called simply a _pea_.
 
@@ -76,7 +76,7 @@ Since most of us don't have a magic pot to fall back on, we're going to have to 
 ### Movement One
 
 <table style="float: right; width: 40%">
-<tr><td><img src="http://imgs.xkcd.com/comics/tasks.png"/></td></tr>
+<tr><td><img src="http://imgs.xkcd.com/comics/tasks.png" title="In the 60s, Marvin Minsky assigned a couple of undergrads to spend the summer programming a computer to use a camera to identify objects in a scene. He figured they&#39;d have the problem solved by the end of the summer. Half a century later, we&#39;re still working on it."/></td></tr>
 <tr><td style="font-family: Roboto; font-size: 50%;">Image (c) 2021 <a href="https://xkcd.com/1425">XKCD</a></td></tr>
 </table>
 
@@ -112,7 +112,7 @@ But don't worry too much if the rice starts stick a little to the bottom of the 
 
 This is the very best accompaniment for any stew or curry. I particularly like to have it with _fricasee chicken_ or _curried goat_, two Jamaican favourites. Indeed curried goat was the very best thing about school lunches when I was a pickney. 
 
-You might also consider getting hold of a bottle of [Pickapepper sauce](http://pickapeppa.com/) for the table when you serve rice 'n' peas. You can now buy this quite easily in Sydney, I even found it on the shelf at Thomas Dux in Hornsby Westfield a couple of weeks ago.
+You might also consider getting hold of a bottle of [Pickapepper sauce](http://pickapeppa.com/) for the table when you serve rice 'n' peas. 
 
 I like to make up a big batch of rice 'n' peas and separate it into family serving size containers for the freezer, where it will keep for a couple of months. These can be defrosted and reheated in the microwave or, if you like a bit of a paella style crust, your can defrost and then fry in a frying pan with some butter.
 
