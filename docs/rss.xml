@@ -7,41 +7,14 @@
         <description><![CDATA[A blog about higher category theory and life]]></description>
         <atom:link href="https://dom-verity.github.io/rss.xml" rel="self"
                    type="application/rss+xml" />
-        <lastBuildDate>Mon, 07 Dec 2015 00:00:00 UT</lastBuildDate>
+        <lastBuildDate>Mon, 20 Dec 2021 00:00:00 UT</lastBuildDate>
         <item>
-    <title>Tu Quoque</title>
-    <link>https://dom-verity.github.io/posts/2015-12-07-tu-quoque.html</link>
-    <description><![CDATA[<p>Vestibulum leo turpis, dignissim quis ultrices sit amet, iaculis ac ligula. Pellentesque tristique, velit eget scelerisque scelerisque, est dolor ultrices arcu, quis ullamcorper justo arcu luctus mauris. Integer congue molestie nisi id posuere. Fusce pellentesque gravida tempus. Integer viverra tortor nec eros mollis quis convallis sem laoreet. Nulla id libero ac erat varius laoreet. Proin sed est est. Curabitur lacinia fermentum lorem, elementum malesuada ipsum malesuada ut. Donec suscipit elit id leo vehicula mattis non sed leo. Morbi varius eleifend varius. Nulla vestibulum, neque vitae aliquam eleifend, nisi tellus placerat nunc, quis suscipit elit turpis eu tortor. Etiam euismod convallis lectus quis venenatis. Phasellus laoreet magna in nibh cursus eu egestas nulla convallis. Aliquam vel ullamcorper risus. Fusce dictum, massa id consequat viverra, nulla ante tristique est, a faucibus nisi enim nec dui. Donec metus ligula, condimentum at porttitor eget, lobortis at quam.</p>
+    <title>A recipe for success: Uncle Bob Verity's rice 'n' peas</title>
+    <link>https://dom-verity.github.io/posts/2021-12-20-rice-n-peas.html</link>
+    <description><![CDATA[<p>What could be more fitting than to kick off this blog by recycling a post I wrote a few years ago about my favourite dish <em>rice ‘n’ peas</em>. Given the season, indeed, I should mention that no Jamaican Christmas would be complete without a vast pot of this staple weighing down the family lunch table. I’ll start with a little personal history, but scroll down in the full article if you’re keen to get straight to my Grandfather’s recipe for rice ‘n’ peas.</p>
 ]]></description>
-    <pubDate>Mon, 07 Dec 2015 00:00:00 UT</pubDate>
-    <guid>https://dom-verity.github.io/posts/2015-12-07-tu-quoque.html</guid>
-    <dc:creator>Dominic Verity</dc:creator>
-</item>
-<item>
-    <title>Carpe Diem</title>
-    <link>https://dom-verity.github.io/posts/2015-11-28-carpe-diem.html</link>
-    <description><![CDATA[<p>Fusce tortor quam, egestas in posuere quis, porttitor vel turpis. Donec vulputate porttitor augue at rhoncus. Proin iaculis consectetur sagittis. Curabitur venenatis turpis sit amet purus tristique nec posuere risus laoreet. Nullam nisi sem, dapibus id semper id, egestas vel arcu. Morbi porttitor ipsum placerat erat consequat sed consequat purus feugiat. Donec auctor elit ut risus mattis facilisis. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-]]></description>
-    <pubDate>Sat, 28 Nov 2015 00:00:00 UT</pubDate>
-    <guid>https://dom-verity.github.io/posts/2015-11-28-carpe-diem.html</guid>
-    <dc:creator>Dominic Verity</dc:creator>
-</item>
-<item>
-    <title>Rosa Rosa Rosam</title>
-    <link>https://dom-verity.github.io/posts/2015-10-07-rosa-rosa-rosam.html</link>
-    <description><![CDATA[<p>Suspendisse pharetra ullamcorper sem et auctor. Suspendisse vitae tellus eu turpis dignissim gravida ut ut tortor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Morbi aliquam sapien quis nisl sodales non aliquet nisl iaculis. Curabitur fermentum orci vel sapien pellentesque id condimentum metus vehicula. Curabitur turpis purus, scelerisque at interdum quis, placerat sit amet tortor. Aliquam erat volutpat.</p>
-]]></description>
-    <pubDate>Wed, 07 Oct 2015 00:00:00 UT</pubDate>
-    <guid>https://dom-verity.github.io/posts/2015-10-07-rosa-rosa-rosam.html</guid>
-    <dc:creator>Dominic Verity</dc:creator>
-</item>
-<item>
-    <title>S.P.Q.R.</title>
-    <link>https://dom-verity.github.io/posts/2015-08-12-spqr.html</link>
-    <description><![CDATA[<p>Mauris in lorem nisl. Maecenas tempus facilisis ante, eget viverra nisl tincidunt et. Donec turpis lectus, mattis ac malesuada a, accumsan eu libero. Morbi condimentum, tortor et tincidunt ullamcorper, sem quam pretium nulla, id convallis lectus libero nec turpis. Proin dapibus nisi id est sodales nec ultrices tortor pellentesque. Vivamus vel nisi ac lacus sollicitudin vulputate ac ut ligula. Nullam feugiat risus eget eros gravida in molestie sapien euismod. Nunc sed hendrerit orci. Nulla mollis consequat lorem ac blandit. Ut et turpis mauris. Nulla est odio, posuere id ullamcorper sit amet, tincidunt vel justo. Curabitur placerat tincidunt varius. Nulla vulputate, ipsum eu consectetur mollis, dui nibh aliquam neque, at ultricies leo ligula et arcu. Proin et mi eget tellus sodales lobortis. Sed tempor, urna vel pulvinar faucibus, lectus urna vehicula ante, at facilisis dolor odio at lorem. Morbi vehicula euismod urna, et imperdiet urna ornare vitae.</p>
-]]></description>
-    <pubDate>Wed, 12 Aug 2015 00:00:00 UT</pubDate>
-    <guid>https://dom-verity.github.io/posts/2015-08-12-spqr.html</guid>
+    <pubDate>Mon, 20 Dec 2021 00:00:00 UT</pubDate>
+    <guid>https://dom-verity.github.io/posts/2021-12-20-rice-n-peas.html</guid>
     <dc:creator>Dominic Verity</dc:creator>
 </item>
 
