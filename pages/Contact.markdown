@@ -22,13 +22,8 @@ Room 529, 12 Wally\'s Walk,\
 Macquarie University,\
 NSW 2109, Australia
 
-**E:** <dominic.verity@mq.edu.au> &nbsp;[**\|**]{style="color: #DD1911"}&nbsp; [**mq.edu.au**](http://mq.edu.au)
+**E:** <dominic.verity@mq.edu.au> &nbsp;[**\|**]{style="color: #DD1911"}&nbsp; [**mq.edu.au**](http://mq.edu.au)  
+**E:** <dom.verity@gmail.com>
 
 [![Macquarie University](http://webresources.mq.edu.au/mq_templates/global/images/macquarieUni_sm.png)](http://mq.edu.au)
 
-**Home**\
-15 Kuring-Gai Chase Road\
-Mount Colah,\
-NSW 2079, Australia
-
-**E:** <dom.verity@gmail.com>
