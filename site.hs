@@ -193,6 +193,7 @@ siteCtx =
     constField "site-email" "dominic.verity@mq.edu.au"                            <>
     constField "github-url" "https://github.com/dom-verity"                       <>
     constField "github-repo" "https://github.com/dom-verity/dom-verity.github.io" <>
+    constField "twitter-url" "https://twitter.com/DomVerity"                      <>
     defaultContext
 
 --------------------------------------------------------------------------------
