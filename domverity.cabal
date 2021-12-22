@@ -22,3 +22,4 @@ executable domverity
                   ,  blaze-html == 0.9.*
                   ,  containers == 0.6.*
                   ,  filepath == 1.4.*
+                  ,  pandoc == 2.14.*

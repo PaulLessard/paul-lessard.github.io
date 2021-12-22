@@ -5,13 +5,14 @@
 import           Data.Monoid                   (mappend, mconcat)
 import           Data.List                     (sortBy, intersperse, intercalate)
 import           Data.Ord                      (comparing)
-import           Hakyll
+import           Hakyll                        hiding (pandocCompiler)
 import           Control.Monad                 (liftM, forM_)
 import           System.FilePath               (takeBaseName)
 import           Text.Blaze.Html               (toHtml, toValue, (!))
 import qualified Text.Blaze.Html5              as H
 import qualified Text.Blaze.Html5.Attributes   as A
 import           Text.Blaze.Html.Renderer.String (renderHtml)
+import           Text.Pandoc.Options
 
 
 --------------------------------------------------------------------------------
@@ -251,3 +252,17 @@ evalCtxKey context [key] item =
 
 getMetadataKey :: [String] -> Item String -> Compiler String
 getMetadataKey [key] item = getMetadataField' (itemIdentifier item) key
+
+--------------------------------------------------------------------------------
+
+pandocReaderOptions :: ReaderOptions
+pandocReaderOptions = defaultHakyllReaderOptions
+
+pandocWriterOptions :: WriterOptions
+pandocWriterOptions = defaultHakyllWriterOptions
+    {   writerHTMLMathMethod = 
+            MathJax "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"
+    }
+
+pandocCompiler :: Compiler (Item String)
+pandocCompiler = pandocCompilerWith pandocReaderOptions pandocWriterOptions
