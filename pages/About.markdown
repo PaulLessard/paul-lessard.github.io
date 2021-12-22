@@ -22,6 +22,13 @@ Dom started his computational career in the early 1980s as a software developer 
 
 ### University career
 
+<table style="float: right; width: 40%">
+<tr><td><img src="../images/dom_at_CT14.jpg" title="Image (c) 2014 
+ Jürgen Koslowski"/></td></tr>
+<tr><td style="font-family: Roboto; font-size: 50%;">Image (c) 2014 
+ Jürgen Koslowski</td></tr>
+</table>
+
 Dom returned to academe at the turn of the new millennium, and since then has worked as a mathematician, computer scientist, and academic administrator at Macquarie University.
 
 His leadership career at Macquarie University includes 6 years as a member of the executive of the Division of Information and Communication Sciences (a precursor to the Faculty of Science and Engineering), 4 years as the Chair of the University's Learning and Teaching Committee (SLTC) and 4 years as Chair of Academic Senate. In that latter rôle he also held ex officio membership of Macquarie's ultimate governing body, the University Council.
