@@ -79,11 +79,12 @@ main = hakyllWith config $ do
             >>= loadAndApplyTemplate "templates/default.html" (baseSidebarCtx <> siteCtx)
             >>= relativizeUrls
 
-    match "About.markdown" $ do
-        route $ constRoute "index.html"
+    create ["index.html"] $ do
+        route idRoute
         compile $ do
             posts <- fmap (take 3) . recentFirst
                         =<< loadAllSnapshots "posts/*" "content"
+
             let indexCtx =
                     listField "posts" postCtx (return posts) <>
                     field "tags" (\_ -> renderAllTags tags)   <>
@@ -91,7 +92,10 @@ main = hakyllWith config $ do
                     constField "title" "About"               <>
                     siteCtx
 
-            pandocCompiler
+            body <- loadSnapshotBody "pages/About.markdown" "page-content"
+
+            makeItem body
+                >>= makeTeaser
                 >>= loadAndApplyTemplate "templates/index.html" indexCtx
                 >>= loadAndApplyTemplate "templates/page.html" indexCtx
                 >>= loadAndApplyTemplate "templates/default.html" (baseSidebarCtx <> indexCtx)
