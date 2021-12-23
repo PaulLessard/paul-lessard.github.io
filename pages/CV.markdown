@@ -2,6 +2,8 @@
 title: Curriculum Vitae
 author: Dominic Verity
 date: 22^nd^ December 2021
+
+pdfproducer: http://dom-verity.github.io
 ---
 
 <img src="../images/newmulogo.png" style="float: right; width: 30%;">
@@ -14,9 +16,9 @@ Faculty of Science and Engineering\
 Macquarie University, Sydney, NSW 2109, Australia
 
 email: [dominic.verity@mq.edu.au](mailto:dominic.verity@mq.edu.au)\
-URL: <https://researchers.mq.edu.au/en/persons/dominic-verity>\
 Homepage: <http://dom-verity.github.io>\
-ORCID: <https://orcid.org/0000-0002-4137-6982>
+ORCID: <https://orcid.org/0000-0002-4137-6982>\
+URL: <https://researchers.mq.edu.au/en/persons/dominic-verity>
 
 ### Current position
 
@@ -24,50 +26,44 @@ _Emeritus Professor of Pure Mathematics, Macquarie University_
 
 ### Areas of research specialisation
 
-Higher Category Theory ⦿ Homotopy Theory ⦿ Programming Languages
-
----
+Higher Category Theory • Homotopy Theory • Programming Languages
 
 ## Appointments held
 
 |    |    |    |
-|:-----|:----------------------------|
+|:-----|:----------------------------------------|
 | **2020-2021** | _Professor of Pure Mathematics_, Department of Mathematics and Statistics, Faculty of Science and Engineering, Macquarie University, Australia|
 | **2012-2020** | _Professor of Computing_, Department of Computing, Faculty of Science and Engineering, Macquarie University, Australia|
 | **2013-2017** | _Chair of Academic Senate_, Vice-Chancellor's Office, Macquarie University, Australia |
 | **2001-2007** | _Director of Postgraduate Programs_, Division of ICS, Macquarie University, Australia |
 | **2001-2012** | _Associate Professor_, Department of Computing, Macquarie University, Australia |
 | **2000-2001** | _Senior Lecturer_, Department of Computing, Macquarie University, Australia |
-| **1999-2000** | _Director and Lead Consultant_, Categorical Solutions Pty.\ Ltd., Sydney, Australia |
+| **1999-2000** | _Director and Lead Consultant_, Categorical Solutions Pty. Ltd., Sydney, Australia |
 | **1996-1999** | _Head of Equity Derivative Trading_, HSBC James Capel, Sydney, Australia |
 | **1995-1996** | _Senior Quantitative Analyst_, Equity Derivatives Trading, Deutsche Bank, Syndey, Australia |
 | **1993-1995** | _Consultant Quantitative Analyst_, Bain and Company, Deutsche Bank, Syndey, Australia |
 | **1993-1995** | _Lecturer_, Department of Mathematics, Macquarie University, Australia |
 | **1992-1993** | _Research Fellow_, Department of Mathematics, Macquarie University, Australia |
-| **1991-1992** | _Research Fellow_, Department of Pure Maths and Math.\ Statistics, Cambridge University, UK |
+| **1991-1992** | _Research Fellow_, Department of Pure Maths and Mathematical Statistics, Cambridge University, UK |
 | **1983-1984** | _Computer Engineer_, BBC World Service, Bush House, London, UK |
 | **1981-1983** | _Computer Programmer_, Acorn Computers Limited (now ARM Limited), Cambridge, UK |
-
----
 
 ## Education
 
 |    |    |    |
-|:-----|:-----------------------------|
+|:-----|:----------------------------------------|
 | **1988-1992** | _PhD in Mathematics_, Fitzwilliam College, Cambridge University, UK |
 | **1987-1988** | _Part III Mathematics_, awarded with Distinction, Fitzwilliam College, Cambridge University, UK |
 | **1984-1987** | _BSc (Hons) Mathematics_, Double 1^st^ Class, Fitzwilliam College, Cambridge University, UK |
 
----
-
 ## Recent awards, invitations & honorary appointments
 
 |    |    |    |
-|:-----|:-----------------------------|
+|:-----|:----------------------------------------|
 | **2020** | *Research Professor and Program Organiser*, Mathematical Sciences Research Institute (MSRI) program *"Higher Categories and Categorification"*, Berkeley (CA) USA. |
 | **2019** | *Visiting Research Fellow*, Dept. of Mathematics, Johns Hopkins University, Baltimore (MD) USA |
 | **2018** | *Invited Mentor*, Mass. Institute of Technology, [Talbot Workshop](http://math.mit.edu/conferences/talbot/), Course title: *"Model-independent theory of $\infty$-Categories"*, Portland (OR) USA |
-| **2017** | *Invited Lecturer*, AMSI Summer School 2017, Course title: *"Category Theory and Computer Science"*, Sydney University, Australia.\\
+| **2017** | *Invited Lecturer*, AMSI Summer School 2017, Course title: *"Category Theory and Computer Science"*, Sydney University, Australia. |
 | **2016** | *Visiting Professor*, Dept. of Mathematics and Mathematical Statistics, Cambridge University, UK |
 | **2016** | *Visiting Research Fellow*, Max Planck Institute for Mathemantics, Bonn, Germany |
 | **2015,2016** | *Visiting Research Fellow*, Dept. of Mathematics, Johns Hopkins University, Baltimore MD, USA |
@@ -77,12 +73,10 @@ Higher Category Theory ⦿ Homotopy Theory ⦿ Programming Languages
 | **2009** | *Vice Chancellor’s Award for Teaching Excellence*, Macquarie University, *"For leadership and development of postgraduate and professional development programs in Information Technology"* |
 | **2006 and 2009** | *Visiting Research Fellow*, Fitzwilliam College and *Visiting Professor*, Department of Pure Mathematics and Mathematical Statistics, Cambridge University, UK |
 
----
-
 ## Externally funded grants
 
 |    |    |    |
-|:-----|:-----------------------------|
+|:-----|:----------------------------------------|
 | **2019-2021** | (with R. Street, S. Lack & R. Garner) Australian Research Council, Discovery Project **DP190102432**, *"Working synthetically in higher categorical structures"*, AU$453,000 |
 | **2016--2018** | (with R. Street, S. Lack & R. Garner) Australian Research Council, Discovery Project **DP160101519**, *"Monoidal categories and beyond: new contexts and new applications"*, AU$580,900 |
 | **2015--2018** | (with M. Hillier, A. Fluck et. al.) Australian Government Office of Learning and Teaching, *"Transforming exams across Australia: processes and platform for e-exams in high stakes, supervised environments"*, AU$500,000 |

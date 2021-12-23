@@ -1,0 +1,124 @@
+%!TEX program = xelatex
+%!TEX encoding = UTF-8 Unicode
+
+%------------------------------------
+% Curriculum Vitae template
+% (c) Dominic Verity 2021
+%
+% Based upon:
+%
+% Dario Taraborelli
+% Typesetting your academic CV in LaTeX
+%
+% URL: http://nitens.org/taraborelli/cvtex
+%
+% Some rights reserved: http://creativecommons.org/licenses/by-sa/3.0/
+%------------------------------------
+
+\documentclass[10pt, a4paper]{article}
+
+% DOCUMENT LAYOUT
+\usepackage{geometry}
+\geometry{a4paper, textwidth=16cm, textheight=26cm, marginparsep=7pt, marginparwidth=1.5cm}
+\setlength\parindent{0in}
+
+% FONTS
+\usepackage[usenames,dvipsnames]{color}
+
+% Font packages  
+\usepackage[no-math]{fontspec} 
+\usepackage{realscripts}
+
+\usepackage{unicode-math}
+\setmathfont{Asana Math}[Alternate = 2]
+
+\setmainfont{EB Garamond}[
+  Numbers = Lining,  
+  Ligatures = Common,
+  Kerning = On
+]
+
+\setsansfont{Roboto}[
+  Scale=0.9129,
+  Ligatures = NoCommon
+]
+
+\setmonofont{SourceCodePro}[
+  Scale=0.8333
+]
+
+\usepackage{amsmath}
+\usepackage{longtable,booktabs,array}
+\usepackage{multirow}
+\usepackage{calc}
+
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+%
+
+% ---- CUSTOM COMMANDS
+%\chardef\&="E050
+\newcommand{\html}[1]{\href{#1}{\scriptsize\textsc{[html]}}}
+\newcommand{\pdf}[1]{\href{#1}{\scriptsize\textsc{[pdf]}}}
+\newcommand{\doi}[1]{\href{#1}{\scriptsize\textsc{[doi]}}}
+% ---- MARGIN YEARS
+\usepackage{marginnote}
+\newcommand{\amper{}}{\chardef\amper="E0BD }
+\newcommand{\years}[1]{\marginnote{\scriptsize #1}}
+\renewcommand*{\raggedleftmarginnote}{}
+\setlength{\marginparsep}{7pt}
+\reversemarginpar
+
+% HEADINGS
+\usepackage{sectsty}
+\usepackage[normalem]{ulem}
+\sectionfont{\mdseries\upshape\Huge}
+\subsectionfont{\mdseries\scshape\Large}
+\subsubsectionfont{\mdseries\upshape\large}
+
+\makeatletter
+\renewcommand{\@seccntformat}[1]{}
+\makeatother
+
+% PDF SETUP
+% ---- FILL IN HERE THE DOC TITLE AND AUTHOR
+\usepackage[bookmarks, colorlinks, breaklinks,
+% ---- FILL IN HERE THE TITLE AND AUTHOR
+  pdftitle={$author$ - $title$},
+  pdfauthor={$author$},
+  pdfproducer={$pdfproducer$}
+]{hyperref}
+\hypersetup{linkcolor=blue,citecolor=blue,filecolor=black,urlcolor=MidnightBlue}
+
+\def\toprule{}
+\def\bottomrule{}
+
+% DOCUMENT
+\begin{document}
+
+\begin{flushright}%
+    \vbox to 0ex{\includegraphics[scale=0.6]{../images/newmulogo.png}\vss}%
+\end{flushright}%
+
+\section{Curriculum Vitae}
+
+$body$
+
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% TeX-engine: xetex
+%%% End:
