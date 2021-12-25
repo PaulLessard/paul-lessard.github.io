@@ -35,7 +35,7 @@ Higher Category Theory • Homotopy Theory • Programming Languages
 ## Appointments held
 
 |    |    |    |
-|:-----|:----------------------------------------|
+|:-------|:--------------------------------------------|
 | **2020-2021** | _Professor of Pure Mathematics_, Department of Mathematics and Statistics, Faculty of Science and Engineering, Macquarie University, Australia|
 | **2012-2020** | _Professor of Computing_, Department of Computing, Faculty of Science and Engineering, Macquarie University, Australia|
 | **2013-2017** | _Chair of Academic Senate_, Vice-Chancellor's Office, Macquarie University, Australia |
@@ -55,7 +55,7 @@ Higher Category Theory • Homotopy Theory • Programming Languages
 ## Education
 
 |    |    |    |
-|:-----|:----------------------------------------|
+|:-------|:--------------------------------------------|
 | **1988-1992** | _PhD in Mathematics_, Fitzwilliam College, Cambridge University, UK |
 | **1987-1988** | _Part III Mathematics_, awarded with Distinction, Fitzwilliam College, Cambridge University, UK |
 | **1984-1987** | _BSc (Hons) Mathematics_, Double 1^st^ Class, Fitzwilliam College, Cambridge University, UK |
@@ -63,7 +63,7 @@ Higher Category Theory • Homotopy Theory • Programming Languages
 ## Recent awards, invitations & honorary appointments
 
 |    |    |    |
-|:-----|:----------------------------------------|
+|:-------|:--------------------------------------------|
 | **2020** | *Research Professor and Program Organiser*, Mathematical Sciences Research Institute (MSRI) program *"Higher Categories and Categorification"*, Berkeley (CA) USA. |
 | **2019** | *Visiting Research Fellow*, Dept. of Mathematics, Johns Hopkins University, Baltimore (MD) USA |
 | **2018** | *Invited Mentor*, Mass. Institute of Technology, [Talbot Workshop](http://math.mit.edu/conferences/talbot/), Course title: *"Model-independent theory of $\infty$-Categories"*, Portland (OR) USA |
@@ -80,10 +80,30 @@ Higher Category Theory • Homotopy Theory • Programming Languages
 ## Externally funded grants
 
 |    |    |    |
-|:-----|:----------------------------------------|
+|:-------|:--------------------------------------------|
 | **2019-2021** | (with R. Street, S. Lack & R. Garner) Australian Research Council, Discovery Project **DP190102432**, *"Working synthetically in higher categorical structures"*, AU$453,000 |
 | **2016--2018** | (with R. Street, S. Lack & R. Garner) Australian Research Council, Discovery Project **DP160101519**, *"Monoidal categories and beyond: new contexts and new applications"*, AU$580,900 |
 | **2015--2018** | (with M. Hillier, A. Fluck et. al.) Australian Government Office of Learning and Teaching, *"Transforming exams across Australia: processes and platform for e-exams in high stakes, supervised environments"*, AU$500,000 |
 | **2013-2015** | (with R. Street, S. Lack & R. Garner) Australian Research Council, Discovery Project **DP130101969**, *"Structural homotopy theory: a category-theoretic study"*, AU$600,000 |
 | **2010-2012** | (with R. Street, M. Johnson & S. Lack) Australian Research Council, Discovery Project **DP1094883**, *"Applicable Categorical Structures"*. AU$290,000 |
 | **2007-2009** | (with R. Street, M. Johnson & S. Lack) Australian Research Council, Discovery Project **DP0771252**, *"Cohomology enhanced: an application of enriched and higher categories"*. AU$276,000 |
+
+## PhD students
+
+|    |    |    |
+|:-------|:--------------------------------------------|
+| **2021 ongoing** | (with S. Lack) David Farrell, *"Model independent fibred $\infty$-category theory"* |
+| **2021 ongoing** | (with R. Garner) Yao Tang, *"Higher categories and dependently typed logics"* |
+| **2020 ongoing** | (with S. Lack) Nicola Di Vittorio, *"Higher derivators as a foundation for $\infty$-category theory"* | 
+| **2018 ongoing** | (with R. Garner) Paula Verdugo, *"Synthetic $\infty$-category theory"* | 
+| **2020 awarded** | (with R. Street) Yuki Maehara, *"The Gray tensor product for 2-quasi-categories"*, Vice-Chancellor's Medal for Excellence | 
+| **2018 awarded** | (with R. Garner) Edoardo Lanari, *"Cylinder objects for Grothendiek-Maltsiniotis $\infty$-groupoids"* | 
+| **2015 awarded** | (with R. Garner) Mitchell Buckley, *"Three studies in higher category theory: fibrations, skew monoidal structures and excision of extremals"* | 
+| **2015 awarded** | (with R. Garner) Matthew Burke, *"Synthetic Lie Theory"* | 
+| **2012 awarded** | (with R. Street) Thomas Booker, *"Generalized and particular monoidal categories, and structures therein"* | 
+| **2012 awarded** | (with R. Street) David Oury, *"Duality for Joyal's category $\Theta$ and homotopy concepts for $\Theta$-sets"* | 
+| **2011 awarded** | (with M. Johnson) Micah McCurdy, *"Cyclic \*-autonomous categories and the Tannaka adjunction via graphical methods"* | 
+| **2011 awarded** | (with A. Sloane) Matthew Roberts, *"Compiled generics for functional programming languages"* | 
+| **2010 awarded** | (with P. Watters) Wai Han Ho, *"On the evaluation of face identification systems"* | 
+| **2007 awarded** | (with A. Sloane) Ekaterina Stefanov, *"Simple code compression and customisation for bytecode for interpreters"* | 
+
