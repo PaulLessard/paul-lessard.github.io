@@ -32,7 +32,7 @@
 \usepackage{unicode-math}
 \setmathfont{Asana Math}[Alternate = 2]
 
-\setmainfont{EB Garamond}[
+\setmainfont{Garamond Premier Pro}[
   Numbers = Lining,  
   Ligatures = Common,
   Kerning = On
@@ -67,25 +67,12 @@
 \makeatother
 %
 
-% ---- CUSTOM COMMANDS
-%\chardef\&="E050
-\newcommand{\html}[1]{\href{#1}{\scriptsize\textsc{[html]}}}
-\newcommand{\pdf}[1]{\href{#1}{\scriptsize\textsc{[pdf]}}}
-\newcommand{\doi}[1]{\href{#1}{\scriptsize\textsc{[doi]}}}
-% ---- MARGIN YEARS
-\usepackage{marginnote}
-\newcommand{\amper{}}{\chardef\amper="E0BD }
-\newcommand{\years}[1]{\marginnote{\scriptsize #1}}
-\renewcommand*{\raggedleftmarginnote}{}
-\setlength{\marginparsep}{7pt}
-\reversemarginpar
-
 % HEADINGS
 \usepackage{sectsty}
 \usepackage[normalem]{ulem}
-\sectionfont{\mdseries\upshape\Huge}
-\subsectionfont{\mdseries\scshape\Large}
-\subsubsectionfont{\mdseries\upshape\large}
+\sectionfont{\sffamily\mdseries\upshape\Huge}
+\subsectionfont{\sffamily\mdseries\scshape\Large}
+\subsubsectionfont{\sffamily\mdseries\upshape\large}
 
 \makeatletter
 \renewcommand{\@seccntformat}[1]{}
@@ -114,6 +101,16 @@
 \section{Curriculum Vitae}
 
 $body$
+
+\begin{center}
+  {\scriptsize Last updated: $modified$ •
+  % ---- PLEASE LEAVE THIS BACKLINK FOR ATTRIBUTION AS PER CC-LICENSE
+  Typeset in \href{http://nitens.org/taraborelli/cvtex}{
+  \fontspec{Times New Roman}Lua\LaTeX}\\
+  % ---- FILL IN THE FULL URL TO YOUR CV HERE
+  \url{https://dom-verity.github.io}
+  }
+\end{center}
 
 \end{document}
 

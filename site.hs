@@ -58,11 +58,10 @@ main = hakyllWith config $ do
 
     match "pages/CV.markdown" $ version "pdf" $ do
         route $ setExtension "pdf"
-        
-        compile $ 
-           pandocLaTeXCompiler
-                >>= loadAndApplyTemplate "templates/CV.tex" siteCtx
-                >>= buildLatex
+        compile $ pandocLaTeXCompiler
+            >>= loadAndApplyTemplate "templates/CV.tex" 
+                                     (siteCtx <> modificationTimeField "modified" "%B %e, %Y")
+            >>= buildLatex
 
     tags <- buildTags "posts/*" (fromCapture "tags/*.html")
 
@@ -74,7 +73,6 @@ main = hakyllWith config $ do
             let ctx = constField "title" title <>
                       listField "posts" (postCtxWithTags tags) (return posts) <>
                       defaultContext
-
             makeItem ""
                 >>= loadAndApplyTemplate "templates/tag.html" ctx
                 >>= loadAndApplyTemplate "templates/default.html" (baseSidebarCtx <> siteCtx)

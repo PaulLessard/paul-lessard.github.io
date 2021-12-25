@@ -17,9 +17,9 @@ date: 22^nd^ December 2021
 Centre of Australian Category Theory\
 Department of Mathematics and Statistics\
 Faculty of Science and Engineering\
-Macquarie University, Sydney, NSW 2109, Australia
+Macquarie University, Sydney, NSW 2109, Australia\
 
-email: [dominic.verity@mq.edu.au](mailto:dominic.verity@mq.edu.au)\
+Email: [dominic.verity@mq.edu.au](mailto:dominic.verity@mq.edu.au)\
 Homepage: <http://dom-verity.github.io>\
 ORCID: <https://orcid.org/0000-0002-4137-6982>\
 URL: <https://researchers.mq.edu.au/en/persons/dominic-verity>
