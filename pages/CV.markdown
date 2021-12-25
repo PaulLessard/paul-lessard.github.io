@@ -2,11 +2,15 @@
 title: Curriculum Vitae
 author: Dominic Verity
 date: 22^nd^ December 2021
-
-pdfproducer: http://dom-verity.github.io
 ---
 
-<img src="../images/newmulogo.png" style="float: right; width: 30%;">
+```{=html}
+<div style="float: right; width: 30%; text-align: center;">
+    <img src="/images/newmulogo.png" target="_blank" rel="noopener noreferrer"/>
+    <a href="CV.pdf">PDF version...</a><br/>
+    (for printing)
+</div>
+```
 
 ## Dominic Verity
 
@@ -24,7 +28,7 @@ URL: <https://researchers.mq.edu.au/en/persons/dominic-verity>
 
 _Emeritus Professor of Pure Mathematics, Macquarie University_
 
-### Areas of research specialisation
+### Areas of research interest
 
 Higher Category Theory • Homotopy Theory • Programming Languages
 

@@ -7,12 +7,15 @@ import           Data.List                     (sortBy, intersperse, intercalate
 import           Data.Ord                      (comparing)
 import           Hakyll                        hiding (pandocCompiler)
 import           Control.Monad                 (liftM, forM_)
-import           System.FilePath               (takeBaseName)
+import           System.FilePath               (takeBaseName, replaceExtension, takeDirectory)
 import           Text.Blaze.Html               (toHtml, toValue, (!))
 import qualified Text.Blaze.Html5              as H
 import qualified Text.Blaze.Html5.Attributes   as A
 import           Text.Blaze.Html.Renderer.String (renderHtml)
-import           Text.Pandoc.Options
+import qualified Text.Pandoc                   as P
+import           System.Process                (system)
+import qualified Data.Text                     as T
+import           GHC.IO                        (unsafePerformIO)
 
 
 --------------------------------------------------------------------------------
@@ -42,9 +45,9 @@ main = hakyllWith config $ do
         compile $ do
             pageName <- takeBaseName . toFilePath <$> getUnderlying
             let pageCtx = constField pageName "" <>
-                          baseNodeCtx
+                        baseNodeCtx
             let evalCtx = functionField "get-meta" getMetadataKey <>
-                          functionField "eval" (evalCtxKey pageCtx)
+                        functionField "eval" (evalCtxKey pageCtx)
             let activeSidebarCtx = sidebarCtx (evalCtx <> pageCtx)
 
             pandocCompiler
@@ -52,6 +55,14 @@ main = hakyllWith config $ do
                 >>= loadAndApplyTemplate "templates/page.html"    siteCtx
                 >>= loadAndApplyTemplate "templates/default.html" (activeSidebarCtx <> siteCtx)
                 >>= relativizeUrls
+
+    match "pages/CV.markdown" $ version "pdf" $ do
+        route $ setExtension "pdf"
+        
+        compile $ 
+           pandocLaTeXCompiler
+                >>= loadAndApplyTemplate "templates/CV.tex" siteCtx
+                >>= buildLatex
 
     tags <- buildTags "posts/*" (fromCapture "tags/*.html")
 
@@ -136,7 +147,7 @@ main = hakyllWith config $ do
                 >>= loadAndApplyTemplate "templates/default.html" (baseSidebarCtx <> indexCtx)
                 >>= relativizeUrls
 
-    match "templates/*.html" $ compile templateBodyCompiler
+    match "templates/*" $ compile templateBodyCompiler
 
     create ["atom.xml"] $ do
         route idRoute
@@ -233,7 +244,8 @@ makeTagsField =
 
 sidebarCtx :: Context String -> Context String
 sidebarCtx nodeCtx =
-    listField "list_pages" nodeCtx (loadAllSnapshots "pages/*" "page-content") <>
+    listField "list_pages" nodeCtx 
+              (loadAllSnapshots ("pages/*" .&&. hasNoVersion) "page-content") <>
     defaultContext
 
 baseNodeCtx :: Context String
@@ -255,14 +267,64 @@ getMetadataKey [key] item = getMetadataField' (itemIdentifier item) key
 
 --------------------------------------------------------------------------------
 
-pandocReaderOptions :: ReaderOptions
+buildLatex :: Item String -> Compiler (Item TmpFile)
+buildLatex item = do
+    TmpFile texPath <- newTmpFile "lualatex.tex"
+    let tmpDir  = takeDirectory texPath
+        pdfPath = replaceExtension texPath "pdf"
+
+    unsafeCompiler $ do
+        writeFile texPath $ itemBody item
+        _ <- system $ unwords ["lualatex", "-halt-on-error",
+            "-output-directory", tmpDir, texPath, ">/dev/null", "2>&1"]
+        return ()
+
+    makeItem $ TmpFile pdfPath
+
+--------------------------------------------------------------------------------
+
+pandocReaderOptions :: P.ReaderOptions
 pandocReaderOptions = defaultHakyllReaderOptions
 
-pandocWriterOptions :: WriterOptions
-pandocWriterOptions = defaultHakyllWriterOptions
-    {   writerHTMLMathMethod = 
-            MathJax "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"
+pandocHTMLWriterOptions :: P.WriterOptions
+pandocHTMLWriterOptions = defaultHakyllWriterOptions
+    {   P.writerHTMLMathMethod = 
+            P.MathJax "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"
     }
 
 pandocCompiler :: Compiler (Item String)
-pandocCompiler = pandocCompilerWith pandocReaderOptions pandocWriterOptions
+pandocCompiler = pandocCompilerWith pandocReaderOptions pandocHTMLWriterOptions
+
+--------------------------------------------------------------------------------
+
+writePandocTyped :: (P.Pandoc -> P.PandocPure T.Text)
+                 -> Item P.Pandoc -> Item String
+writePandocTyped writer (Item itemi doc) =
+    case P.runPure $ writer doc of
+        Left err    -> error $ "Hakyll.Web.Pandoc.writePandocWith: " ++ show err
+        Right item' -> Item itemi $ T.unpack item'
+
+writePandocLaTeX :: Item P.Pandoc -> Item String
+writePandocLaTeX = writePandocTyped (P.writeLaTeX P.def)
+
+renderPandocTypedTransformM :: P.ReaderOptions -> (P.Pandoc -> P.PandocPure T.Text)
+                            -> (P.Pandoc -> Compiler P.Pandoc)
+                            -> Item String -> Compiler (Item String)
+renderPandocTypedTransformM ropt writer trans item = 
+    writePandocTyped writer <$> (readPandocWith ropt item >>= traverse trans)
+
+pandocCompilerTypedTransformM :: P.ReaderOptions -> (P.Pandoc -> P.PandocPure T.Text)
+                              -> (P.Pandoc -> Compiler P.Pandoc)
+                              -> Compiler (Item String)
+pandocCompilerTypedTransformM ropt writer f = 
+    getResourceBody >>= renderPandocTypedTransformM ropt writer f
+
+pandocCompilerTyped :: P.ReaderOptions -> (P.Pandoc -> P.PandocPure T.Text)
+                    -> Compiler (Item String)
+pandocCompilerTyped ropt writer = pandocCompilerTypedTransformM ropt writer return
+
+pandocLaTeXCompiler :: Compiler (Item String)
+pandocLaTeXCompiler = getResourceBody  >>= renderPandocLaTeX
+
+renderPandocLaTeX :: Item String -> Compiler (Item String)
+renderPandocLaTeX = renderPandocTypedTransformM defaultHakyllReaderOptions (P.writeLaTeX P.def) return
