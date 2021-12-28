@@ -45,6 +45,8 @@ packages:
 # extra-deps: []
 extra-deps:
 - hakyll-4.15.1.0
+- pandoc-crossref-0.3.12.1
+- roman-numerals-0.5.1.5
 
 # Override default flag values for local packages and extra-deps
 # flags: {}

@@ -1,7 +1,34 @@
 ---
 title: "A recipe for success: Uncle Bob Verity's rice 'n' peas"
 author: Dom Verity
+date: December 20, 2021
 tags: cooking, jamaica
+
+header-includes: |
+    ```{=latex}
+    \usepackage{wrapfig}
+    \usepackage{graphicx}
+    \usepackage{realscripts}
+    ```
+
+mainfont: Garamond Premier Pro
+mainfontoptions:
+- Numbers = Lining
+- Ligatures = Common
+- Kerning = On
+
+sansfont: Roboto
+sansfontoptions:
+- Scale=0.9129
+- Ligatures = NoCommon
+
+monofont: Office Code Pro
+monofontoptions:
+- Scale=0.8333
+
+mathfont: Asana Math
+mathfontoptions:
+- Alternate = 2
 ---
 
 What could be more fitting than to kick off this blog by recycling a post I wrote a few years ago about my favourite dish _rice 'n' peas_. Given the season, indeed, I should mention that no Jamaican Christmas would be complete without a vast pot of this staple weighing down the family lunch table. I'll start with a little personal history, but scroll down in the full article if you're keen to get straight to my Grandfather's recipe for rice 'n' peas.
@@ -14,9 +41,10 @@ Beyond our geographic proximity, it seems to me that we have only ever been boun
 
 ## Uncle Bob
 
-When I was a child in Kingston, my grandfather was known universally as "Uncle Bob". He was someone who was recognised, and regarded with much affection, by everyone in the city at that time, or so it seemed to me. 
+When I was a child in Kingston, my grandfather was known universally as "Uncle Bob". He was someone who was recognised, and regarded with much affection, by everyone in the city at that time, or so it seemed to me.
 
-<img style="float: right; width: 35%" src="../images/Institute_of_Jamaica.png"/>
+`<img style="float: right; width: 25%" src="../images/Institute_of_Jamaica.png"/>`{=html}
+`\begin{wrapfigure}[10]{r}{0pt}\includegraphics[width=0.25\textwidth]{../images/Institute_of_Jamaica.png}\end{wrapfigure}`{=latex}
 
 He had been a broadcaster and lecturer for many years but was much better known for the many cultural institutions he had helped found, all to the end of furthering the lot of Kingston's poor. This included the central public market, where those from the country came to sell their produce, and his beloved [_Junior Centre of the Institute of Jamaica_](http://juniorcentre-ioj.org.jm/index.php/about-us).
 
@@ -26,10 +54,20 @@ Over the years I have come to appreciate, and revel in, just how much of Uncle B
 
 ## Rice 'n' Peas
 
+```{=html}
 <table style="float: right; width: 40%">
-<tr><td><img  src="../images/rice-and-peas.png" title="Image (c) 2020 sweetandsorrel.com"/></td></tr>
-<tr><td style="font-family: Roboto; font-size: 50%;">Image (c) 2020 <a href="https://www.sweetandsorrel.com">Sweet and Sorrel</a></td></tr>
+    <tr><td><img  src="../images/rice-and-peas.png" title="Image (c) 2020 sweetandsorrel.com"/></td></tr>
+    <tr><td style="font-family: Roboto; font-size: 50%;">Image (c) 2020 <a href="https://www.sweetandsorrel.com">Sweet and Sorrel</a></td></tr>
 </table>
+```
+```{=latex}
+\begin{wrapfigure}[18]{r}{0pt}
+    \begin{tabular}{c}
+        \includegraphics[width=0.4\textwidth]{../images/rice-and-peas.png} \\
+        \textsf{\small Image (c) 2020 \href{https://www.sweetandsorrel.com}{Sweet and Sorrel}}
+    \end{tabular}
+\end{wrapfigure}
+```
 
 Those of you who know Jamaica, even in passing, will know that no significant meal is complete without a bowl of ***Rice 'n' Peas***. So there can be no better way to honour the memory of Uncle Bob than to share with you his recipe for that iconic Jamaican dish.
 
@@ -52,10 +90,12 @@ Ingredients
 
 This recipe can be made vegetarian or Kosher friendly by leaving out the bacon. But if you aren't worried about such things a good bacon bone really does lift this dish.
 
+```{=html}
 <table style="float: right; width: 30%" >
-<tr><td><img src="../images/anansi.jpg"/></td></tr>
-<tr><td style="font-family: Roboto; font-size: 50%;">Image (c) 1954 Marcia Brown</td></tr>
+    <tr><td><img src="../images/anansi.jpg"/></td></tr>
+    <tr><td style="font-family: Roboto; font-size: 50%;">Image (c) 1954 Marcia Brown</td></tr>
 </table>
+```
 
 > Anansi and his family were starving. One day Anansi was walking in the forest and his foot kicked over a pot which was just lying on the ground.
 > 
@@ -69,16 +109,26 @@ This recipe can be made vegetarian or Kosher friendly by leaving out the bacon. 
 >
 > * from _"Anansi and the Magic Pot"_ a Jamaican [Anansi folk tale](https://en.wikipedia.org/wiki/Anansi) of the West African Asante tradition
 
+```{=latex}
+\begin{wrapfigure}[12]{r}{0pt}
+    \begin{tabular}{c}
+        \includegraphics[width=0.3\textwidth]{../images/anansi.jpg} \\
+        \textsf{\small Image (c) 1954 Marcia Brown}
+    \end{tabular}
+\end{wrapfigure}
+```
 Since most of us don't have a magic pot to fall back on, we're going to have to do a little work to make our rice 'n' peas:
 
 ## Method
 
 ### Movement One
 
+```{=html}
 <table style="float: right; width: 40%">
-<tr><td><img src="http://imgs.xkcd.com/comics/tasks.png" title="In the 60s, Marvin Minsky assigned a couple of undergrads to spend the summer programming a computer to use a camera to identify objects in a scene. He figured they&#39;d have the problem solved by the end of the summer. Half a century later, we&#39;re still working on it."/></td></tr>
-<tr><td style="font-family: Roboto; font-size: 50%;">Image (c) 2021 <a href="https://xkcd.com/1425">XKCD</a></td></tr>
+    <tr><td><img src="../images/XKCD_tasks.png" title="In the 60s, Marvin Minsky assigned a couple of undergrads to spend the summer programming a computer to use a camera to identify objects in a scene. He figured they&#39;d have the problem solved by the end of the summer. Half a century later, we&#39;re still working on it."/></td></tr>
+    <tr><td style="font-family: Roboto; font-size: 50%;">Image (c) 2021 <a href="https://xkcd.com/1425">XKCD</a></td></tr>
 </table>
+```
 
 Pour the coconut cream into a large cooking pot and start the heat to bring it to the boil. Strain the brine from the kidney beans and add them to the pot. 
 
@@ -95,6 +145,15 @@ Now you should have an excellent cooking liquor for the rice. Remove the bacon b
 Warning: **do not pour this liquor away** this is the most important part of the dish, as it will eventually be absorbed into the rice to give it a wonderful coconut flavour.
 
 ### Movement Two
+
+```{=latex}
+\begin{wrapfigure}[21]{r}{0pt}
+    \begin{tabular}{c}
+        \includegraphics[width=0.4\textwidth]{../images/XKCD_tasks.png} \\
+        \textsf{\small Image (c) 2021 \href{https://xkcd.com/1425}{XKCD}}
+    \end{tabular}
+\end{wrapfigure}
+```
 
 Return the bean mixture to the pan. Get hold of a potato masher and mash about 1/3 of the beans into a paste. At this stage if there are any large pieces of spring onion left you should make sure that these are also mashed into the bean paste. 
 

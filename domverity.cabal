@@ -23,5 +23,6 @@ executable domverity
                   ,  containers == 0.6.*
                   ,  filepath == 1.4.*
                   ,  pandoc == 2.14.*
+                  ,  pandoc-crossref == 0.3.*
                   ,  process == 1.6.*
                   ,  text == 1.2.*
