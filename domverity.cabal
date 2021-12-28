@@ -14,9 +14,12 @@ extra-source-files:  README.md
 cabal-version:       >=1.10
 
 executable domverity
-  main-is:           site.hs
+  main-is:           Site.hs
+  other-modules:     Compilers
+
   default-language:  Haskell2010
   ghc-options:       -threaded
+  hs-source-dirs:    src
   build-depends:     base >= 4.7 && < 5
                   ,  hakyll == 4.15.*
                   ,  blaze-html == 0.9.*
