@@ -1,0 +1,25 @@
+header-includes: |
+    ```{=latex}
+    \usepackage{wrapfig}
+    \usepackage{graphicx}
+    \usepackage{realscripts}
+    ```
+
+mainfont: Garamond Premier Pro
+mainfontoptions:
+- Numbers = Lining
+- Ligatures = Common
+- Kerning = On
+
+sansfont: Roboto
+sansfontoptions:
+- Scale=0.9129
+- Ligatures = NoCommon
+
+monofont: Office Code Pro
+monofontoptions:
+- Scale=0.8333
+
+mathfont: Asana Math
+mathfontoptions:
+- Alternate = 2

@@ -3,32 +3,6 @@ title: "A recipe for success: Uncle Bob Verity's rice 'n' peas"
 author: Dom Verity
 date: December 20, 2021
 tags: cooking, jamaica
-
-header-includes: |
-    ```{=latex}
-    \usepackage{wrapfig}
-    \usepackage{graphicx}
-    \usepackage{realscripts}
-    ```
-
-mainfont: Garamond Premier Pro
-mainfontoptions:
-- Numbers = Lining
-- Ligatures = Common
-- Kerning = On
-
-sansfont: Roboto
-sansfontoptions:
-- Scale=0.9129
-- Ligatures = NoCommon
-
-monofont: Office Code Pro
-monofontoptions:
-- Scale=0.8333
-
-mathfont: Asana Math
-mathfontoptions:
-- Alternate = 2
 ---
 
 What could be more fitting than to kick off this blog by recycling a post I wrote a few years ago about my favourite dish _rice 'n' peas_. Given the season, indeed, I should mention that no Jamaican Christmas would be complete without a vast pot of this staple weighing down the family lunch table. I'll start with a little personal history, but scroll down in the full article if you're keen to get straight to my Grandfather's recipe for rice 'n' peas.

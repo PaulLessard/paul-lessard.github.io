@@ -2,16 +2,17 @@
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE LambdaCase #-}
 {-# OPTIONS_GHC -Wno-incomplete-patterns #-}
-import           Data.Monoid                   (mappend, mconcat)
-import           Data.List                     (sortBy, intersperse, intercalate)
-import           Data.Ord                      (comparing)
-import           Hakyll                        hiding (pandocCompiler)
-import           Control.Monad                 (liftM, forM_)
-import           System.FilePath               (takeBaseName, replaceExtension, takeDirectory)
-import           Text.Blaze.Html               (toHtml, toValue, (!))
-import qualified Text.Blaze.Html5              as H
-import qualified Text.Blaze.Html5.Attributes   as A
-import           Text.Blaze.Html.Renderer.String (renderHtml)
+import           Data.Monoid                        (mappend, mconcat)
+import           Data.List                          (sortBy, intersperse, intercalate)
+import           Data.Ord                           (comparing)
+import           Hakyll
+import           Control.Monad                      (liftM, forM_)
+import           System.FilePath                    (takeBaseName)
+import           Text.Blaze.Html                    (toHtml, toValue, (!))
+import qualified Text.Blaze.Html5                   as H
+import qualified Text.Blaze.Html5.Attributes        as A
+import           Text.Blaze.Html.Renderer.String    (renderHtml)
+
 import           Compilers
 --------------------------------------------------------------------------------
 
@@ -19,6 +20,7 @@ config :: Configuration
 config = defaultConfiguration
   { destinationDirectory = "docs"
   }
+
 
 main :: IO ()
 main = hakyllWith config $ do
@@ -32,7 +34,7 @@ main = hakyllWith config $ do
 
     match "error/*" $ do
         route $ gsubRoute "error/" (const "") `composeRoutes` setExtension "html"
-        compile $ pandocCompiler
+        compile $ pandocHTMLCompiler
             >>= applyAsTemplate siteCtx
             >>= loadAndApplyTemplate "templates/default.html" (baseSidebarCtx <> siteCtx)
 
@@ -46,7 +48,7 @@ main = hakyllWith config $ do
                         functionField "eval" (evalCtxKey pageCtx)
             let activeSidebarCtx = sidebarCtx (evalCtx <> pageCtx)
 
-            pandocCompiler
+            pandocHTMLCompiler
                 >>= saveSnapshot "page-content"
                 >>= loadAndApplyTemplate "templates/page.html"    siteCtx
                 >>= loadAndApplyTemplate "templates/default.html" (activeSidebarCtx <> siteCtx)
@@ -76,7 +78,7 @@ main = hakyllWith config $ do
 
     match "posts/*" $ do
         route $ setExtension "html"
-        compile $ pandocCompiler
+        compile $ pandocHTMLCompiler
             >>= \post -> do  
                     teaser <- makeTeaser post
                     saveSnapshot "teaser" teaser
