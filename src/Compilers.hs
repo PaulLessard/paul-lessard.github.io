@@ -9,18 +9,15 @@ module Compilers
     ( pandocHTMLCompiler
     , pandocLaTeXCompiler
     , buildLatex
-    , HTMLBundle
-    , compileToHTMLBundle
-    , pdfToSVGs
     ) where
 
 import           Hakyll
 
 import qualified Data.Text as T
 import qualified Data.Text.IO as TIO
+import qualified Data.Text.Lazy as LT
 import qualified Data.ByteString.Lazy as LB
-import           Data.Typeable                 (Typeable)
-import qualified Data.Map as M                 (Map, fromList, empty, intersectionWith, toList, lookup)
+import qualified Data.Map as M                 (Map, fromList, empty, intersectionWith, toList, lookup, adjust, insert, union)
 import           Data.Char                     (isDigit, isSpace)
 import           Data.Maybe                    (fromMaybe, mapMaybe)
 import           Data.List                     (isPrefixOf, stripPrefix, sort)
@@ -45,7 +42,7 @@ import           Text.Pandoc.Builder
 import           Text.Pandoc.Parsing           (runF, defaultParserState)
 import           Text.Pandoc.Readers.Markdown  (yamlToMeta)
 import           Text.Blaze.Html5.Attributes   (xmlns, item)
-import qualified Text.Pandoc.UTF8 as T
+import qualified Text.XML as X
 
 buildLatex :: Item String -> Compiler (Item TmpFile)
 buildLatex item = do
@@ -64,7 +61,7 @@ latexToPDF latexFile = do
         latexPath, latexDir, pdfPath :: FilePath
         TmpFile latexPath = latexFile
         latexDir = takeDirectory latexPath
-        pdfPath = replaceExtension "pdf" latexPath
+        pdfPath = latexPath -<.> "pdf"
 
 pdfToSVGs :: TmpFile -> IO (M.Map Int TmpFile)
 pdfToSVGs pdfFile = do
@@ -85,22 +82,37 @@ pdfToSVGs pdfFile = do
 
 --------------------------------------------------------------------------------
 
-pandocReaderOptions :: ReaderOptions
-pandocReaderOptions = defaultHakyllReaderOptions
+domsDefaultReaderOptions :: ReaderOptions
+domsDefaultReaderOptions = defaultHakyllReaderOptions
 
-pandocHTMLWriterOptions :: WriterOptions
-pandocHTMLWriterOptions = defaultHakyllWriterOptions
-    {   writerHTMLMathMethod =
-            MathJax "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"
-    }
+domsDefaultHTMLWriterOptions :: WriterOptions
+domsDefaultHTMLWriterOptions = defaultHakyllWriterOptions
 
-{-# NOINLINE pandocLaTeXWriterOptions #-}
-pandocLaTeXWriterOptions :: WriterOptions
-pandocLaTeXWriterOptions = unsafePerformIO $ do
+{-# NOINLINE domsDefaultLaTeXWriterOptions #-}
+domsDefaultLaTeXWriterOptions :: WriterOptions
+domsDefaultLaTeXWriterOptions = unsafePerformIO $ do
     templ <- runIO (compileDefaultTemplate "latex") >>= handleError
     return $ def
         {   writerTemplate = Just templ
         }
+
+-------------------------------------------------------------------------------
+-- Load standard pandoc option sets
+
+{-# NOINLINE latexOptions #-}
+latexOptions :: Meta
+latexOptions = unsafePerformIO $ do
+    yaml <- LB.readFile "pandoc/latexOptions.yaml"
+    runIOorExplode $ yamlToMeta domsDefaultReaderOptions Nothing yaml
+
+{-# NOINLINE imgGenOptions #-}
+imgGenOptions :: Meta
+imgGenOptions = unsafePerformIO $ do
+    yaml <- LB.readFile "pandoc/imgGenOptions.yaml"
+    runIOorExplode $ yamlToMeta domsDefaultReaderOptions Nothing yaml
+
+-- Meta is a monoid and when applying <> options in its rhs override corresponding 
+-- options in its lhs.
 
 --------------------------------------------------------------------------------
 
@@ -130,10 +142,10 @@ pandocCompilerTyped ropt writer = pandocCompilerTypedTransformM ropt writer retu
 --------------------------------------------------------------------------------
 
 writePandocLaTeX :: Item Pandoc -> Item String
-writePandocLaTeX = writePandocTyped (writeLaTeX pandocLaTeXWriterOptions)
+writePandocLaTeX = writePandocTyped (writeLaTeX domsDefaultLaTeXWriterOptions)
 
 writePandocHTML :: Item Pandoc -> Item String
-writePandocHTML = writePandocTyped (writeLaTeX pandocHTMLWriterOptions)
+writePandocHTML = writePandocTyped (writeLaTeX domsDefaultHTMLWriterOptions)
 
 renderPandocLaTeX :: Item String -> Compiler (Item String)
 renderPandocLaTeX = renderPandocTypedTransformM defaultHakyllReaderOptions (writeLaTeX def) return
@@ -141,27 +153,9 @@ renderPandocLaTeX = renderPandocTypedTransformM defaultHakyllReaderOptions (writ
 pandocLaTeXCompiler :: Compiler (Item String)
 pandocLaTeXCompiler = getResourceBody  >>= renderPandocLaTeX
 
-pandocHTMLCompiler :: Compiler (Item String)
-pandocHTMLCompiler = pandocCompilerWith pandocReaderOptions pandocHTMLWriterOptions
+-- pandocHTMLCompiler :: Compiler (Item String)
+-- pandocHTMLCompiler = pandocCompilerWith domsDefaultReaderOptions domsDefaultHTMLWriterOptions
 
-
--------------------------------------------------------------------------------
--- Load standard pandoc option sets
-
-{-# NOINLINE latexOptions #-}
-latexOptions :: Meta
-latexOptions = unsafePerformIO $ do
-    yaml <- LB.readFile "pandoc/latexOptions.yaml"
-    runIOorExplode $ yamlToMeta pandocReaderOptions Nothing yaml
-
-{-# NOINLINE imgGenOptions #-}
-imgGenOptions :: Meta
-imgGenOptions = unsafePerformIO $ do
-    yaml <- LB.readFile "pandoc/imgGenOptions.yaml"
-    runIOorExplode $ yamlToMeta pandocReaderOptions Nothing yaml
-
--- Meta is a monoid and when applying <> options in its rhs override corresponding 
--- options in its lhs.
 
 -------------------------------------------------------------------------------
 -- Very simple backtracking parser monad.
@@ -223,74 +217,46 @@ getEqnDimens fp = mapMaybe (evalStateT parseImageDimens) . lines <$> readFile fp
             d3 <- parseDimen
             return (i, e, ImageInfo d1 d2 d3)
 
---------------------------------------------------------------------------------
--- A Writeable instance to represent an HTML output accompanied by SVG images
--- generated from displayed tikz code.
-
-data HTMLBundle = HTMLBundle String [(Int, TmpFile)]
-    deriving (Typeable)
-
-instance Writable HTMLBundle where
-    write fp item = do
-        writeFile fp html
-        removeDirectory imgsDir
-        if null imgs
-            then return ()
-            else do
-                createDirectory imgsDir
-                forM_ imgs $ \(n, TmpFile ifp) ->
-                    renameFile ifp (imgsDir </> "equation-" ++ show n ++ ".svg")
-        where
-            HTMLBundle html imgs = itemBody item
-            imgsDir = dropExtensions fp
-
 -------------------------------------------------------------------------------
--- Build an HTML bundle from an input containing LaTeX equations
+-- Build an HTML file with embedded SVG sections from an input containing 
+-- LaTeX equations
 
 ptConvFactor :: Points
 ptConvFactor = 1.00375
 
-compileToHTMLBundle :: Item String -> Compiler (Item HTMLBundle)
-compileToHTMLBundle item = do
-    doc <- readPandoc item
-    imgs <- makeImages doc
+pandocHTMLCompiler :: Compiler (Item String)
+pandocHTMLCompiler = getResourceBody  >>= renderPandocHTML
+
+renderPandocHTML :: Item String -> Compiler (Item String)
+renderPandocHTML item = do
+    doc <- readPandocWith domsDefaultReaderOptions item
+    imgs <- makeEquationImages doc
     let imgSubdir = takeBaseName $ toFilePath $ itemIdentifier item
-        html = writePandocHTML $
-                flip evalState 0 . walkM (transformEquation imgSubdir imgs) <$> doc
-        eqns = [ (e, f) | (e, (f, _)) <- M.toList imgs ]
-    return $ flip HTMLBundle eqns <$> html
+    writePandocHTML <$> transformHTMLDocument imgSubdir imgs doc
+
+transformHTMLDocument :: String -> M.Map Int (TmpFile, ImageInfo) ->
+    Item Pandoc -> Compiler (Item Pandoc)
+transformHTMLDocument imgSubdir imgs =
+    traverse $ unsafeCompiler . flip evalStateT 0 . walkM transformEquation
     where
-        transformEquation :: String -> M.Map Int (TmpFile, ImageInfo) -> Inline -> State Int Inline
-        transformEquation imgSubdir imgs (Math typ body) = do
+        transformEquation :: Inline -> StateT Int IO Inline
+        transformEquation (Math typ body) = do
             num <- get
             let num = num + 1
             put num
-            let img = M.lookup num imgs
-                cssClasses = case typ of
+            let classes = case typ of
                     InlineMath -> ["inline-equation"]
                     DisplayMath -> ["displayed-equation"]
-            return $ case img of
+            case M.lookup num imgs of
                 Nothing ->
-                    Span ("", cssClasses, [("style", "color: red;")]) $
-                        [Str "<missing image>"]
-                Just (imgFile, imgInfo) ->
-                    Image ("", cssClasses, attributes) (toList $ text body)
-                        ( T.pack $ imgSubdir </> "equation-" ++ show num <.> "svg"
-                        , T.pack $ "equation: " ++ show num)
-                    where
-                        attributes :: [(T.Text, T.Text)]
-                        attributes = case typ of
-                            InlineMath ->
-                                [ ( "style"
-                                  , T.pack $ "transform: translateY(" ++
-                                            show (depth imgInfo / ptConvFactor + 0.5) ++ "pt);"
-                                  )
-                                ]
-                            DisplayMath -> []
-        transformEquation _ _ x = return x
+                    return $ Span ("", classes, [("style", "color: red;")])
+                                [Str "<missing image>"]
+                Just img ->
+                    RawInline "xml" <$> liftIO (loadAndTransformSVG num img typ)
+        transformEquation x = return x
 
-makeImages :: Item Pandoc -> Compiler (M.Map Int (TmpFile, ImageInfo))
-makeImages item =
+makeEquationImages :: Item Pandoc -> Compiler (M.Map Int (TmpFile, ImageInfo))
+makeEquationImages item =
     if numEqns > 0
     then do
         latexFile@(TmpFile latexPath) <- newTmpFile "lualatex.tex"
@@ -330,29 +296,41 @@ makeImages item =
             let item' = addShippers . addImgGenOptions <$> item
             in (itemBody $ writePandocLaTeX $ fst <$> item', snd $ itemBody item')
 
-{-
-testFilter :: FilePath -> IO ()
-testFilter fp = do
-    text <- TIO.readFile fp
-    result <- runIO $ do
-        doc <- readMarkdown pandocReaderOptions text
-        let Pandoc meta body = evalState (walkM transformEquation doc) 1
-        let doc' = Pandoc (meta <> latexOptions <> imgGenOptions) body
-        writeLaTeX pandocLaTeXWriterOptions doc'
-    latex <- handleError result
-    TIO.putStrLn latex
+loadAndTransformSVG :: Int -> (TmpFile, ImageInfo) -> MathType -> IO T.Text
+loadAndTransformSVG num (TmpFile fp, ImageInfo dp _ _) typ =
+    LT.toStrict . X.renderText X.def . traverseDocument <$> X.readFile X.def fp
     where
-        transformEquation :: Inline -> State Int Inline
-        transformEquation (Math typ text) = do
-            num <- get
-            put (num + 1)
-            return $ Math typ $ T.pack $ "\\begin{shipper}{" ++ (
-                case typ of
-                    InlineMath -> "\\textstyle"
-                    DisplayMath -> "\\displaystyle"
-                ) ++ "}{" ++ show num ++ "}" ++ T.unpack text ++ "\\end{shipper}"
-        transformEquation x = return x
--}
+        extraRootAttr :: M.Map X.Name T.Text
+        extraRootAttr =
+            case typ of
+                DisplayMath -> M.fromList
+                    [ ( "class", "displayed-equation" )
+                    ]
+                InlineMath -> M.fromList
+                    [ ( "class", "inline-equation" )
+                    , ( "style"
+                      , T.pack $ "transform: translateY(" ++
+                                 show (dp / ptConvFactor + 0.5) ++ "pt);" )
+                    ]
 
+        updateRoot :: X.Element -> X.Element
+        updateRoot (X.Element nm attr nodes) =
+            X.Element nm (M.union attr extraRootAttr) (map traverseNode nodes)
 
-        
+        traverseDocument :: X.Document -> X.Document
+        traverseDocument (X.Document p e ms) = X.Document p (updateRoot e) ms
+
+        traverseElement :: X.Element -> X.Element
+        traverseElement (X.Element nm attr nodes) =
+            X.Element nm (updateAttr attr) (map traverseNode nodes)
+
+        updateAttr :: M.Map X.Name T.Text -> M.Map X.Name T.Text
+        updateAttr attr =
+            foldr (M.adjust transformID) attr ["id", "{http://www.w3.org/1999/xlink}href"]
+
+        transformID :: T.Text -> T.Text
+        transformID = flip T.append (T.pack $ "-equation-" ++ show num)
+
+        traverseNode :: X.Node -> X.Node
+        traverseNode (X.NodeElement elem) = X.NodeElement $ traverseElement elem
+        traverseNode n = n        
