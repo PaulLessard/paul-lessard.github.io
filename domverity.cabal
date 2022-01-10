@@ -32,3 +32,5 @@ executable domverity
                   ,  process == 1.6.*
                   ,  text == 1.2.*
                   ,  bytestring == 0.10.*
+                  ,  mtl == 2.2.*
+                  ,  xml == 1.3.*

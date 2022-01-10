@@ -21,3 +21,4 @@ _cache/
 _site/
 templates/_cache/
 stack.yaml.lock
+test/

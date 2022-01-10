@@ -468,6 +468,29 @@ a.pagination-item:hover {
           transform: translateX(-14rem);
 }
 
+/*
+ * Equations
+ * 
+ * Style images generated from inline and displayed equations
+ */
+
+.inline-equation {
+  vertical-align: baseline; 
+  display: inline; 
+  margin: 0;
+  border-radius: 0;
+  border: 0;
+}
+
+.displayed-equation {
+  display: block;
+  height: auto; 
+  width: auto; 
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 100%; 
+  max-height: 100%;
+}
 
 /*
  * Themes
