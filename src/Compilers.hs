@@ -65,17 +65,7 @@ latexToPDF :: FilePath  -> IO FilePath
 latexToPDF latexPath = do
     system $ unwords ["lualatex", "-halt-on-error",
         "-output-directory", takeDirectory latexPath, latexPath, ">/dev/null", "2>&1"]
-    copyFile pdfPath savePath
     return $ latexPath -<.> "pdf"
-    where
-        savesDirectory :: FilePath
-        savesDirectory = "/Users/dom/Desktop/saves"
-
-        pdfPath :: FilePath
-        pdfPath = latexPath -<.> "pdf"
-
-        savePath :: FilePath
-        savePath = replaceDirectory pdfPath savesDirectory
 
 pdfToSVGs :: FilePath -> IO (M.Map Int FilePath)
 pdfToSVGs pdfPath = do
