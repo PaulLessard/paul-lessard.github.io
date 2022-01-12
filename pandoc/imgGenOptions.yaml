@@ -1,5 +1,0 @@
-header-includes:
-- \PassOptionsToPackage{active}{preview}
-- \input{../pandoc/head.tex}
-
-fontsize: 17pt

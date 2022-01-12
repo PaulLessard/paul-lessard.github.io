@@ -114,7 +114,7 @@ Higher Category Theory • Homotopy Theory • Programming Languages
 |    |    |    |
 |:-------|:--------------------------------------------|
 | **2021** | (with M. Rovelli and V. Ozornova, submitted) [Gray tensor products and saturated $n$-complicial sets]{.smallcaps}, <https://arxiv.org/abs/2007.01235>, submitted to *Higher Structures*. |
-| **2020a** | (with E. Riehl) [On the construction of limits and colimits in ∞-categories]{.smallcaps} [Theory and Applications of Categories]{.smallcaps}, 35 (2020), 1101--1158. |
+| **2020a** | (with E. Riehl) [On the construction of limits and colimits in $\infty$-categories]{.smallcaps} [Theory and Applications of Categories]{.smallcaps}, 35 (2020), 1101--1158. |
 | **2020b** | (with E. Riehl) [Infinity category theory from scratch]{.smallcaps}, *Higher Structures*, 4(1) (2020), 115--167. (invited publication) |
 | **2020c** | (with E. Riehl) [Recognizing quasi-categorical limits and colimits in homotopy coherent nerves]{.smallcaps}, *Applied Categorical Structures*, 28 (2020), 669--716. |
 | **2018** | (with E. Riehl) [The comprehension construction]{.smallcaps}, *Higher Structures*, 2(1) (2018), 116--190. |
@@ -133,7 +133,7 @@ Higher Category Theory • Homotopy Theory • Programming Languages
 
 |    |    |    |
 |:-------|:--------------------------------------------|
-| **2022** | (with E. Riehl) [The elements of ∞-category theory]{.smallcaps}, <http://www.math.jhu.edu/~eriehl/elements.pdf>, 640 pages, contracted for publication by **Cambridge University Press** in 2021. |
+| **2022** | (with E. Riehl) [The elements of $\infty$-category theory]{.smallcaps}, <http://www.math.jhu.edu/~eriehl/elements.pdf>, 640 pages, contracted for publication by **Cambridge University Press** in 2021. |
 | **2011** | [Enriched categories, internal categories and change of base]{.smallcaps}. *Reprints in Theory and Application of Categories*, 20:1--266 |
 | **2008** | [Complicial Sets, Characterising the Simplicial Nerves of Strict $\omega$-Categories]{.smallcaps}, volume 193 of *Memoirs of the AMS*. American Mathematical Society |
 
@@ -141,11 +141,11 @@ Higher Category Theory • Homotopy Theory • Programming Languages
 
 |    |    |    |
 |:-------|:--------------------------------------------|
-| **2020** | [Invited mini-course, Higher Categories and Categorification]{.smallcaps}, Mathematical Sciences Research Institute, Berkeley (CA) USA, *"Synthetic ∞-category theory"*. |
-| **2019** | [Invited mini-course, Foundational Methods in Computer Science]{.smallcaps}, University of Calgary, Calgary Canada, *"Synthetic ∞-category theory"*. |
-| **2019** | [Invited speaker, Tercer Coloquio de Categorías, Álgebra y Temas Afines]{.smallcaps}, UNAM Oaxaca Mexico, *"Synthetic ∞-category theory and ∞-cosmology"* |
+| **2020** | [Invited mini-course, Higher Categories and Categorification]{.smallcaps}, Mathematical Sciences Research Institute, Berkeley (CA) USA, *"Synthetic $\infty$-category theory"*. |
+| **2019** | [Invited mini-course, Foundational Methods in Computer Science]{.smallcaps}, University of Calgary, Calgary Canada, *"Synthetic $\infty$-category theory"*. |
+| **2019** | [Invited speaker, Tercer Coloquio de Categorías, Álgebra y Temas Afines]{.smallcaps}, UNAM Oaxaca Mexico, *"Synthetic $\infty$-category theory and $\infty$-cosmology"* |
 | **2018** | [Invited speaker, Diagrammatic Reasoning in Higher Education]{.smallcaps}, University of Newcastle, *"An exploration of String Diagrams in Computer Science"* |
-| **2018** | [Invited mini-course, Topology in Australia and South Korea (AMSI)]{.smallcaps}, POSTECH, Pohang, South Korea, *"An introduction to model independent ∞-category theory"* |
+| **2018** | [Invited mini-course, Topology in Australia and South Korea (AMSI)]{.smallcaps}, POSTECH, Pohang, South Korea, *"An introduction to model independent $\infty$-category theory"* |
 | **2017** | [Invited speaker, Categories for homotopy theory and rewriting]{.smallcaps}, CIRM, Luminy, France, talk entitled *"A complicial compendium"* |
 | **2016** | [Invited speaker, International Category Theory Meeting (ICTM2016)]{.smallcaps} Dalhousie University, Halifax, Canada, talk entitled *"On the Yoga of (Un)straightening"* |
 | **2016** | [Invited speaker, 31st Summer Topology Conference]{.smallcaps}, University of Leicester, UK, talk entitled *"A monadic account of Lurie's (un)straightening construction"* |

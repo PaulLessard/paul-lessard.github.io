@@ -8,8 +8,17 @@
         <name>Dominic Verity</name>
         <email>dominic.verity@mq.edu.au</email>
     </author>
-    <updated>2021-12-20T00:00:00Z</updated>
+    <updated>2022-01-11T00:00:00Z</updated>
     <entry>
+    <title>Mathematics Embedding Test</title>
+    <link href="https://dom-verity.github.io/posts/2022-01-11-test-math.html" />
+    <id>https://dom-verity.github.io/posts/2022-01-11-test-math.html</id>
+    <published>2022-01-11T00:00:00Z</published>
+    <updated>2022-01-11T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<p>This post is simply here to demonstrate our new code for embedding LaTeX generated SVG equation images into HTML output.</p>
+]]></summary>
+</entry>
+<entry>
     <title>A recipe for success: Uncle Bob Verity's rice 'n' peas</title>
     <link href="https://dom-verity.github.io/posts/2021-12-20-rice-n-peas.html" />
     <id>https://dom-verity.github.io/posts/2021-12-20-rice-n-peas.html</id>

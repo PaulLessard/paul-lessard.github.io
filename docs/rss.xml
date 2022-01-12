@@ -7,8 +7,17 @@
         <description><![CDATA[A blog about higher category theory and life]]></description>
         <atom:link href="https://dom-verity.github.io/rss.xml" rel="self"
                    type="application/rss+xml" />
-        <lastBuildDate>Mon, 20 Dec 2021 00:00:00 UT</lastBuildDate>
+        <lastBuildDate>Tue, 11 Jan 2022 00:00:00 UT</lastBuildDate>
         <item>
+    <title>Mathematics Embedding Test</title>
+    <link>https://dom-verity.github.io/posts/2022-01-11-test-math.html</link>
+    <description><![CDATA[<p>This post is simply here to demonstrate our new code for embedding LaTeX generated SVG equation images into HTML output.</p>
+]]></description>
+    <pubDate>Tue, 11 Jan 2022 00:00:00 UT</pubDate>
+    <guid>https://dom-verity.github.io/posts/2022-01-11-test-math.html</guid>
+    <dc:creator>Dominic Verity</dc:creator>
+</item>
+<item>
     <title>A recipe for success: Uncle Bob Verity's rice 'n' peas</title>
     <link>https://dom-verity.github.io/posts/2021-12-20-rice-n-peas.html</link>
     <description><![CDATA[<p>What could be more fitting than to kick off this blog by recycling a post I wrote a few years ago about my favourite dish <em>rice ‘n’ peas</em>. Given the season, indeed, I should mention that no Jamaican Christmas would be complete without a vast pot of this staple weighing down the family lunch table. I’ll start with a little personal history, but scroll down in the full article if you’re keen to get straight to my Grandfather’s recipe for rice ‘n’ peas.</p>
