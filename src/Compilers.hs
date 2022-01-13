@@ -3,6 +3,15 @@
 {-# OPTIONS_GHC -Wno-incomplete-patterns #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE TupleSections #-}
+{-# LANGUAGE MultiParamTypeClasses #-}
+{-# LANGUAGE FlexibleContexts #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE ScopedTypeVariables #-}
+{-# LANGUAGE CPP #-}
+
+{-# OPTIONS_GHC -fno-warn-redundant-constraints -O2 #-}
+
+
 
 --------------------------------------------------------------------------------
 
@@ -19,25 +28,30 @@ import qualified Data.Text.IO as TIO
 import qualified Data.Text.Lazy as LT
 import qualified Data.ByteString.Lazy as LB
 import qualified Data.Map as M
-import           Data.Char                     (isDigit, isSpace)
+import           Data.Char                     (isDigit, isSpace, isAlpha)
 import           Data.Maybe                    (fromMaybe, mapMaybe)
 import           Data.List                     (isPrefixOf, stripPrefix, sort)
 import           Data.Fixed                    (Fixed)
 import           Data.Functor                  ((<&>))
+import           Data.Traversable
+import qualified Data.Set as S
+import qualified Data.Char as C
 
 import           GHC.IO                        (unsafePerformIO)
 
 import           System.Process                (system)
-import           System.Directory              (createDirectory, setCurrentDirectory, listDirectory, 
+import           System.Directory              (createDirectory, setCurrentDirectory, listDirectory,
                                                 renameFile, copyFile)
 import           System.FilePath               (replaceExtension, takeDirectory,
                                                 dropExtensions, takeFileName, takeBaseName,
-                                                replaceBaseName, takeExtension, (</>), (<.>), (-<.>), 
+                                                replaceBaseName, takeExtension, (</>), (<.>), (-<.>),
                                                 replaceDirectory)
 
 import           Control.Monad
-import           Control.Monad.State.Lazy
 import           Control.Applicative
+import           Control.Monad.State.Lazy
+import qualified Control.Monad.Reader as R
+
 
 import           Text.Pandoc
 import           Text.Pandoc.Walk
@@ -47,7 +61,6 @@ import           Text.Pandoc.Parsing           (runF, defaultParserState, extrac
 import           Text.Pandoc.Readers.Markdown  (yamlToMeta)
 import           Text.Blaze.Html5.Attributes   (xmlns, item)
 import qualified Text.XML as X
-import Data.Traversable
 import qualified GHC.TypeLits as T
 
 buildLatex :: Item String -> Compiler (Item TmpFile)
@@ -115,14 +128,14 @@ replaceMetaField :: T.Text -> MetaValue -> Meta -> Meta
 replaceMetaField nm mv meta = Meta $ M.insert nm mv (unMeta meta)
 
 addToStartMetaList :: T.Text -> MetaValue -> Meta -> Meta
-addToStartMetaList nm mv meta = 
+addToStartMetaList nm mv meta =
     case lookupMeta nm meta of
         Just (MetaList ls)      -> replaceMetaField nm (MetaList (mv:ls)) meta
         Just x                  -> replaceMetaField nm (MetaList [mv,x]) meta
         Nothing                 -> replaceMetaField nm mv meta
 
 imgGenOptions :: Meta
-imgGenOptions = 
+imgGenOptions =
     addToStartMetaList "header-includes" (MetaInlines [RawInline "latex" "\\PassOptionsToPackage{active}{preview}"]) $
         replaceMetaField "fontsize" (toMetaValue ("17pt" :: String)) latexOptions
 
@@ -283,7 +296,7 @@ makeEquationImages latexPath doc =
         imgInfo <- getEqnDimens $ pdfPath -<.> "log"
         svgFiles <- pdfToSVGs pdfPath
         imgData <- traverse (X.readFile X.def) svgFiles
-        return $ M.fromList $ 
+        return $ M.fromList $
             mapMaybe (\(i, e, d) -> (e,) . (,d) <$> M.lookup i imgData) imgInfo
 
     else return M.empty
@@ -315,8 +328,24 @@ makeEquationImages latexPath doc =
 
 transformAndRenderImage :: Int -> (X.Document, ImageInfo) -> MathType -> T.Text
 transformAndRenderImage num (svg, ImageInfo dp _ _) typ =
-    LT.toStrict $ X.renderText domsDefaultXMLRenderSettings $ traverseDocument svg
+    LT.toStrict $ X.renderText domsDefaultXMLRenderSettings $
+        R.runReader (walkM transformElement svg) allIDs
     where
+        transformElement :: X.Element -> R.Reader (S.Set T.Text) X.Element
+        transformElement = transformTags . transformID . addExtraAttrAtRoot
+
+        allIDs :: S.Set T.Text
+        allIDs = query queryID svg
+            where
+                queryID :: X.Element -> S.Set T.Text
+                queryID (X.Element _ attr _) = maybe S.empty S.singleton (M.lookup "id" attr)
+
+        addExtraAttrAtRoot :: X.Element -> X.Element
+        addExtraAttrAtRoot e@(X.Element nm attr nodes) =
+            if nm == "{http://www.w3.org/2000/svg}svg" 
+                then X.Element nm (attr <> extraRootAttr) nodes 
+                else e
+
         extraRootAttr :: M.Map X.Name T.Text
         extraRootAttr =
             case typ of
@@ -330,24 +359,122 @@ transformAndRenderImage num (svg, ImageInfo dp _ _) typ =
                                  show (dp + 0.5) ++ "pt);" )
                     ]
 
-        updateRoot :: X.Element -> X.Element
-        updateRoot (X.Element nm attr nodes) =
-            X.Element nm (M.union attr extraRootAttr) (map traverseNode nodes)
+        transformID :: X.Element -> X.Element
+        transformID e@(X.Element nm attr nodes) =
+            case M.lookup "id" attr of
+                Just t -> 
+                    X.Element 
+                        nm
+                        (M.insert "id" (T.concat ["equation-", T.pack (show num), "-", t]) attr) 
+                        nodes
+                Nothing -> e
 
-        traverseDocument :: X.Document -> X.Document
-        traverseDocument (X.Document p e ms) = X.Document p (updateRoot e) ms
+        -- return $ foldr (M.adjust transformID) attr ["id", "{http://www.w3.org/1999/xlink}href"]
 
-        traverseElement :: X.Element -> X.Element
-        traverseElement (X.Element nm attr nodes) =
-            X.Element nm (updateAttr attr) (map traverseNode nodes)
+        transformTags :: X.Element -> R.Reader (S.Set T.Text) X.Element
+        transformTags (X.Element nm attr nodes) = do
+            transAttr <- traverse transformAttrValue attr
+            return $ X.Element nm transAttr nodes
 
-        updateAttr :: M.Map X.Name T.Text -> M.Map X.Name T.Text
-        updateAttr attr =
-            foldr (M.adjust transformID) attr ["id", "{http://www.w3.org/1999/xlink}href"]
+        transformAttrValue :: T.Text -> R.Reader (S.Set T.Text) T.Text
+        transformAttrValue s = do
+            trans <- mapM transformTag (tail splitup)
+            return $ T.concat $ head splitup:trans
+            where
+                splitup :: [T.Text]
+                splitup = T.splitOn "#" s
 
-        transformID :: T.Text -> T.Text
-        transformID = flip T.append (T.pack $ "-equation-" ++ show num)
+                transformTag :: T.Text -> R.Reader (S.Set T.Text) T.Text
+                transformTag s  = do
+                    ids <- R.ask
+                    if S.member (T.takeWhile (\c -> C.isAlphaNum c || c == '-') s) ids
+                        then return $ T.concat ["#", "equation-", T.pack (show num), "-", s]
+                        else return $ T.concat ["#", s]
 
-        traverseNode :: X.Node -> X.Node
-        traverseNode (X.NodeElement elem) = X.NodeElement $ traverseElement elem
-        traverseNode n = n
+-- Walker for XML documents
+-- Incomplete: only walks Document, Node and Element nodes
+
+-- Walkable instance declarations
+-- Walk Document
+instance Walkable X.Document X.Document where
+    walkM f = f
+    query f = f
+
+instance Walkable X.Element X.Document where
+    walkM = walkDocumentM
+    query = queryDocument
+
+instance Walkable [X.Node] X.Document where
+    walkM = walkDocumentM
+    query = queryDocument
+
+instance Walkable X.Node X.Document where
+    walkM = walkDocumentM
+    query = queryDocument
+
+-- Walk Element
+instance Walkable X.Element X.Element where
+    walkM f e = walkElementM f e >>= f
+    query f e = f e <> queryElement f e
+
+instance Walkable [X.Node] X.Element where
+    walkM = walkElementM
+    query = queryElement
+
+instance Walkable X.Node X.Element where
+    walkM = walkElementM
+    query = queryElement
+
+-- Walk node list
+instance {-# OVERLAPPING #-}
+         Walkable [X.Node] [X.Node] where
+    walkM f = traverse (walkNodeM f) >=> f
+    query f nodes = f nodes <> mconcat (map (queryNode f) nodes)
+
+-- Walk node
+instance Walkable X.Node X.Node where
+    walkM f n = walkNodeM f n >>= f
+    query f n = f n <> queryNode f n
+
+instance Walkable X.Element X.Node where
+    walkM = walkNodeM
+    query = queryNode
+
+-- Concrete walkers
+
+-- Helper methods to walk and query the components of a Document
+walkDocumentM :: (Walkable a X.Element, Applicative m, Monad m) =>
+    (a -> m a) -> X.Document -> m X.Document
+walkDocumentM f (X.Document p e ms) = do
+    e' <- walkM f e
+    return $ X.Document p e' ms
+
+queryDocument :: (Walkable a X.Element, Monoid c) =>
+    (a -> c) -> X.Document -> c
+queryDocument f (X.Document p e ms) = query f e
+
+-- Helper methods to walk and query the components of an Elemement
+walkElementM :: (Walkable a [X.Node], Applicative m, Monad m) =>
+    (a -> m a) -> X.Element -> m X.Element
+walkElementM f (X.Element nm attr nodes) = do
+    nodes' <- walkM f nodes
+    return $ X.Element nm attr nodes'
+
+queryElement :: (Walkable a [X.Node], Monoid c) =>
+    (a -> c) -> X.Element -> c
+queryElement f (X.Element _ _ nodes) = query f nodes
+
+-- Helper methods to walk and query the components of an Node
+walkNodeM :: (Walkable a X.Element, Applicative m, Monad m) =>
+    (a -> m a) -> X.Node -> m X.Node
+walkNodeM f (X.NodeElement e) = do
+    e' <- walkM f e
+    return $ X.NodeElement e'
+walkNodeM _ e = return e
+
+queryNode :: (Walkable a X.Element, Monoid c) =>
+    (a -> c) -> X.Node -> c
+queryNode f (X.NodeElement e) = query f e
+queryNode _ e = mempty
+
+

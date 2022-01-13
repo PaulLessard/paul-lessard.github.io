@@ -133,7 +133,7 @@ Higher Category Theory • Homotopy Theory • Programming Languages
 
 |    |    |    |
 |:-------|:--------------------------------------------|
-| **2022** | (with E. Riehl) [The elements of $\infty$-category theory]{.smallcaps}, <http://www.math.jhu.edu/~eriehl/elements.pdf>, 640 pages, contracted for publication by **Cambridge University Press** in 2021. |
+| **2022** | (with E. Riehl) [The elements of $\infty$-category theory]{.smallcaps}, <http://www.math.jhu.edu/~eriehl/elements.pdf>, 758 pages, contracted for publication by **Cambridge University Press** in 2022. |
 | **2011** | [Enriched categories, internal categories and change of base]{.smallcaps}. *Reprints in Theory and Application of Categories*, 20:1--266 |
 | **2008** | [Complicial Sets, Characterising the Simplicial Nerves of Strict $\omega$-Categories]{.smallcaps}, volume 193 of *Memoirs of the AMS*. American Mathematical Society |
 

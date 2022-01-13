@@ -45,7 +45,7 @@ documentclass: extarticle
 fontsize: 12pt
 papersize: a4
 
-mainfont: EB Garamond
+mainfont: Garamond Premier Pro
 mainfontoptions:
 - Numbers = Lining
 - Ligatures = Common
