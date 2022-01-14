@@ -17,8 +17,8 @@ Beyond our geographic proximity, it seems to me that we have only ever been boun
 
 When I was a child in Kingston, my grandfather was known universally as "Uncle Bob". He was someone who was recognised, and regarded with much affection, by everyone in the city at that time, or so it seemed to me.
 
-`<img style="float: right; width: 25%" src="../images/Institute_of_Jamaica.png"/>`{=html}
-`\begin{wrapfigure}[10]{r}{0pt}\includegraphics[width=0.25\textwidth]{../images/Institute_of_Jamaica.png}\end{wrapfigure}`{=latex}
+`<img style="float: right; width: 25%" src="/images/Institute_of_Jamaica.png"/>`{=html}
+`\begin{wrapfigure}[10]{r}{0pt}\includegraphics[width=0.25\textwidth]{images/Institute_of_Jamaica.png}\end{wrapfigure}`{=latex}
 
 He had been a broadcaster and lecturer for many years but was much better known for the many cultural institutions he had helped found, all to the end of furthering the lot of Kingston's poor. This included the central public market, where those from the country came to sell their produce, and his beloved [_Junior Centre of the Institute of Jamaica_](http://juniorcentre-ioj.org.jm/index.php/about-us).
 
@@ -30,14 +30,14 @@ Over the years I have come to appreciate, and revel in, just how much of Uncle B
 
 ```{=html}
 <table style="float: right; width: 40%">
-    <tr><td><img  src="../images/rice-and-peas.png" title="Image (c) 2020 sweetandsorrel.com"/></td></tr>
+    <tr><td><img  src="/images/rice-and-peas.png" title="Image (c) 2020 sweetandsorrel.com"/></td></tr>
     <tr><td style="font-family: Roboto; font-size: 50%;">Image (c) 2020 <a href="https://www.sweetandsorrel.com">Sweet and Sorrel</a></td></tr>
 </table>
 ```
 ```{=latex}
 \begin{wrapfigure}[18]{r}{0pt}
     \begin{tabular}{c}
-        \includegraphics[width=0.4\textwidth]{../images/rice-and-peas.png} \\
+        \includegraphics[width=0.4\textwidth]{images/rice-and-peas.png} \\
         \textsf{\small Image (c) 2020 \href{https://www.sweetandsorrel.com}{Sweet and Sorrel}}
     \end{tabular}
 \end{wrapfigure}
@@ -66,7 +66,7 @@ This recipe can be made vegetarian or Kosher friendly by leaving out the bacon. 
 
 ```{=html}
 <table style="float: right; width: 30%" >
-    <tr><td><img src="../images/anansi.jpg"/></td></tr>
+    <tr><td><img src="/images/anansi.jpg"/></td></tr>
     <tr><td style="font-family: Roboto; font-size: 50%;">Image (c) 1954 Marcia Brown</td></tr>
 </table>
 ```
@@ -86,7 +86,7 @@ This recipe can be made vegetarian or Kosher friendly by leaving out the bacon. 
 ```{=latex}
 \begin{wrapfigure}[12]{r}{0pt}
     \begin{tabular}{c}
-        \includegraphics[width=0.3\textwidth]{../images/anansi.jpg} \\
+        \includegraphics[width=0.3\textwidth]{images/anansi.jpg} \\
         \textsf{\small Image (c) 1954 Marcia Brown}
     \end{tabular}
 \end{wrapfigure}
@@ -99,7 +99,7 @@ Since most of us don't have a magic pot to fall back on, we're going to have to 
 
 ```{=html}
 <table style="float: right; width: 40%">
-    <tr><td><img src="../images/XKCD_tasks.png" title="In the 60s, Marvin Minsky assigned a couple of undergrads to spend the summer programming a computer to use a camera to identify objects in a scene. He figured they&#39;d have the problem solved by the end of the summer. Half a century later, we&#39;re still working on it."/></td></tr>
+    <tr><td><img src="/images/XKCD_tasks.png" title="In the 60s, Marvin Minsky assigned a couple of undergrads to spend the summer programming a computer to use a camera to identify objects in a scene. He figured they&#39;d have the problem solved by the end of the summer. Half a century later, we&#39;re still working on it."/></td></tr>
     <tr><td style="font-family: Roboto; font-size: 50%;">Image (c) 2021 <a href="https://xkcd.com/1425">XKCD</a></td></tr>
 </table>
 ```
@@ -123,7 +123,7 @@ Warning: **do not pour this liquor away** this is the most important part of the
 ```{=latex}
 \begin{wrapfigure}[21]{r}{0pt}
     \begin{tabular}{c}
-        \includegraphics[width=0.4\textwidth]{../images/XKCD_tasks.png} \\
+        \includegraphics[width=0.4\textwidth]{images/XKCD_tasks.png} \\
         \textsf{\small Image (c) 2021 \href{https://xkcd.com/1425}{XKCD}}
     \end{tabular}
 \end{wrapfigure}

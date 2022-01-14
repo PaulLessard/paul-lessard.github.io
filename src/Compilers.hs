@@ -10,14 +10,12 @@
 {-# LANGUAGE CPP #-}
 
 {-# OPTIONS_GHC -fno-warn-redundant-constraints -O2 #-}
-
-
-
 --------------------------------------------------------------------------------
 
 module Compilers
     ( pandocHTMLCompiler
     , pandocLaTeXCompiler
+    , pandocPDFCompiler
     , buildLatex
     ) where
 
@@ -65,14 +63,11 @@ import qualified GHC.TypeLits as T
 
 buildLatex :: Item String -> Compiler (Item TmpFile)
 buildLatex item = do
-    latexFile <- newTmpFile "lualatex.tex"
-    traverse (unsafeCompiler . buildLatex' latexFile) item
-    where
-        buildLatex' :: TmpFile -> String -> IO TmpFile
-        buildLatex' (TmpFile latexPath) body = do
-            writeFile latexPath $ itemBody item
-            pdfPath <- latexToPDF latexPath
-            return (TmpFile pdfPath)
+    latexFile@(TmpFile latexPath) <- newTmpFile "lualatex.tex"
+    tmp <- unsafeCompiler $ do
+        writeFile latexPath $ itemBody item
+        latexToPDF latexPath
+    makeItem (TmpFile tmp)
 
 latexToPDF :: FilePath  -> IO FilePath
 latexToPDF latexPath = do
@@ -180,11 +175,21 @@ renderPandocLaTeX :: Item String -> Compiler (Item String)
 renderPandocLaTeX = renderPandocTypedTransformM defaultHakyllReaderOptions (writeLaTeX def) return
 
 pandocLaTeXCompiler :: Compiler (Item String)
-pandocLaTeXCompiler = getResourceBody  >>= renderPandocLaTeX
+pandocLaTeXCompiler = getResourceBody >>= renderPandocLaTeX
 
 pandocHTMLCompiler :: Compiler (Item String)
--- pandocHTMLCompiler = pandocCompilerWith domsDefaultReaderOptions domsDefaultHTMLWriterOptions
-pandocHTMLCompiler = getResourceBody  >>= renderPandocHTML
+pandocHTMLCompiler = getResourceBody >>= renderPandocHTML
+
+renderPandocPDF :: Item String -> Compiler (Item TmpFile)
+renderPandocPDF =
+    renderPandocTypedTransformM defaultHakyllReaderOptions 
+        (writeLaTeX domsDefaultLaTeXWriterOptions) addOpts >=> buildLatex
+    where
+        addOpts :: Pandoc -> Compiler Pandoc
+        addOpts (Pandoc meta body) = return $ Pandoc (meta <> latexOptions) body
+
+pandocPDFCompiler :: Compiler (Item TmpFile)
+pandocPDFCompiler = getResourceBody >>= renderPandocPDF 
 
 -------------------------------------------------------------------------------
 -- Very simple backtracking parser monad.
@@ -260,7 +265,7 @@ renderPandocHTML :: Item String -> Compiler (Item String)
 renderPandocHTML item = do
     doc <- readPandocWith domsDefaultReaderOptions item
     latexFile@(TmpFile latexPath) <- newTmpFile "eqnimages.tex"
-    for doc $ \body -> unsafeCompiler $ do
+    for doc $ \body -> do
         imgs <- makeEquationImages latexPath body
         let imgSubdir = takeBaseName $ toFilePath $ itemIdentifier item
         writePandocHTML <$> embedEquationImages imgs body
@@ -287,18 +292,17 @@ embedEquationImages imgs = flip evalStateT 0 . walkM transformEquation
                     return $ RawInline "html" (transformAndRenderImage num img typ)
         transformEquation x = return x
 
-makeEquationImages :: FilePath -> Pandoc -> IO (M.Map Int (X.Document, ImageInfo))
+makeEquationImages :: FilePath -> Pandoc -> Compiler (M.Map Int (X.Document, ImageInfo))
 makeEquationImages latexPath doc =
     if numEqns > 0
-    then do
-        writeFile latexPath latex
-        pdfPath <- latexToPDF latexPath
-        imgInfo <- getEqnDimens $ pdfPath -<.> "log"
-        svgFiles <- pdfToSVGs pdfPath
-        imgData <- traverse (X.readFile X.def) svgFiles
-        return $ M.fromList $
-            mapMaybe (\(i, e, d) -> (e,) . (,d) <$> M.lookup i imgData) imgInfo
-
+    then unsafeCompiler $ do
+            writeFile latexPath latex
+            pdfPath <- latexToPDF latexPath
+            imgInfo <- getEqnDimens $ pdfPath -<.> "log"
+            svgFiles <- pdfToSVGs pdfPath
+            imgData <- traverse (X.readFile X.def) svgFiles
+            return $ M.fromList $
+                mapMaybe (\(i, e, d) -> (e,) . (,d) <$> M.lookup i imgData) imgInfo
     else return M.empty
     where
         transformEquation :: Inline -> State Int Inline
@@ -342,8 +346,8 @@ transformAndRenderImage num (svg, ImageInfo dp _ _) typ =
 
         addExtraAttrAtRoot :: X.Element -> X.Element
         addExtraAttrAtRoot e@(X.Element nm attr nodes) =
-            if nm == "{http://www.w3.org/2000/svg}svg" 
-                then X.Element nm (attr <> extraRootAttr) nodes 
+            if nm == "{http://www.w3.org/2000/svg}svg"
+                then X.Element nm (attr <> extraRootAttr) nodes
                 else e
 
         extraRootAttr :: M.Map X.Name T.Text
@@ -362,10 +366,10 @@ transformAndRenderImage num (svg, ImageInfo dp _ _) typ =
         transformID :: X.Element -> X.Element
         transformID e@(X.Element nm attr nodes) =
             case M.lookup "id" attr of
-                Just t -> 
-                    X.Element 
+                Just t ->
+                    X.Element
                         nm
-                        (M.insert "id" (T.concat ["equation-", T.pack (show num), "-", t]) attr) 
+                        (M.insert "id" (T.concat ["equation-", T.pack (show num), "-", t]) attr)
                         nodes
                 Nothing -> e
 
@@ -476,5 +480,7 @@ queryNode :: (Walkable a X.Element, Monoid c) =>
     (a -> c) -> X.Node -> c
 queryNode f (X.NodeElement e) = query f e
 queryNode _ e = mempty
+
+
 
 

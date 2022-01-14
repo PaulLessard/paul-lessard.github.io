@@ -21,7 +21,6 @@ config = defaultConfiguration
   { destinationDirectory = "docs"
   }
 
-
 main :: IO ()
 main = hakyllWith config $ do
     match ("images/*" .||. "js/*") $ do
@@ -87,11 +86,15 @@ main = hakyllWith config $ do
             >>= loadAndApplyTemplate "templates/default.html" (baseSidebarCtx <> siteCtx)
             >>= relativizeUrls
 
+    match "posts/*" $ version "pdf" $ do
+        route $ setExtension "pdf"
+        compile pandocPDFCompiler
+
     create ["index.html"] $ do
         route idRoute
         compile $ do
             posts <- fmap (take 3) . recentFirst
-                        =<< loadAllSnapshots "posts/*" "content"
+                        =<< loadAllSnapshots ("posts/*" .&&. hasNoVersion) "content"
 
             let indexCtx =
                     listField "posts" postCtx (return posts) <>
@@ -112,7 +115,7 @@ main = hakyllWith config $ do
     create ["archive.html"] $ do
         route idRoute
         compile $ do
-            posts <- recentFirst =<< loadAllSnapshots "posts/*" "content"
+            posts <- recentFirst =<< loadAllSnapshots ("posts/*" .&&. hasNoVersion) "content"
             let archiveCtx =
                     listField "posts" postCtx (return posts) <>
                     constField "title" "Archive"             <>
@@ -124,12 +127,12 @@ main = hakyllWith config $ do
                 >>= loadAndApplyTemplate "templates/default.html" (baseSidebarCtx <> archiveCtx)
                 >>= relativizeUrls
 
-    paginate <- buildPaginateWith postsGrouper "posts/*" postsPageId
+    paginate <- buildPaginateWith postsGrouper ("posts/*" .&&. hasNoVersion) postsPageId
 
     paginateRules paginate $ \ page pat -> do
         route idRoute
         compile $ do
-            let posts = recentFirst =<< loadAllSnapshots pat "teaser"
+            let posts = recentFirst =<< loadAllSnapshots (pat .&&. hasNoVersion) "teaser"
             let indexCtx =
                     constField "title" ("Blog posts, page " ++ show page) <>
                     listField "posts" postCtx posts                       <>
@@ -149,14 +152,16 @@ main = hakyllWith config $ do
         route idRoute
         compile $ do
             let feedCtx = postCtx <> bodyField "description"
-            posts <- fmap (take 10) . recentFirst =<< loadAllSnapshots "posts/*" "teaser"
+            posts <- fmap (take 10) . recentFirst =<< 
+                loadAllSnapshots ("posts/*" .&&. hasNoVersion) "teaser"
             renderAtom feedConfig feedCtx posts
 
     create ["rss.xml"] $ do
         route idRoute
         compile $ do
             let feedCtx = postCtx <> bodyField "description"
-            posts <- fmap (take 10) . recentFirst =<< loadAllSnapshots "posts/*" "teaser"
+            posts <- fmap (take 10) . recentFirst =<<
+                loadAllSnapshots ("posts/*" .&&. hasNoVersion) "teaser"
             renderRss feedConfig feedCtx posts
 
 --------------------------------------------------------------------------------

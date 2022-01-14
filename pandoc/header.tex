@@ -1,0 +1,40 @@
+  % Site-wide standard header latex files
+  
+  % Imports of general utility packages
+  \usepackage{wrapfig}
+  \usepackage{graphicx}
+  \usepackage{realscripts}
+  \usepackage{transparent}
+  \usepackage{etoolbox}
+
+  % Setup tikz and tikz cd
+  \usepackage{tikz}
+  \usetikzlibrary{cd}
+
+  % Setup preview package for generation of equation images
+  \usepackage[tightpage,pdftex,delayed]{preview}
+
+  \ifPreview%
+      \makeatletter
+      \newenvironment{doms@math}{\(}{\)}
+      \PreviewEnvironment{doms@math}
+      \newcounter{doms@page}    
+      \newenvironment{shipper}[2]{%
+          \gdef\doms@eqnno{#2}%
+          \stepcounter{doms@page}
+          \hbox{\begingroup\aftergroup}\begin{doms@math}\m@th#1{\begingroup\aftergroup}}{%
+          \endgroup\end{doms@math}\endgroup}
+      \pretocmd{\pr@ship@end}{%
+      \typeout{Preview: image (\arabic{doms@page}) equation (\doms@eqnno) dimensions \the\dp\pr@box, \the\ht\pr@box, \the\wd\pr@box.}}{%
+      \typeout{Preview: box dimension printer successfully installed.}}{%
+      \typeout{Preview: box dimension printer not installed!}}
+      \typeout{Preview: border \the\PreviewBorder.}
+      \makeatother
+
+      \def\adjustcolor{\color[HTML]{515151}\transparent{1}}
+      \AtBeginDocument{\adjustcolor}
+      \everymath{\adjustcolor}
+      \everydisplay{\adjustcolor}
+  \else
+      \newenvironment{shipper}[2]{}{}
+  \fi
