@@ -7,8 +7,16 @@
         <description><![CDATA[A blog about higher category theory and life]]></description>
         <atom:link href="https://dom-verity.github.io/rss.xml" rel="self"
                    type="application/rss+xml" />
-        <lastBuildDate>Tue, 11 Jan 2022 00:00:00 UT</lastBuildDate>
+        <lastBuildDate>Sat, 15 Jan 2022 00:00:00 UT</lastBuildDate>
         <item>
+    <title>The Comprehension Construction</title>
+    <link>https://dom-verity.github.io/posts/2022-01-15-comprehension-construction.html</link>
+    <description><![CDATA[]]></description>
+    <pubDate>Sat, 15 Jan 2022 00:00:00 UT</pubDate>
+    <guid>https://dom-verity.github.io/posts/2022-01-15-comprehension-construction.html</guid>
+    <dc:creator>Dominic Verity</dc:creator>
+</item>
+<item>
     <title>Mathematics Embedding Test</title>
     <link>https://dom-verity.github.io/posts/2022-01-11-test-math.html</link>
     <description><![CDATA[<p>This post is simply here to demonstrate our new code for embedding LaTeX generated SVG equation images into HTML output.</p>
