@@ -7,7 +7,7 @@ import           Data.List                          (sortBy, intersperse, interc
 import           Data.Ord                           (comparing)
 import           Hakyll
 import           Control.Monad                      (liftM, forM_)
-import           System.FilePath                    (takeBaseName)
+import           System.FilePath                    (takeBaseName, (<.>), takeFileName, replaceExtension)
 import           Text.Blaze.Html                    (toHtml, toValue, (!))
 import qualified Text.Blaze.Html5                   as H
 import qualified Text.Blaze.Html5.Attributes        as A
@@ -56,7 +56,7 @@ main = hakyllWith config $ do
     match "pages/CV.markdown" $ version "pdf" $ do
         route $ setExtension "pdf"
         compile $ pandocLaTeXCompiler
-            >>= loadAndApplyTemplate "templates/CV.tex" 
+            >>= loadAndApplyTemplate "templates/CV.tex"
                                      (siteCtx <> modificationTimeField "modified" "%B %e, %Y")
             >>= buildLatex
 
@@ -77,18 +77,21 @@ main = hakyllWith config $ do
 
     match "posts/*" $ do
         route $ setExtension "html"
-        compile $ pandocHTMLCompiler
-            >>= \post -> do  
-                    teaser <- makeTeaser post
-                    saveSnapshot "teaser" teaser
-                    saveSnapshot "content" post
-            >>= loadAndApplyTemplate "templates/post.html" (postCtxWithTags tags)
-            >>= loadAndApplyTemplate "templates/default.html" (baseSidebarCtx <> siteCtx)
-            >>= relativizeUrls
+        compile $ do
+            pdfFileName <- flip replaceExtension "pdf" . takeFileName . toFilePath <$> getUnderlying
+            pandocHTMLCompiler
+                >>= \post -> do
+                        teaser <- makeTeaser post
+                        saveSnapshot "teaser" teaser
+                        saveSnapshot "content" post
+                >>= loadAndApplyTemplate "templates/post.html" (postCtxWithTags tags <>
+                                                                    constField "pdf-filename" pdfFileName)
+                >>= loadAndApplyTemplate "templates/default.html" (baseSidebarCtx <> siteCtx)
+                >>= relativizeUrls
 
     match "posts/*" $ version "pdf" $ do
         route $ setExtension "pdf"
-        compile pandocPDFCompiler
+        compile $ getResourceString >>= renderPandocPDF
 
     create ["index.html"] $ do
         route idRoute
@@ -152,7 +155,7 @@ main = hakyllWith config $ do
         route idRoute
         compile $ do
             let feedCtx = postCtx <> bodyField "description"
-            posts <- fmap (take 10) . recentFirst =<< 
+            posts <- fmap (take 10) . recentFirst =<<
                 loadAllSnapshots ("posts/*" .&&. hasNoVersion) "teaser"
             renderAtom feedConfig feedCtx posts
 
@@ -232,8 +235,8 @@ makeTagLink tag filePath =
         $ toHtml tag
 
 renderAllTags :: Tags -> Compiler String
-renderAllTags = 
-    return . mconcat . 
+renderAllTags =
+    return . mconcat .
         fmap (\case (s, _) -> renderHtml $ makeTagLink s ("/tags/" ++ s ++ ".html")) .
         tagsMap
 
@@ -245,7 +248,7 @@ makeTagsField =
 
 sidebarCtx :: Context String -> Context String
 sidebarCtx nodeCtx =
-    listField "list_pages" nodeCtx 
+    listField "list_pages" nodeCtx
               (loadAllSnapshots ("pages/*" .&&. hasNoVersion) "page-content") <>
     defaultContext
 

@@ -14,9 +14,13 @@
 
 module Compilers
     ( pandocHTMLCompiler
+    , renderPandocHTML
     , pandocLaTeXCompiler
+    , renderPandocLaTeX
     , pandocPDFCompiler
+    , renderPandocPDF
     , buildLatex
+    , pdfToSVGs
     ) where
 
 import           Hakyll
@@ -131,7 +135,8 @@ addToStartMetaList nm mv meta =
 
 imgGenOptions :: Meta
 imgGenOptions =
-    addToStartMetaList "header-includes" (MetaInlines [RawInline "latex" "\\PassOptionsToPackage{active}{preview}"]) $
+    addToStartMetaList "header-includes" 
+        (MetaInlines [RawInline "latex" "\\PassOptionsToPackage{active}{preview}"]) $
         replaceMetaField "fontsize" (toMetaValue ("17pt" :: String)) latexOptions
 
 -- Meta is a monoid and when applying <> options in its rhs override corresponding 

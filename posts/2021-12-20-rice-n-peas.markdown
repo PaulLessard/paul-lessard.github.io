@@ -18,13 +18,24 @@ Beyond our geographic proximity, it seems to me that we have only ever been boun
 When I was a child in Kingston, my grandfather was known universally as "Uncle Bob". He was someone who was recognised, and regarded with much affection, by everyone in the city at that time, or so it seemed to me.
 
 `<img style="float: right; width: 25%" src="/images/Institute_of_Jamaica.png"/>`{=html}
-`\begin{wrapfigure}[10]{r}{0pt}\includegraphics[width=0.25\textwidth]{images/Institute_of_Jamaica.png}\end{wrapfigure}`{=latex}
+`\begin{wrapfigure}[7]{r}{0pt}\includegraphics[width=0.2\textwidth]{images/Institute_of_Jamaica.png}\end{wrapfigure}`{=latex}
 
 He had been a broadcaster and lecturer for many years but was much better known for the many cultural institutions he had helped found, all to the end of furthering the lot of Kingston's poor. This included the central public market, where those from the country came to sell their produce, and his beloved [_Junior Centre of the Institute of Jamaica_](http://juniorcentre-ioj.org.jm/index.php/about-us).
 
 Indeed, it was his devotion to the education of all, and most particularly his absolute commitment to the poor children of our community, that inspired me to follow his footsteps into the classroom.
 
-Over the years I have come to appreciate, and revel in, just how much of Uncle Bob I have inherited; whether directly, in my early childhood, or indirectly via my father, his son [Jeremy](http://blog.beresford-verity.com). These include key aspects of my personality, my world view, my likes and dislikes, my mannerisms and so much more, which remind me of him every day. While I cannot say that my mathematical and technical interests stem from this source, it is certainly true that my love of Jamaican food comes directly from his generous dinner table.
+Over the years I have come to appreciate, and revel in, just how much of Uncle Bob I have inherited; whether directly, in my early childhood, or indirectly via my father, his son [Jeremy](http://blog.beresford-verity.com). These include key aspects of my personality, my world view, my likes and dislikes, my mannerisms and so much more, which remind me of him every day. 
+
+```{=latex}
+\begin{wrapfigure}[11]{r}[0.5cm]{0pt}
+    \begin{tabular}{c}
+        \includegraphics[width=0.25\textwidth]{images/rice-and-peas.png} \\
+        \textsf{\tiny Image (c) 2020 \href{https://www.sweetandsorrel.com}{Sweet and Sorrel}}
+    \end{tabular}
+\end{wrapfigure}
+```
+
+While I cannot say that my mathematical and technical interests stem from this source, it is certainly true that my love of Jamaican food comes directly from his generous dinner table.
 
 ## Rice 'n' Peas
 
@@ -33,14 +44,6 @@ Over the years I have come to appreciate, and revel in, just how much of Uncle B
     <tr><td><img  src="/images/rice-and-peas.png" title="Image (c) 2020 sweetandsorrel.com"/></td></tr>
     <tr><td style="font-family: Roboto; font-size: 50%;">Image (c) 2020 <a href="https://www.sweetandsorrel.com">Sweet and Sorrel</a></td></tr>
 </table>
-```
-```{=latex}
-\begin{wrapfigure}[18]{r}{0pt}
-    \begin{tabular}{c}
-        \includegraphics[width=0.4\textwidth]{images/rice-and-peas.png} \\
-        \textsf{\small Image (c) 2020 \href{https://www.sweetandsorrel.com}{Sweet and Sorrel}}
-    \end{tabular}
-\end{wrapfigure}
 ```
 
 Those of you who know Jamaica, even in passing, will know that no significant meal is complete without a bowl of ***Rice 'n' Peas***. So there can be no better way to honour the memory of Uncle Bob than to share with you his recipe for that iconic Jamaican dish.
@@ -83,14 +86,6 @@ This recipe can be made vegetarian or Kosher friendly by leaving out the bacon. 
 >
 > * from _"Anansi and the Magic Pot"_ a Jamaican [Anansi folk tale](https://en.wikipedia.org/wiki/Anansi) of the West African Asante tradition
 
-```{=latex}
-\begin{wrapfigure}[12]{r}{0pt}
-    \begin{tabular}{c}
-        \includegraphics[width=0.3\textwidth]{images/anansi.jpg} \\
-        \textsf{\small Image (c) 1954 Marcia Brown}
-    \end{tabular}
-\end{wrapfigure}
-```
 Since most of us don't have a magic pot to fall back on, we're going to have to do a little work to make our rice 'n' peas:
 
 ## Method
@@ -106,6 +101,15 @@ Since most of us don't have a magic pot to fall back on, we're going to have to 
 
 Pour the coconut cream into a large cooking pot and start the heat to bring it to the boil. Strain the brine from the kidney beans and add them to the pot. 
 
+```{=latex}
+\begin{wrapfigure}[12]{r}[0.5cm]{0pt}
+    \begin{tabular}{c}
+        \includegraphics[width=0.2\textwidth]{images/anansi.jpg} \\
+        \textsf{\tiny Image (c) 1954 Marcia Brown}
+    \end{tabular}
+\end{wrapfigure}
+```
+
 You will often find that a can of kidney beans has a red "sludge" at the bottom of it. I like to add a little water to the can, swill it around to suspend that sludge and add the resulting red liquid to the pan. This will help to give the rice 'n' peas a nice ruddy colour.
 
 Now take your bunch of thyme, which as I said in the ingredients should be a generous one, and bind it together with a piece of cooking twine. Add this to the pot along with the whole red chilli. 
@@ -116,18 +120,18 @@ At this point you should also add the bacon bone or lardons. Bring this all to t
 
 Now you should have an excellent cooking liquor for the rice. Remove the bacon bone, if you are using it, the bunch of thyme (which should now have lost all its leaves) and the whole chilli. Separate this liquor from the beans by passing it through a sieve, reserving both the liquor and the beans. 
 
-Warning: **do not pour this liquor away** this is the most important part of the dish, as it will eventually be absorbed into the rice to give it a wonderful coconut flavour.
-
-### Movement Two
-
 ```{=latex}
-\begin{wrapfigure}[21]{r}{0pt}
+\begin{wrapfigure}[8]{r}[0.5cm]{0pt}
     \begin{tabular}{c}
-        \includegraphics[width=0.4\textwidth]{images/XKCD_tasks.png} \\
-        \textsf{\small Image (c) 2021 \href{https://xkcd.com/1425}{XKCD}}
+        \includegraphics[width=0.2\textwidth]{images/XKCD_tasks.png} \\
+        \textsf{\tiny Image (c) 2021 \href{https://xkcd.com/1425}{XKCD}}
     \end{tabular}
 \end{wrapfigure}
 ```
+
+Warning: **do not pour this liquor away** this is the most important part of the dish, as it will eventually be absorbed into the rice to give it a wonderful coconut flavour.
+
+### Movement Two
 
 Return the bean mixture to the pan. Get hold of a potato masher and mash about 1/3 of the beans into a paste. At this stage if there are any large pieces of spring onion left you should make sure that these are also mashed into the bean paste. 
 

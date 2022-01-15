@@ -5,9 +5,9 @@ date: 22^nd^ December 2021
 ---
 
 ```{=html}
-<div style="float: right; width: 30%; text-align: center;">
+<div class="pdf-version">
     <img src="/images/newmulogo.png"/>
-    <a href="CV.pdf" target="_blank" rel="noopener noreferrer">PDF version...</a><br/>
+    <a href="/posts/CV.pdf" target="_blank" rel="noopener noreferrer">PDF version...</a><br/>
     (for printing)
 </div>
 ```

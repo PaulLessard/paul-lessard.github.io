@@ -29,3 +29,6 @@ mathfontoptions:
 - Scale = 1
 - StylisticSet = 8
 - StylisticSet = 9
+
+geometry:
+- scale = 0.8

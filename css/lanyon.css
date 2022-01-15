@@ -493,6 +493,20 @@ a.pagination-item:hover {
 }
 
 /*
+ * PDF versions
+ */
+
+.pdf-version {
+  float: right; 
+  width: 30%; 
+  text-align: center;
+  display: block;
+  margin-top: -.5rem;
+  margin-bottom: 1rem;
+  color: #9a9a9a;
+}
+
+/*
  * Themes
  *
  * Apply custom color schemes by adding the appropriate class to the `body`.
