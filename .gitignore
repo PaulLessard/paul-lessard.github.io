@@ -22,3 +22,4 @@ _site/
 templates/_cache/
 stack.yaml.lock
 test/
+**/_texlog/
