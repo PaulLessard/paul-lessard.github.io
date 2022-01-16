@@ -37,16 +37,29 @@
         \hbox{\begingroup\aftergroup}\begin{doms@math}\m@th#1{\begingroup\aftergroup}}{%
         \endgroup\end{doms@math}\endgroup}
     \pretocmd{\pr@ship@end}{%
-    \typeout{Preview: image (\arabic{doms@page}) equation (\doms@eqnno) dimensions \the\dp\pr@box, \the\ht\pr@box, \the\wd\pr@box.}}{%
+    \typeout{Preview: img#\arabic{doms@page} eqn#\doms@eqnno\space dims \the\dp\pr@box,\the\ht\pr@box,\the\wd\pr@box.}}{%
     \typeout{Preview: box dimension printer successfully installed.}}{%
     \typeout{Preview: box dimension printer not installed!}}
     \typeout{Preview: border \the\PreviewBorder.}
     \makeatother
+\else
+    \newenvironment{shipper}[2]{}{}
+\fi
 
+%\tikzset{
+%  commutative diagrams/.cd, 
+%  arrow style=tikz, 
+%  diagrams={>=Straight Barb, semithick}
+%}
+
+% Differential styling of diagrams, colours, font sizes and so
+% forth in normal and preview modes
+
+\ifPreview%
     \def\adjustcolor{\color[HTML]{515151}\transparent{1}}
     \AtBeginDocument{\adjustcolor}
     \everymath{\adjustcolor}
     \everydisplay{\adjustcolor}
-\else
-    \newenvironment{shipper}[2]{}{}
+
+    \tikzset{every picture/.style={scale=1.41137}}
 \fi

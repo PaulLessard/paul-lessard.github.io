@@ -135,7 +135,7 @@ addToStartMetaList nm mv meta =
 
 imgGenOptions :: Meta
 imgGenOptions =
-    addToStartMetaList "header-includes" 
+    addToStartMetaList "header-includes"
         (MetaInlines [RawInline "latex" "\\PassOptionsToPackage{active}{preview}"]) $
         replaceMetaField "fontsize" (toMetaValue ("17pt" :: String)) latexOptions
 
@@ -187,14 +187,14 @@ pandocHTMLCompiler = getResourceBody >>= renderPandocHTML
 
 renderPandocPDF :: Item String -> Compiler (Item TmpFile)
 renderPandocPDF =
-    renderPandocTypedTransformM defaultHakyllReaderOptions 
+    renderPandocTypedTransformM defaultHakyllReaderOptions
         (writeLaTeX domsDefaultLaTeXWriterOptions) addOpts >=> buildLatex
     where
         addOpts :: Pandoc -> Compiler Pandoc
         addOpts (Pandoc meta body) = return $ Pandoc (meta <> latexOptions) body
 
 pandocPDFCompiler :: Compiler (Item TmpFile)
-pandocPDFCompiler = getResourceBody >>= renderPandocPDF 
+pandocPDFCompiler = getResourceBody >>= renderPandocPDF
 
 -------------------------------------------------------------------------------
 -- Very simple backtracking parser monad.
@@ -248,15 +248,18 @@ getEqnDimens fp = mapMaybe (evalStateT parseImageDimens) . lines <$> readFile fp
 
         parseImageDimens :: ParserMonad (Int, Int, ImageInfo)
         parseImageDimens = do
-            token "Preview: image ("
+            token "Preview: img#"
             i <- number
-            token ") equation ("
+            stripSpaces
+            token "eqn#"
             e <- number
-            token ") dimensions" >> stripSpaces
+            stripSpaces
+            token "dims"
+            stripSpaces
             d1 <- parseDimen
-            token "," >> stripSpaces
+            token ","
             d2 <- parseDimen
-            token "," >> stripSpaces
+            token ","
             d3 <- parseDimen
             return (i, e, ImageInfo (d1 / ptConvFactor)
                                     (d2 / ptConvFactor)
@@ -485,6 +488,7 @@ queryNode :: (Walkable a X.Element, Monoid c) =>
     (a -> c) -> X.Node -> c
 queryNode f (X.NodeElement e) = query f e
 queryNode _ e = mempty
+
 
 
 

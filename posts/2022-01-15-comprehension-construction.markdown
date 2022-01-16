@@ -1,17 +1,9 @@
 ---
 title: The Comprehension Construction
-author: Dom Verity
+author: Emily Riehl and Dom Verity
 date: January 15, 2022
 tags: mathematics, ∞-cosmoi
 ---
-
-```{=comment}
-\tikzset{
-  commutative diagrams/.cd, 
-  arrow style=tikz, 
-  diagrams={>=Straight Barb, semithick}
-}
-```
 
 <!--more-->
 
@@ -19,11 +11,11 @@ tags: mathematics, ∞-cosmoi
 
 [Dominic Verity](http://orcid.org/0000-0002-4137-6982) and I have just posted a paper on the [arXiv](https://arxiv.org/abs/1706.10023) entitled "The comprehension construction." This post is meant to explain what we mean by the name.
 
-The comprehension construction is somehow analogous to both the straightening and the unstraightening constructions introduced by Lurie in his development of the theory of quasi-categories. Most people use the term *$\infty$-categories* as a rough synonym for quasi-categories, but we reserve this term for something more general: the objects in any [$\infty$-cosmos](https://ncatlab.org/nlab/show/infinity-cosmos). There is an $\infty$-cosmos whose objects are quasi-categories and another whose objects are complete Segal spaces. But there are also more exotic $\infty$-cosmoi whose objects model $(\infty,n)$-categories or fibered $(\infty,1)$-categories, and our comprehension construction applies to any of these contexts.
+The comprehension construction is somehow analogous to both the straightening and the unstraightening constructions introduced by Lurie in his development of the theory of quasi-categories. Most people use the term *∞-categories* as a rough synonym for quasi-categories, but we reserve this term for something more general: the objects in any [∞-cosmos](https://ncatlab.org/nlab/show/infinity-cosmos). There is an ∞-cosmos whose objects are quasi-categories and another whose objects are complete Segal spaces. But there are also more exotic ∞-cosmoi whose objects model (∞,n)-categories or fibered (∞,1)-categories, and our comprehension construction applies to any of these contexts.
 
-The input to the comprehension construction is any cocartesian fibration between $\infty$-categories together with a third $\infty$-category $A$. The output is then a particular homotopy coherent diagram that we refer to as the *comprehension functor*. In the case $A=1$, the comprehension functor defines a "straightening" of the cocartesian fibration. In the case where the cocartesian fibration is the universal one over the quasi-category of small $\infty$-categories, the comprehension functor converts a homotopy coherent diagram of shape $A$ into its "unstraightening," a cocartesian fibration over $A$.
+The input to the comprehension construction is any cocartesian fibration between ∞-categories together with a third ∞-category $A$. The output is then a particular homotopy coherent diagram that we refer to as the *comprehension functor*. In the case $A=1$, the comprehension functor defines a "straightening" of the cocartesian fibration. In the case where the cocartesian fibration is the universal one over the quasi-category of small ∞-categories, the comprehension functor converts a homotopy coherent diagram of shape $A$ into its "unstraightening," a cocartesian fibration over $A$.
 
-The fact that the comprehension construction can be applied in any $\infty$-cosmos has an immediate benefit. The codomain projection functor associated to an $\infty$-category $A$ defines a cocartesian fibration in the slice $\infty$-cosmos over $A$, in which case the comprehension functor specializes to define the Yoneda embedding.
+The fact that the comprehension construction can be applied in any ∞-cosmos has an immediate benefit. The codomain projection functor associated to an ∞-category $A$ defines a cocartesian fibration in the slice ∞-cosmos over $A$, in which case the comprehension functor specializes to define the Yoneda embedding.
 
 ## Classical comprehension
 
@@ -35,11 +27,11 @@ comprised of those elements for which the formula is satisfied. If the propositi
 
 $$
 \begin{tikzpicture}[commutative diagrams/every diagram]
-  \matrix[matrix of math nodes, name=m, row sep=2em, column sep=2em, commutative diagrams/every cell] {
+  \matrix[matrix of math nodes, name=m, row sep=3em, column sep=3em, commutative diagrams/every cell] {
     {\{x\in A\mid \phi(x)\}} & {1} \\
     {A} & {2} \\};
   \begin{scope}[shift={($(m-1-1)+(0.6,-0.6)$)}]
-    \draw +(-.3,0) -- +(0,0)  -- +(0,.3);
+    \draw +(-.3,0) -- +(0,0) -- +(0,.3);
     % \fill +(-.15,.15) circle (.03);
   \end{scope}
   \path[commutative diagrams/.cd, every arrow, every label]
@@ -60,7 +52,7 @@ A key early observation in this regard, due to Ross Street I believe, is that we
 
 $$
 \begin{tikzpicture}[commutative diagrams/every diagram]
-  \matrix[matrix of math nodes, name=m, row sep=2em, column sep=2em, commutative diagrams/every cell] {
+  \matrix[matrix of math nodes, name=m, row sep=3em, column sep=3em, commutative diagrams/every cell] {
     {\int F} & {\prescript{*/}{}{\Set}} \\
     {\cC} & {\Set} \\};
   \begin{scope}[shift={($(m-1-1)+(0.5,-0.5)$)}]
@@ -83,42 +75,40 @@ This account, however, glosses over one important point; thus far we have only s
 
 The key observation in that regard is that for any fixed "representably defined" cocartesian fibration $p\colon E\to B$ in a (finitely complete) 2-category $\cK$, we may extend pullback to define a pseudo-functor $\Fun_{\cK}(A,B)\to\cK/A$. This carries each 1-cell $a\colon A\to B$ to the pullback $p_a\colon E_a\to A$ of $p$ along $a$ and its action on a 2-cell $\phi\colon a\Rightarrow b$ is constructed in the manner depicted in the following diagram:
 
-```{=comment}
 $$
 \begin{tikzpicture}[commutative diagrams/every diagram]
-  \node (Ea) at (0,5) {$E_a$} ; \node (Eb) at (2,3) {$E_b$} ;
-  \node (E) at (6,4) {$E$} ; \node (Aa) at (0,2) {$A$} ;
-  \node (Ab) at (2,0) {$A$} ; \node (B) at (6,1) {$B$} ;
-
-  % Please macro-ize me!
-  \begin{scope}[shift={($(Ea)+(0.5,-0.5)$)}]
-    \draw +(-.3,0) -- +(0,0)  -- +(0,.3);
-    % \fill +(-.15,.15) circle (.03);
-  \end{scope}
-
-  \begin{scope}[shift={($(Eb)+(0.5,-0.5)$)}]
-    \draw +(-.3,0) -- +(0,0)  -- +(0,.3);
-    % \fill +(-.15,.15) circle (.03);
-  \end{scope}
-
-  \path[commutative diagrams/.cd, every arrow, every label, /tikz/.search also = {/tikz/commutative diagrams}]
-  (Ea) edge [two heads] node [swap] {$p_a$} (Aa)
-  (Aa) edge [bend left = 10] node {$a$} node [name=L, below] {} (B)
-  (Eb) edge [two heads, crossing over] node [swap] {$p_b$} (Ab)
-  (E) edge [two heads] node {$p$} (B)
-  (Ea) edge [bend left = 10] node {$\ell_a$} node [name=U, below] {} (E)
-  (Eb) edge [bend right = 15] node [swap] {$\ell_b$}(E) 
-  (Ab) edge [bend right = 15] node [swap] {$b$} (B)
-  (Aa) edge [equal] (Ab) (Ea) edge [dotted] node [swap] {$E_\phi$} (Eb)
-  (Ea) edge [dotted, bend right = 25] (E)
-  (U) edge [phantom] node [pos=0, description, name = U1] {}
-                     node [pos=0.5, description, name = U2] {} (Eb)
-  (U1) edge [Rightarrow, dashed] node {$\chi$} (U2) 
-  (L) edge [phantom] node [pos=0, description, name = L1] {}
-                     node [pos=0.75, description, name = L2] {} (Ab)
-  (L1) edge [Rightarrow] node {$\phi$} (L2) ;
+    \node (Ea) at (0,5) {$E_a$} ; \node (Eb) at (2,3) {$E_b$} ;
+    \node (E) at (6,4) {$E$} ; \node (Aa) at (0,2) {$A$} ;
+    \node (Ab) at (2,0) {$A$} ; \node (B) at (6,1) {$B$} ;
+    % Please macro-ize me!
+    \begin{scope}[shift={($(Ea)+(0.5,-0.5)$)}]
+        \draw +(-.3,0) -- +(0,0) -- +(0,.3);
+        % \fill +(-.15,.15) circle (.03);
+    \end{scope}
+    %
+    \begin{scope}[shift={($(Eb)+(0.5,-0.5)$)}]
+        \draw +(-.3,0) -- +(0,0) -- +(0,.3);
+        % \fill +(-.15,.15) circle (.03);
+    \end{scope}
+    %
+    \path[commutative diagrams/.cd, every arrow, every label, /tikz/.search also = {/tikz/commutative diagrams}]
+    (Ea) edge [two heads] node [swap] {$p_a$} (Aa)
+    (Aa) edge [bend left = 10] node {$a$} node [name=L, below] {} (B)
+    (Eb) edge [two heads, crossing over] node [swap] {$p_b$} (Ab)
+    (E) edge [two heads] node {$p$} (B)
+    (Ea) edge [bend left = 10] node {$\ell_a$} node [name=U, below] {} (E)
+    (Eb) edge [bend right = 15] node [swap] {$\ell_b$}(E) 
+    (Ab) edge [bend right = 15] node [swap] {$b$} (B)
+    (Aa) edge [equal] (Ab) (Ea) edge [dotted] node [swap] {$E_\phi$} (Eb)
+    (Ea) edge [dotted, bend right = 25] (E)
+    (U) edge [phantom] node [pos=0, description, name = U1] {}
+                        node [pos=0.5, description, name = U2] {} (Eb)
+    (U1) edge [Rightarrow, dashed] node {$\chi$} (U2) 
+    (L) edge [phantom] node [pos=0, description, name = L1] {}
+                        node [pos=0.75, description, name = L2] {} (Ab)
+    (L1) edge [Rightarrow] node {$\phi$} (L2) ;
+\end{tikzpicture}
 $$
-```
 
 Here we make use of the fact that $p\colon E\to B$ is a cocartesian fibration in order to lift the whiskered 2-cell $\phi p_a$ to a cocartesian 2-cell $\chi$. Its codomain 1-cell may then be factored through $E_b$, using the pullback property of the front square, to give a 1-cell $E_{\phi}\colon E_a\to E_b$ over $A$ as required. Standard (essential) uniqueness properties of cocartesian lifts may now be deployed to provide canonical isomorphisms $E_{\psi\cdot\phi}\cong E_{\psi}\circ E_{\phi}$ and $E_{\id_a}\cong\id_{E_a}$ and to prove that these satisfy required coherence conditions. 
 
@@ -128,11 +118,11 @@ It is this 2-categorical comprehension construction that motivates the key const
 
 In passing, we might quickly observe that the 2-categorical comprehension construction may be regarded as being but one aspect of the theory of [2-fibrations](https://ncatlab.org/nlab/show/n-fibration). Specifically the totality of all cocartesian fibrations and cartesian functors between them in $\cK$ is a 2-category whose codomain projection $\coCart(\cK)\to\cK$ is a cartesian 2-fibration, it is indeed the archetypal such gadget. Under this interpretation, the lifting construction used to define the pseudo-functor $\Fun_{\cK}(A,B) \to \cK_{/A}$ is quite simply the typical cartesian 2-cell lifting property characteristic of a 2-fibration.
 
-In an early draft of our paper, our narrative followed just this kind of route. There we showed that the totality of cocartesian fibrations in an $\infty$-cosmos could be assembled to give the total space of a kind of cartesian fibration of [(weak) 2-complicial sets](https://ncatlab.org/nlab/show/weak+complicial+set). In the end, however, we abandoned this presentation in favour of one that was more explicitly to the point for current purposes. Watch this space, however, because we are currently preparing a paper on the complicial version of this theory which will return to this point of view. For us this has become a key component of our work on foundations of complicial approach to $(\infty,\infty)$-category theory.
+In an early draft of our paper, our narrative followed just this kind of route. There we showed that the totality of cocartesian fibrations in an ∞-cosmos could be assembled to give the total space of a kind of cartesian fibration of [(weak) 2-complicial sets](https://ncatlab.org/nlab/show/weak+complicial+set). In the end, however, we abandoned this presentation in favour of one that was more explicitly to the point for current purposes. Watch this space, however, because we are currently preparing a paper on the complicial version of this theory which will return to this point of view. For us this has become a key component of our work on foundations of complicial approach to $(\infty,\infty)$-category theory.
 
-## An $\infty$-categorical comprehension construction
+## An ∞-categorical comprehension construction
 
-In an [$\infty$-cosmos](https://ncatlab.org/nlab/show/infinity-cosmos) $\cK$, by which we mean a category enriched over quasi-categories that admits a specified class of isofibrations and certain simplicially enriched limits, we may again define $p \colon E \twoheadrightarrow B$ to be a cocartesian fibration representably. That is to say, $p$ is a *cocartesian fibration* if it is an isofibration in the specified class and if $\Fun_{\cK}(X,p) \colon \Fun_{\cK}(X,E) \to \Fun_{\cK}(X,B)$ is a cocartesian fibration of quasi-categories for every $\infty$-category $X$. Then a direct "homotopy coherent" generalisation of the 2-categorical construction discussed above demonstrates that we define an associated comprehension functor:
+In an [∞-cosmos](https://ncatlab.org/nlab/show/infinity-cosmos) $\cK$, by which we mean a category enriched over quasi-categories that admits a specified class of isofibrations and certain simplicially enriched limits, we may again define $p \colon E \twoheadrightarrow B$ to be a cocartesian fibration representably. That is to say, $p$ is a *cocartesian fibration* if it is an isofibration in the specified class and if $\Fun_{\cK}(X,p) \colon \Fun_{\cK}(X,E) \to \Fun_{\cK}(X,B)$ is a cocartesian fibration of quasi-categories for every ∞-category $X$. Then a direct "homotopy coherent" generalisation of the 2-categorical construction discussed above demonstrates that we define an associated comprehension functor:
 
 $$c_{p,A} \colon \mathfrak{C}\Fun_{\cK}(A,B)\to \coCart(\cK)_{/A}.$$
 
@@ -146,7 +136,7 @@ whose codomain is defined by applying the homotopy coherent nerve.
 
 The "straightening" of a cocartesian fibration into a homotopy coherent diagram is certainly one of early highlights in Lurie's account of quasi-category theory. Such functors are intrinsically tricky to construct, since that process embroils us in specifying an infinite hierarchy of homotopy coherent data.
 
-We may deploy the $\infty$-categorical comprehension to provide a alternative approach to straightening. To that end we work in the $\infty$-cosmos of quasi-categories $\qCat$ and let $A=1$, and observe that the comprehension functor $c_{p,1}\colon \mathfrak{C}B \to \qCat$ is itself the straightening of $p$. Indeed, it is possible to use the constructions in our paper to extend this variant of unstraightening to give a functor of  quasi-categories:
+We may deploy the ∞-categorical comprehension to provide a alternative approach to straightening. To that end we work in the ∞-cosmos of quasi-categories $\qCat$ and let $A=1$, then observe that the comprehension functor $c_{p,1}\colon \mathfrak{C}B \to \qCat$ is itself the straightening of $p$. Indeed, it is possible to use the constructions in our paper to extend this variant of unstraightening to give a functor of  quasi-categories:
 
 $$\hN(\coCart_{/B}) \to \Fun(B,Q)$$
 
@@ -154,18 +144,18 @@ Here $Q$ is the (large) quasi-category constructed by taking the homotopy cohere
 
 ### Unstraightening as comprehension
 
-In the $\infty$-categorical context, the Grothendieck construction is christened [unstraightening](https://ncatlab.org/nlab/show/%28infinity%2C1%29-Grothendieck+construction) by Lurie. It is inverse to the straightening construction discussed above.
+In the ∞-categorical context, the Grothendieck construction is christened [unstraightening](https://ncatlab.org/nlab/show/%28infinity%2C1%29-Grothendieck+construction) by Lurie. It is inverse to the straightening construction discussed above.
 
 We may also realise unstraightening as comprehension. To that end we follow Ross Street's lead by taking $Q_{\ast}$ to be a quasi-category of pointed quasi-categories and apply the comprehension construction to the "forget the point" projection $Q_{\ast}\to Q$. The comprehension functor thus derived
 
 $$c_{p,A} \colon Fun(A,Q) \to \hN\left(\dCoCart_{/A}\right)$$
 
-defines a quasi-categorical analogue of Lurie's unstraightening construction. In an upcoming paper we use the quasi-categorical variant of Beck's monadicity theorem to prove that this functor is an equivalence. We also extend this result to certain other $\infty$-cosmoi, such as the $\infty$-cosmos of (co)cartesian fibrations over a fixed quasi-category.
+defines a quasi-categorical analogue of Lurie's unstraightening construction. In an upcoming paper we use the quasi-categorical variant of Beck's monadicity theorem to prove that this functor is an equivalence. We also extend this result to certain other ∞-cosmoi, such as the ∞-cosmos of (co)cartesian fibrations over a fixed quasi-category.
 
 ### Constructing the Yoneda embedding
 
-Applying the comprehension construction to the cocartesian fibration $\cod : A^2 \to A$ in the slice $\infty$-cosmos $\cK_{/A}$, we obtain a map
+Applying the comprehension construction to the cocartesian fibration $\cod\colon A^2\to A$ in the slice ∞-cosmos $\cK_{/A}$, we obtain a map
 
-$$y \colon \Fun_{\cK}(1,A) \to  \hN\Cart(\cK)_{/A}$$
+$$y\colon\Fun_{\cK}(1,A)\to\hN(\Cart(\cK)_{/A})$$
 
-that carries an element $a \colon 1 \to A$ to the groupoidal cartesian fibration $\dom : A \downarrow a \to A$. This provides us with a particularly explicit model of the Yoneda embedding, whose action on hom-spaces is easily computed. In particular, this allows us to easily demonstrate that the Yoneda embedding is fully-faithful and thus that every quasi-category is equivalent to the homotopy coherent nerve of some Kan complex enriched category.
+that carries an element $a \colon 1 \to A$ to the groupoidal cartesian fibration $\dom\colon A\downarrow a \to A$. This provides us with a particularly explicit model of the Yoneda embedding, whose action on hom-spaces is easily computed. In particular, this allows us to easily demonstrate that the Yoneda embedding is fully-faithful and thus that every quasi-category is equivalent to the homotopy coherent nerve of some Kan complex enriched category.
