@@ -36,14 +36,16 @@ import           Data.List                     (isPrefixOf, stripPrefix, sort)
 import           Data.Fixed                    (Fixed)
 import           Data.Functor                  ((<&>))
 import           Data.Traversable
+import           Data.Foldable
 import qualified Data.Set as S
 import qualified Data.Char as C
 
 import           GHC.IO                        (unsafePerformIO)
 
 import           System.Process                (system)
+import           System.Exit                   (ExitCode(..))
 import           System.Directory              (createDirectory, setCurrentDirectory, listDirectory,
-                                                renameFile, copyFile)
+                                                renameFile, copyFile, doesFileExist)
 import           System.FilePath               (replaceExtension, takeDirectory,
                                                 dropExtensions, takeFileName, takeBaseName,
                                                 replaceBaseName, takeExtension, (</>), (<.>), (-<.>),
@@ -53,6 +55,7 @@ import           Control.Monad
 import           Control.Applicative
 import           Control.Monad.State.Lazy
 import qualified Control.Monad.Reader as R
+import           Control.Monad.Except
 
 
 import           Text.Pandoc
@@ -68,21 +71,42 @@ import qualified GHC.TypeLits as T
 buildLatex :: Item String -> Compiler (Item TmpFile)
 buildLatex item = do
     latexFile@(TmpFile latexPath) <- newTmpFile "lualatex.tex"
-    tmp <- unsafeCompiler $ do
-        writeFile latexPath $ itemBody item
-        latexToPDF latexPath
-    makeItem (TmpFile tmp)
+    unsafeCompiler $ writeFile latexPath $ itemBody item
+    latexToPDF latexPath >>= makeItem . TmpFile
 
-latexToPDF :: FilePath  -> IO FilePath
+latexToPDF :: FilePath  -> Compiler FilePath
 latexToPDF latexPath = do
-    system $ unwords ["lualatex", "-halt-on-error",
+    exitCode <- unsafeCompiler $ system $ unwords ["lualatex", "-halt-on-error",
         "-output-directory", takeDirectory latexPath, latexPath, ">/dev/null", "2>&1"]
-    return $ latexPath -<.> "pdf"
+    id <- getUnderlying
+    let idPath = toFilePath id
+        logDir = takeDirectory idPath </> "_texlog"
+        logDestinationPath = case identifierVersion id of
+            Nothing -> logDir </> takeBaseName idPath <.> "log"
+            Just v -> logDir </> (takeBaseName idPath ++ "#" ++ v) <.> "log"
+        logSourcePath = latexPath -<.> "log"
+    unsafeCompiler $ do
+        exists <- doesFileExist logSourcePath
+        when exists $ do
+                makeDirectories logDestinationPath
+                copyFile logSourcePath logDestinationPath
+    case exitCode of
+        ExitSuccess ->
+            return $ latexPath -<.> "pdf"
+        ExitFailure err ->
+            throwError [ "LaTeX compiler: failed while processing item " ++
+                show id ++ " exit code " ++ show err ++ "." ]
 
-pdfToSVGs :: FilePath -> IO (M.Map Int FilePath)
+pdfToSVGs :: FilePath -> Compiler (M.Map Int FilePath)
 pdfToSVGs pdfPath = do
-    system $ unwords ["pdf2svg", pdfPath, imgPath, "all"]
-    M.fromList . mapMaybe imageFile <$> listDirectory pdfDir
+    exitCode <- unsafeCompiler $ system $ unwords ["pdf2svg", pdfPath, imgPath, "all"]
+    case exitCode of
+        ExitSuccess ->
+            M.fromList . mapMaybe imageFile <$> unsafeCompiler (listDirectory pdfDir)
+        ExitFailure err -> do
+            id <- getUnderlying
+            throwError [ "PDFtoSVG compiler: failed while processing item " ++
+                show id ++ " exit code " ++ show err ++ "."]
     where
         pdfDir, imgBaseName, imgPath :: FilePath
         pdfDir = takeDirectory pdfPath
@@ -236,8 +260,9 @@ data ImageInfo = ImageInfo
     , width :: Points
     } deriving (Show)
 
-getEqnDimens :: FilePath -> IO [(Int, Int, ImageInfo)]
-getEqnDimens fp = mapMaybe (evalStateT parseImageDimens) . lines <$> readFile fp
+getEqnDimens :: FilePath -> Compiler [(Int, Int, ImageInfo)]
+getEqnDimens fp = unsafeCompiler $
+        mapMaybe (evalStateT parseImageDimens) . lines <$> readFile fp
     where
         parseDimen :: ParserMonad Points
         parseDimen = do
@@ -303,12 +328,12 @@ embedEquationImages imgs = flip evalStateT 0 . walkM transformEquation
 makeEquationImages :: FilePath -> Pandoc -> Compiler (M.Map Int (X.Document, ImageInfo))
 makeEquationImages latexPath doc =
     if numEqns > 0
-    then unsafeCompiler $ do
-            writeFile latexPath latex
+    then do
+            unsafeCompiler $ writeFile latexPath latex
             pdfPath <- latexToPDF latexPath
-            imgInfo <- getEqnDimens $ pdfPath -<.> "log"
+            imgInfo <- getEqnDimens $ latexPath -<.> "log"
             svgFiles <- pdfToSVGs pdfPath
-            imgData <- traverse (X.readFile X.def) svgFiles
+            imgData <- unsafeCompiler $ traverse (X.readFile X.def) svgFiles
             return $ M.fromList $
                 mapMaybe (\(i, e, d) -> (e,) . (,d) <$> M.lookup i imgData) imgInfo
     else return M.empty
@@ -488,6 +513,12 @@ queryNode :: (Walkable a X.Element, Monoid c) =>
     (a -> c) -> X.Node -> c
 queryNode f (X.NodeElement e) = query f e
 queryNode _ e = mempty
+
+
+
+
+
+
 
 
 
