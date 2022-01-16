@@ -23,7 +23,7 @@ config = defaultConfiguration
 
 main :: IO ()
 main = hakyllWith config $ do
-    match ("images/*" .||. "js/*") $ do
+    match ("images/*" .||. "js/*" .||. "fonts/*") $ do
         route   idRoute
         compile copyFileCompiler
 
