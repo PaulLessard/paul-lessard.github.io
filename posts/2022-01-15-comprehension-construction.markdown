@@ -5,9 +5,9 @@ date: January 15, 2022
 tags: mathematics, ∞-cosmoi
 ---
 
-In 2017 [Emily Riehl](https://emilyriehl.github.io/) and I posted a paper on the [arXiv](https://arxiv.org/abs/1706.10023) entitled "The comprehension construction." and we blogged about it on the [n-Category Café](https://golem.ph.utexas.edu/category/). That post explains the use of the term *comprehension* in the title of that paper. 
+In 2017 [Emily Riehl](https://emilyriehl.github.io/) and I posted a paper on the [arXiv](https://arxiv.org/abs/1706.10023) entitled "The comprehension construction." and we blogged about it on the [n-Category Café](https://golem.ph.utexas.edu/category/). That post explains the use of the term *comprehension* in the title of that paper.
 
-I have reproduced it here to show off some Haskell hacking to support the typesetting of category theoretic diagrams in blog posts. To do this I've used [LaTeX](https://en.wikipedia.org/wiki/LaTeX) to generate SVG images, from diagrams specified using packages such as [PGF/TikZ](https://en.wikipedia.org/wiki/PGF/TikZ), which are then inlined directly into HTML pages.
+I have reproduced it here to show off some Haskell hacking I've been indulging in to support the typesetting of category theoretic diagrams in blog post. To do this I've used [LaTeX](https://en.wikipedia.org/wiki/LaTeX) to generate SVG images, from diagrams specified using packages such as [PGF/TikZ](https://en.wikipedia.org/wiki/PGF/TikZ), which are then inlined directly into HTML pages.
 
 <!--more-->
 
