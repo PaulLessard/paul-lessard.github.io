@@ -7,7 +7,7 @@ date: 22^nd^ December 2021
 ```{=html}
 <div class="pdf-version">
     <img src="/images/newmulogo.png"/>
-    <a href="/posts/CV.pdf" target="_blank" rel="noopener noreferrer">PDF version...</a><br/>
+    <a href="/pages/CV.pdf" target="_blank" rel="noopener noreferrer">PDF version...</a><br/>
     (for printing)
 </div>
 ```
@@ -109,10 +109,20 @@ Higher Category Theory • Homotopy Theory • Programming Languages
 
 ## Publications & talks
 
+### Books and memoirs
+
+|    |    |    |
+|:-------|:--------------------------------------------|
+| **2022-** | (with E. Riehl) [More elements of ∞-category theory]{.smallcaps}, <https://emilyriehl.github.io/files/more-elements.pdf>, book draft under development. |
+| **2022** | (with E. Riehl) [The elements of ∞-category theory]{.smallcaps}, <https://emilyriehl.github.io/files/elements.pdf>, 758 pages, contracted for publication by **Cambridge University Press**, February 2022. |
+| **2011** | [Enriched categories, internal categories and change of base]{.smallcaps}. *Reprints in Theory and Application of Categories*, 20:1--266 |
+| **2008** | [Complicial Sets, Characterising the Simplicial Nerves of Strict ω-Categories]{.smallcaps}, volume 193 of *Memoirs of the AMS*. American Mathematical Society |
+
 ### Selected articles and preprints
 
 |    |    |    |
 |:-------|:--------------------------------------------|
+| **2021** | (with E. Riehl, submitted) [Cartesian exponentiation and monadicity]{.smallcaps}, <https://arxiv.org/abs/2108.11786>, 1--71 |
 | **2021** | (with M. Rovelli and V. Ozornova, submitted) [Gray tensor products and saturated n-complicial sets]{.smallcaps}, <https://arxiv.org/abs/2007.01235>, submitted to *Higher Structures*. |
 | **2020a** | (with E. Riehl) [On the construction of limits and colimits in ∞-categories]{.smallcaps} [Theory and Applications of Categories]{.smallcaps}, 35 (2020), 1101--1158. |
 | **2020b** | (with E. Riehl) [Infinity category theory from scratch]{.smallcaps}, *Higher Structures*, 4(1) (2020), 115--167. (invited publication) |
@@ -128,14 +138,6 @@ Higher Category Theory • Homotopy Theory • Programming Languages
 | **2008** | [Weak complicial sets I, basic homotopy theory]{.smallcaps}. *Advances in Mathematics*, 219:1081--1149 |
 | **2007** | [Weak complicial sets II, nerves of complicial Gray-categories]{.smallcaps}. In A. Davydov et al., editors, *Categories in Algebra, Geometry and Mathematical Physics (StreetFest)*, volume 431 of *Contemporary Mathematics*, pages 441--467. American Mathematical Society. |
 | **1995** | (with A. Joyal & R. H. Street) [Traced monoidal categories]{.smallcaps}, *Mathematical Proceedings of the Cambridge Philosophical Society*, 119(3):425---446 |
-
-### Books and memoirs
-
-|    |    |    |
-|:-------|:--------------------------------------------|
-| **2022** | (with E. Riehl) [The elements of ∞-category theory]{.smallcaps}, <http://www.math.jhu.edu/~eriehl/elements.pdf>, 758 pages, contracted for publication by **Cambridge University Press** in 2022. |
-| **2011** | [Enriched categories, internal categories and change of base]{.smallcaps}. *Reprints in Theory and Application of Categories*, 20:1--266 |
-| **2008** | [Complicial Sets, Characterising the Simplicial Nerves of Strict ω-Categories]{.smallcaps}, volume 193 of *Memoirs of the AMS*. American Mathematical Society |
 
 ### Invited Keynotes, Courses and Plenaries
 

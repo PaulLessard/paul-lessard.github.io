@@ -207,7 +207,7 @@ siteCtx =
     constField "site-description" "Synthetic Perspectives"                        <>
     constField "site-url" "https://dom-verity.github.io"                          <>
     constField "tagline" "Life, the Universe, and Higher Categories"              <>
-    constField "site-title" "Em/Prof. Dominic Verity"                             <>
+    constField "site-title" "Dom Verity"                                          <>
     constField "copy-year" "2021"                                                 <>
     constField "site-author" "Dom Verity"                                         <>
     constField "site-email" "dominic.verity@mq.edu.au"                            <>

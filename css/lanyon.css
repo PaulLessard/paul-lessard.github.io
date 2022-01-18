@@ -51,7 +51,6 @@ h1, h2, h3, h4, h5, h6 {
   letter-spacing: -.025rem;
 }
 
-
 /*
  * Wrapper
  *
@@ -469,6 +468,10 @@ a.pagination-item:hover {
 }
 
 /*
+ * Dom's customisations
+ */
+
+/*
  * Equations
  * 
  * Style images generated from inline and displayed equations
@@ -506,6 +509,14 @@ a.pagination-item:hover {
   margin-top: -.5rem;
   margin-bottom: 1rem;
   color: #9a9a9a;
+}
+
+/*
+ * Extras, styles
+ */
+
+.smallcaps {
+  font-family: "Cormorant SC", "Cormorant Garamond", Georgia, "Times New Roman", serif;
 }
 
 /*
