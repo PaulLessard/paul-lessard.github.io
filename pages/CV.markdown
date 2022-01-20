@@ -15,7 +15,7 @@ date: 22^nd^ December 2021
 ## Dominic Verity
 
 Centre of Australian Category Theory\
-Department of Mathematics and Statistics\
+School of Mathematical and Physical Sciences\
 Faculty of Science and Engineering\
 Macquarie University, Sydney, NSW 2109, Australia\
 
@@ -64,7 +64,7 @@ Higher Category Theory • Homotopy Theory • Programming Languages
 
 |    |    |    |
 |:-------|:--------------------------------------------|
-| **2020** | *Research Professor and Program Organiser*, Mathematical Sciences Research Institute (MSRI) program *"Higher Categories and Categorification"*, Berkeley (CA) USA. |
+| **2020, 2022** | *Research Professor and Program Organiser*, Mathematical Sciences Research Institute (MSRI) program *"Higher Categories and Categorification"*, Berkeley (CA) USA. |
 | **2019** | *Visiting Research Fellow*, Dept. of Mathematics, Johns Hopkins University, Baltimore (MD) USA |
 | **2018** | *Invited Mentor*, Mass. Institute of Technology, [Talbot Workshop](http://math.mit.edu/conferences/talbot/), Course title: *"Model-independent theory of ∞-Categories"*, Portland (OR) USA |
 | **2017** | *Invited Lecturer*, AMSI Summer School 2017, Course title: *"Category Theory and Computer Science"*, Sydney University, Australia. |
@@ -81,7 +81,7 @@ Higher Category Theory • Homotopy Theory • Programming Languages
 
 |    |    |    |
 |:-------|:--------------------------------------------|
-| **2019-2021** | (with R. Street, S. Lack & R. Garner) Australian Research Council, Discovery Project **DP190102432**, *"Working synthetically in higher categorical structures"*, AU$453,000 |
+| **2019-2022** | (with R. Street, S. Lack & R. Garner) Australian Research Council, Discovery Project **DP190102432**, *"Working synthetically in higher categorical structures"*, AU$453,000 |
 | **2016--2018** | (with R. Street, S. Lack & R. Garner) Australian Research Council, Discovery Project **DP160101519**, *"Monoidal categories and beyond: new contexts and new applications"*, AU$580,900 |
 | **2015--2018** | (with M. Hillier, A. Fluck et. al.) Australian Government Office of Learning and Teaching, *"Transforming exams across Australia: processes and platform for e-exams in high stakes, supervised environments"*, AU$500,000 |
 | **2013-2015** | (with R. Street, S. Lack & R. Garner) Australian Research Council, Discovery Project **DP130101969**, *"Structural homotopy theory: a category-theoretic study"*, AU$600,000 |
@@ -107,6 +107,8 @@ Higher Category Theory • Homotopy Theory • Programming Languages
 | **2010 awarded** | (with P. Watters) Wai Han Ho, *"On the evaluation of face identification systems"* |
 | **2007 awarded** | (with A. Sloane) Ekaterina Stefanov, *"Simple code compression and customisation for bytecode for interpreters"* |
 
+`\newpage`{=latex}
+
 ## Publications & talks
 
 ### Books and memoirs
@@ -115,14 +117,14 @@ Higher Category Theory • Homotopy Theory • Programming Languages
 |:-------|:--------------------------------------------|
 | **2022-** | (with E. Riehl) [More elements of ∞-category theory]{.smallcaps}, <https://emilyriehl.github.io/files/more-elements.pdf>, book draft under development. |
 | **2022** | (with E. Riehl) [The elements of ∞-category theory]{.smallcaps}, <https://emilyriehl.github.io/files/elements.pdf>, 758 pages, contracted for publication by **Cambridge University Press**, February 2022. |
-| **2011** | [Enriched categories, internal categories and change of base]{.smallcaps}. *Reprints in Theory and Application of Categories*, 20:1--266 |
+| **2011** | [Enriched categories, internal categories and change of base]{.smallcaps}, *Reprints in Theory and Application of Categories*, 20:1--266 |
 | **2008** | [Complicial Sets, Characterising the Simplicial Nerves of Strict ω-Categories]{.smallcaps}, volume 193 of *Memoirs of the AMS*. American Mathematical Society |
 
 ### Selected articles and preprints
 
 |    |    |    |
 |:-------|:--------------------------------------------|
-| **2021** | (with E. Riehl, submitted) [Cartesian exponentiation and monadicity]{.smallcaps}, <https://arxiv.org/abs/2108.11786>, 1--71 |
+| **2021** | (with E. Riehl, submitted) [Cartesian exponentiation and monadicity]{.smallcaps}, <https://arxiv.org/abs/2108.11786>, 1--71, submitted to *Cahiers de Topologie et Géométrie Différentielle Catégoriques*. |
 | **2021** | (with M. Rovelli and V. Ozornova, submitted) [Gray tensor products and saturated n-complicial sets]{.smallcaps}, <https://arxiv.org/abs/2007.01235>, submitted to *Higher Structures*. |
 | **2020a** | (with E. Riehl) [On the construction of limits and colimits in ∞-categories]{.smallcaps} [Theory and Applications of Categories]{.smallcaps}, 35 (2020), 1101--1158. |
 | **2020b** | (with E. Riehl) [Infinity category theory from scratch]{.smallcaps}, *Higher Structures*, 4(1) (2020), 115--167. (invited publication) |

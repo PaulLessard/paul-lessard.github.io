@@ -10,7 +10,7 @@ date-meta: 16^th^ July 2020
 Deputy Director, [Centre of Australian Category
 Theory](http://www.mq.edu.au/research/research-centres-groups-and-facilities/innovative-technologies/centres/centre-of-australian-category-theory-coact){.OWAAutoLink}
 
-**Department of Mathematics and Statistics**\
+**School of Mathematical and Physical Sciences**\
 Room 529, 12 Wally\'s Walk,\
 Macquarie University,\
 NSW 2109, Australia
