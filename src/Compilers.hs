@@ -304,10 +304,10 @@ renderPandocHTML item = do
         inputFile :: FilePath
         inputFile = toFilePath (itemIdentifier item)
 
-embedEquationImages :: Monad m => M.Map Int (X.Document, ImageInfo) ->
-    Pandoc -> m Pandoc
-embedEquationImages imgs = flip evalStateT 0 . walkM transformEquation
+embedEquationImages :: [X.Document] -> Pandoc -> Pandoc
+embedEquationImages imgs (Pandoc meta blocks) = 
     where
+        
         transformEquation :: Monad m => Inline -> StateT Int m Inline
         transformEquation (Math typ body) = do
             modify (+1)
@@ -329,7 +329,7 @@ prependMeta pmeta (Pandoc meta body) = Pandoc (pmeta <> meta) body
 getMeta :: Pandoc -> Meta
 getMeta (Pandoc meta _) = meta
 
-makeEquationSVGs :: Pandoc -> Compiler [T.Text]
+makeEquationSVGs :: Pandoc -> Compiler [X.Document]
 makeEquationSVGs inputDoc =
     if null eqnBlocks
     then do
@@ -338,7 +338,7 @@ makeEquationSVGs inputDoc =
         pdfPath <- runLuaLaTeX ["--shell-escape"] latexPath
         imgInfo <- getEqnDimens $ latexPath -<.> "log"
         svg <- unsafeCompiler $ X.readFile X.def $ pdfPath -<.> "svg"
-        return $ splitSVGAndRender imgInfo svg
+        return $ splitSVG imgInfo svg
     else
         return []
     where
@@ -367,9 +367,8 @@ makeEquationSVGs inputDoc =
         imgGenLaTeX :: String
         imgGenLaTeX = writePandocLaTeX imgGenDoc
 
-splitSVGAndRender :: [ImageInfo] -> X.Document -> [T.Text]
-splitSVGAndRender imgInfo svg = 
-    map (LT.toStrict . X.renderText domsDefaultXMLRenderSettings) (defsDoc:allEqnImages)
+splitSVG :: [ImageInfo] -> X.Document -> [X.Document]
+splitSVG imgInfo svg = defsDoc:allEqnImages
     where
         namedElementNodes :: X.Name -> X.Element -> [[X.Node]]
         namedElementNodes nm e@(X.Element enm _ nodes) | nm == enm = [nodes]
