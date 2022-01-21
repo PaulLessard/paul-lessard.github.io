@@ -4,7 +4,6 @@
 \usepackage{wrapfig}
 \usepackage{graphicx}
 \usepackage{realscripts}
-\usepackage{transparent}
 \usepackage{etoolbox}
 \usepackage{amsxtra}
 \usepackage{mathtools}
@@ -26,7 +25,7 @@
 % Conditional set if we are generating images
 \newif\ifgenimages
 \makeatletter
-\@ifclassloaded{standalone}\genimagestrue\else\genimagesfalse\fi
+\@ifclassloaded{standalone}\genimagestrue
 \makeatother
 
 % Setup macros and environments for generation of equation images
@@ -35,11 +34,12 @@
     \newbox\doms@ship@box
     \newcounter{doms@eqnno}
     \newenvironment{shipper}[1]{%
-        \stepcounter{doms@eqncount}%
+        \stepcounter{doms@eqnno}%
         \setbox\doms@ship@box=%
             \hbox{\begingroup\aftergroup}\(#1{\begingroup\aftergroup}}{\endgroup\)\endgroup%
-        \typeout{Preview: eqn#\arabic{doms@eqnno}\space%
-            dims \the\dp\doms@ship@box,\the\ht\doms@ship@box,\the\wd\doms@ship@box.}}
+        \typeout{Preview: eqn (\arabic{doms@eqnno})\space%
+            dims \the\dp\doms@ship@box,\the\ht\doms@ship@box,\the\wd\doms@ship@box.}%
+        \box\doms@ship@box}
     \standaloneenv{shipper}
     \makeatother
 \else
@@ -56,7 +56,7 @@
 % forth in normal and image generation modes
 
 \ifgenimages%
-    \def\adjustcolor{\color[HTML]{515151}\transparent{1}}
+    \def\adjustcolor{\color[HTML]{515151}}
     \AtBeginDocument{\adjustcolor}
     \everymath{\adjustcolor}
     \everydisplay{\adjustcolor}

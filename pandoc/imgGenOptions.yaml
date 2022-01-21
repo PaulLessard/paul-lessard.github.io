@@ -5,8 +5,3 @@ classoption:
 - crop=true
 - border=0pt
 - multi=true
-- |
-  convert={%
-    outext=.svg, 
-    command=\unexpanded{pdftocairo -svg -origpagesizes \infile\space\inname\outext}%
-  }
