@@ -5,7 +5,7 @@ date: January 22, 2022
 tags: mathematics, ∞-cosmoi
 ---
 
-The book [*Elements of ∞-Category Theory*](https://www.cambridge.org/core/books/elements-of-category-theory/DAC48C449AB8C2C1B1E528A49D27FC6D) by Emily Riehl and Dom Verity has just been published (online, January 2022) by [Cambridge University Press](https://www.cambridge.org) as volume 194 of the series [Cambridge Studies in Advanced Mathematic](https://www.cambridge.org/core/series/cambridge-studies-in-advanced-mathematics/0A5F361E5A5E9D3EFE58F53613C0D307). Here's what the reviewers are saying:
+The book [*Elements of ∞-Category Theory*](https://www.cambridge.org/core/books/elements-of-category-theory/DAC48C449AB8C2C1B1E528A49D27FC6D) by Emily Riehl and Dom Verity has just been published (online, January 2022) by [Cambridge University Press](https://www.cambridge.org) as volume 194 of the series [Cambridge Studies in Advanced Mathematics](https://www.cambridge.org/core/series/cambridge-studies-in-advanced-mathematics/0A5F361E5A5E9D3EFE58F53613C0D307). Here's what the reviewers are saying:
 
 > *'Emily and Dom have done what many thought impossible: they have written an introductory text on a model-independent approach to higher category theory. This self-contained text is ideal for both end-users and architects of higher category theory. Every page is bursting at the seams with gorgeous insights and the refreshingly candid delight the authors take in their subject.'*\
 > [Clark Barwick - University of Edinburgh]{.underline}
