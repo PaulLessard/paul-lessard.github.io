@@ -1,14 +1,13 @@
 --------------------------------------------------------------------------------
 {-# LANGUAGE OverloadedStrings #-}
-{-# OPTIONS_GHC -Wno-incomplete-patterns #-}
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE TupleSections #-}
 {-# LANGUAGE MultiParamTypeClasses #-}
 {-# LANGUAGE FlexibleContexts #-}
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE ScopedTypeVariables #-}
 {-# LANGUAGE CPP #-}
 
+{-# OPTIONS_GHC -Wno-incomplete-patterns #-}
 {-# OPTIONS_GHC -fno-warn-redundant-constraints -O2 #-}
 --------------------------------------------------------------------------------
 
@@ -20,10 +19,10 @@ module Compilers
     , pandocPDFCompiler
     , renderPandocPDF
     , buildLatex
-    , pdfToSVGs
     ) where
 
 import           Hakyll
+import           XMLWalker
 
 import qualified Data.Text as T
 import qualified Data.Text.IO as TIO
@@ -32,7 +31,7 @@ import qualified Data.ByteString.Lazy as LB
 import qualified Data.Map as M
 import           Data.Char                     (isDigit, isSpace, isAlpha)
 import           Data.Maybe                    (fromMaybe, mapMaybe)
-import           Data.List                     (isPrefixOf, stripPrefix, sort)
+import           Data.List                     (isPrefixOf, stripPrefix, sort, intersperse, zipWith4)
 import           Data.Fixed                    (Fixed)
 import           Data.Functor                  ((<&>))
 import           Data.Traversable
@@ -42,14 +41,14 @@ import qualified Data.Char as C
 
 import           GHC.IO                        (unsafePerformIO)
 
-import           System.Process                (system)
+import           System.Process                (system, readProcessWithExitCode)
 import           System.Exit                   (ExitCode(..))
 import           System.Directory              (createDirectory, setCurrentDirectory, listDirectory,
                                                 renameFile, copyFile, doesFileExist)
 import           System.FilePath               (replaceExtension, takeDirectory,
                                                 dropExtensions, takeFileName, takeBaseName,
                                                 replaceBaseName, takeExtension, (</>), (<.>), (-<.>),
-                                                replaceDirectory)
+                                                replaceDirectory, dropExtension, stripExtension)
 
 import           Control.Monad
 import           Control.Applicative
@@ -61,23 +60,23 @@ import           Control.Monad.Except
 import           Text.Pandoc
 import           Text.Pandoc.Walk
 import           Text.Pandoc.Shared            (filteredFilesFromArchive)
-import           Text.Pandoc.Builder
+import           Text.Pandoc.Builder as B
 import           Text.Pandoc.Parsing           (runF, defaultParserState, extractIdClass)
 import           Text.Pandoc.Readers.Markdown  (yamlToMeta)
 import           Text.Blaze.Html5.Attributes   (xmlns, item)
 import qualified Text.XML as X
-import qualified GHC.TypeLits as T
 
 buildLatex :: Item String -> Compiler (Item TmpFile)
 buildLatex item = do
     latexFile@(TmpFile latexPath) <- newTmpFile "lualatex.tex"
     unsafeCompiler $ writeFile latexPath $ itemBody item
-    latexToPDF latexPath >>= makeItem . TmpFile
+    runLuaLaTeX latexPath >>= makeItem . TmpFile
 
-latexToPDF :: FilePath  -> Compiler FilePath
-latexToPDF latexPath = do
-    exitCode <- unsafeCompiler $ system $ unwords ["lualatex", "-halt-on-error",
-        "-output-directory", takeDirectory latexPath, latexPath, ">/dev/null", "2>&1"]
+runLuaLaTeX :: FilePath  -> Compiler FilePath
+runLuaLaTeX latexPath = do
+    exitCode <- unsafeCompiler $ system $ unwords
+        ["lualatex", "-halt-on-error", "-output-directory"
+        , takeDirectory latexPath, latexPath, ">/dev/null", "2>&1"]
     id <- getUnderlying
     let idPath = toFilePath id
         logDir = takeDirectory idPath </> "_texlog"
@@ -94,30 +93,45 @@ latexToPDF latexPath = do
         ExitSuccess ->
             return $ latexPath -<.> "pdf"
         ExitFailure err ->
-            throwError [ "LaTeX compiler: failed while processing item " ++
-                show id ++ " exit code " ++ show err ++ "." ]
+            throwError ["LaTeX compiler: failed while processing item " ++
+                show id ++ " exit code " ++ show err ++ "."]
 
-pdfToSVGs :: FilePath -> Compiler (M.Map Int FilePath)
+pdfToSVGs :: FilePath -> Compiler [FilePath]
 pdfToSVGs pdfPath = do
-    exitCode <- unsafeCompiler $ system $ unwords ["pdf2svg", pdfPath, imgPath, "all"]
+    exitCode <- unsafeCompiler $ system $ unwords
+        ["pdf2svg", pdfPath, svgPath, "all"]
     case exitCode of
         ExitSuccess ->
-            M.fromList . mapMaybe imageFile <$> unsafeCompiler (listDirectory pdfDir)
+            map snd . sort . mapMaybe processSVGFileNo <$>
+                unsafeCompiler (listDirectory (takeDirectory pdfPath))
         ExitFailure err -> do
             id <- getUnderlying
-            throwError [ "PDFtoSVG compiler: failed while processing item " ++
+            throwError ["PDFtoSVG compiler: failed while processing item " ++
                 show id ++ " exit code " ++ show err ++ "."]
     where
-        pdfDir, imgBaseName, imgPath :: FilePath
-        pdfDir = takeDirectory pdfPath
-        imgBaseName = takeBaseName pdfPath ++ "-pdf2svg"
-        imgPath = flip replaceBaseName (imgBaseName ++ "-%i") $ pdfPath -<.> "svg"
+        svgPath :: FilePath
+        svgPath =
+            replaceBaseName
+                (pdfPath -<.> "svg")
+                (takeBaseName pdfPath ++ "-eqn-%i")
 
-        imageFile :: FilePath -> Maybe (Int, FilePath)
-        imageFile fp = do
-            guard $ takeExtension fp == ".svg"
-            str <- stripPrefix (imgBaseName ++ "-") (takeBaseName fp)
-            return (read str, pdfDir </> fp)
+        processSVGFileNo :: FilePath -> Maybe (Integer, FilePath)
+        processSVGFileNo fp = do
+            bare <- stripExtension "svg" fp
+            num <- stripPrefix (takeBaseName pdfPath ++ "-eqn-") bare
+            guard $ not (null num) && all isDigit num
+            return (read num, takeDirectory pdfPath </> fp)
+
+cleanImageSVG :: Integer -> T.Text -> Compiler T.Text
+cleanImageSVG num svg = do
+    (exitCode, svgout, _) <- unsafeCompiler $ 
+        readProcessWithExitCode "svgcleaner" ["--remove-nonsvg-attributes=no","-c", "-"] (T.unpack svg)
+    case exitCode of
+        ExitSuccess -> return $ T.pack svgout
+        ExitFailure err -> do
+            id <- getUnderlying
+            throwError ["SVGCleaner: failed while processing image " ++ show num ++ 
+                " from item " ++ show id ++ " exit code " ++ show err ++ "."]
 
 --------------------------------------------------------------------------------
 
@@ -141,27 +155,25 @@ domsDefaultXMLRenderSettings = X.def { X.rsXMLDeclaration = False }
 -------------------------------------------------------------------------------
 -- Load standard pandoc option sets
 
-{-# NOINLINE latexOptions #-}
-latexOptions :: Meta
-latexOptions = unsafePerformIO $ do
-    yaml <- LB.readFile "pandoc/latexOptions.yaml"
+{-# NOINLINE commonOptions #-}
+commonOptions :: Meta
+commonOptions = unsafePerformIO $ do
+    yaml <- LB.readFile "pandoc/commonOptions.yaml"
     runIOorExplode $ yamlToMeta domsDefaultReaderOptions Nothing yaml
 
-replaceMetaField :: T.Text -> MetaValue -> Meta -> Meta
-replaceMetaField nm mv meta = Meta $ M.insert nm mv (unMeta meta)
+{-# NOINLINE pdfGenOptions #-}
+pdfGenOptions :: Meta
+pdfGenOptions = unsafePerformIO $ do
+    yaml <- LB.readFile "pandoc/pdfGenOptions.yaml"
+    meta <- runIOorExplode $ yamlToMeta domsDefaultReaderOptions Nothing yaml
+    return (meta <> commonOptions)
 
-addToStartMetaList :: T.Text -> MetaValue -> Meta -> Meta
-addToStartMetaList nm mv meta =
-    case lookupMeta nm meta of
-        Just (MetaList ls)      -> replaceMetaField nm (MetaList (mv:ls)) meta
-        Just x                  -> replaceMetaField nm (MetaList [mv,x]) meta
-        Nothing                 -> replaceMetaField nm mv meta
-
+{-# NOINLINE imgGenOptions #-}
 imgGenOptions :: Meta
-imgGenOptions =
-    addToStartMetaList "header-includes"
-        (MetaInlines [RawInline "latex" "\\PassOptionsToPackage{active}{preview}"]) $
-        replaceMetaField "fontsize" (toMetaValue ("17pt" :: String)) latexOptions
+imgGenOptions = unsafePerformIO $ do
+    yaml <- LB.readFile "pandoc/imgGenOptions.yaml"
+    meta <- runIOorExplode $ yamlToMeta domsDefaultReaderOptions Nothing yaml
+    return (meta <> commonOptions)
 
 -- Meta is a monoid and when applying <> options in its rhs override corresponding 
 -- options in its lhs.
@@ -215,7 +227,7 @@ renderPandocPDF =
         (writeLaTeX domsDefaultLaTeXWriterOptions) addOpts >=> buildLatex
     where
         addOpts :: Pandoc -> Compiler Pandoc
-        addOpts (Pandoc meta body) = return $ Pandoc (meta <> latexOptions) body
+        addOpts (Pandoc meta body) = return $ Pandoc (meta <> pdfGenOptions) body
 
 pandocPDFCompiler :: Compiler (Item TmpFile)
 pandocPDFCompiler = getResourceBody >>= renderPandocPDF
@@ -260,7 +272,7 @@ data ImageInfo = ImageInfo
     , width :: Points
     } deriving (Show)
 
-getEqnDimens :: FilePath -> Compiler [(Int, Int, ImageInfo)]
+getEqnDimens :: FilePath -> Compiler [ImageInfo]
 getEqnDimens fp = unsafeCompiler $
         mapMaybe (evalStateT parseImageDimens) . lines <$> readFile fp
     where
@@ -271,24 +283,23 @@ getEqnDimens fp = unsafeCompiler $
             token "pt"
             return $ read $ n1 ++ "." ++ n2
 
-        parseImageDimens :: ParserMonad (Int, Int, ImageInfo)
+        parseImageDimens :: ParserMonad ImageInfo
         parseImageDimens = do
-            token "Preview: img#"
-            i <- number
-            stripSpaces
-            token "eqn#"
+            token "Preview: eqn" >> stripSpaces
+            token "("
             e <- number
             stripSpaces
-            token "dims"
-            stripSpaces
+            token ")" >> stripSpaces
+            token "dims" >> stripSpaces
             d1 <- parseDimen
             token ","
             d2 <- parseDimen
             token ","
             d3 <- parseDimen
-            return (i, e, ImageInfo (d1 / ptConvFactor)
-                                    (d2 / ptConvFactor)
-                                    (d3 / ptConvFactor))
+            return $ ImageInfo
+                (d1 / ptConvFactor)
+                (d2 / ptConvFactor)
+                (d3 / ptConvFactor)
 
 -------------------------------------------------------------------------------
 -- Build an HTML file with embedded SVG sections from an input containing 
@@ -296,105 +307,84 @@ getEqnDimens fp = unsafeCompiler $
 
 renderPandocHTML :: Item String -> Compiler (Item String)
 renderPandocHTML item = do
-    doc <- readPandocWith domsDefaultReaderOptions item
-    latexFile@(TmpFile latexPath) <- newTmpFile "eqnimages.tex"
-    for doc $ \body -> do
-        imgs <- makeEquationImages latexPath body
-        let imgSubdir = takeBaseName $ toFilePath $ itemIdentifier item
-        writePandocHTML <$> embedEquationImages imgs body
-    where
-        inputFile :: FilePath
-        inputFile = toFilePath (itemIdentifier item)
+    Item _ body <- readPandocWith domsDefaultReaderOptions item
+    svgs <- makeEquationSVGs body
+    makeItem $ writePandocHTML $ embedEquationImages svgs body
 
-embedEquationImages :: Monad m => M.Map Int (X.Document, ImageInfo) ->
-    Pandoc -> m Pandoc
-embedEquationImages imgs = flip evalStateT 0 . walkM transformEquation
+embedEquationImages :: [T.Text] -> Pandoc -> Pandoc
+embedEquationImages imgs doc = evalState (walkM transformEquation doc) imgs
     where
-        transformEquation :: Monad m => Inline -> StateT Int m Inline
+        transformEquation :: Inline -> State [T.Text] Inline
         transformEquation (Math typ body) = do
-            modify (+1)
-            num <- get
-            let classes = case typ of
-                    InlineMath -> ["inline-equation"]
-                    DisplayMath -> ["displayed-equation"]
-            case M.lookup num imgs of
-                Nothing ->
-                    return $ Span ("", classes, [("style", "color: red;")])
-                                [Str "<missing image>"]
-                Just img ->
-                    return $ RawInline "html" (transformAndRenderImage num img typ)
+            imgs <- get
+            case imgs of
+                [] ->
+                    let classes = case typ of
+                            InlineMath -> ["inline-equation"]
+                            DisplayMath -> ["displayed-equation"]
+                    in return $
+                        Span ("", classes, [("style", "color: red;")])
+                            [Str "<missing image>"]
+                (img:imgs') -> do
+                    put imgs'
+                    return $ RawInline "html" img
         transformEquation x = return x
 
-makeEquationImages :: FilePath -> Pandoc -> Compiler (M.Map Int (X.Document, ImageInfo))
-makeEquationImages latexPath doc =
-    if numEqns > 0
-    then do
-            unsafeCompiler $ writeFile latexPath latex
-            pdfPath <- latexToPDF latexPath
-            imgInfo <- getEqnDimens $ latexPath -<.> "log"
-            svgFiles <- pdfToSVGs pdfPath
-            imgData <- unsafeCompiler $ traverse (X.readFile X.def) svgFiles
-            return $ M.fromList $
-                mapMaybe (\(i, e, d) -> (e,) . (,d) <$> M.lookup i imgData) imgInfo
-    else return M.empty
+prependMeta :: Meta -> Pandoc -> Pandoc
+prependMeta pmeta (Pandoc meta body) = Pandoc (pmeta <> meta) body
+
+getMeta :: Pandoc -> Meta
+getMeta (Pandoc meta _) = meta
+
+makeEquationSVGs :: Pandoc -> Compiler [T.Text]
+makeEquationSVGs inputDoc =
+    if null eqnBlocks
+    then return []
+    else do
+        TmpFile latexPath <- newTmpFile "eqnimages.tex"
+        unsafeCompiler $ writeFile latexPath imgGenLaTeX
+        svgDocs <- runLuaLaTeX latexPath >>= 
+            pdfToSVGs >>= traverse (unsafeCompiler . X.readFile X.def)
+        imgInfo <- getEqnDimens $ latexPath -<.> "log"
+        sequenceA $ zipWith4 processImage [1..] svgDocs imgInfo eqnTypes
     where
-        transformEquation :: Inline -> State Int Inline
-        transformEquation (Math typ text) = do
-            modify (+1)
-            num <- get
-            return $ Math typ $ T.pack $ "\\begin{shipper}{" ++ (
-                case typ of
+        queryEquation :: Inline -> [(MathType, Block)]
+        queryEquation (Math typ text) =
+            [( typ
+            , RawBlock "latex" $ T.concat
+                [ "\\begin{shipper}{"
+                , case typ of
                     InlineMath -> "\\textstyle"
                     DisplayMath -> "\\displaystyle"
-                ) ++ "}{" ++ show num ++ "}" ++ T.unpack text ++ "\\end{shipper}"
-        transformEquation x = return x
+                , "}"
+                , text
+                , "\\end{shipper}\n"
+                ]
+            )]
+        queryEquation x = []
 
-        addImgGenOptions :: Pandoc -> Pandoc
-        addImgGenOptions (Pandoc meta body) =
-            Pandoc (meta <> imgGenOptions) body
+        eqnTypes :: [MathType]
+        eqnBlocks :: [Block]
+        (eqnTypes, eqnBlocks) = unzip $ query queryEquation inputDoc
 
-        addShippers :: Pandoc -> (Pandoc, Int)
-        addShippers = flip runState 0 . walkM transformEquation
+        imgGenDoc :: Pandoc
+        imgGenDoc =
+            prependMeta imgGenOptions $
+                prependMeta (getMeta inputDoc) $
+                doc $ B.fromList eqnBlocks
 
-        transDoc :: Pandoc
-        numEqns :: Int
-        (transDoc, numEqns) = addShippers $ addImgGenOptions doc
+        imgGenLaTeX :: String
+        imgGenLaTeX = writePandocLaTeX imgGenDoc
 
-        latex :: String
-        latex = writePandocLaTeX transDoc
-
-transformAndRenderImage :: Int -> (X.Document, ImageInfo) -> MathType -> T.Text
-transformAndRenderImage num (svg, ImageInfo dp _ _) typ =
-    LT.toStrict $ X.renderText domsDefaultXMLRenderSettings $
-        R.runReader (walkM transformElement svg) allIDs
+processImage :: Integer -> X.Document -> ImageInfo -> MathType -> Compiler T.Text
+processImage num svg (ImageInfo dp _ _) typ = 
+    return $ (LT.toStrict . X.renderText domsDefaultXMLRenderSettings) transformedSVG
     where
-        transformElement :: X.Element -> R.Reader (S.Set T.Text) X.Element
-        transformElement = transformTags . transformID . addExtraAttrAtRoot
+        queryID :: X.Element -> S.Set T.Text
+        queryID (X.Element _ attr _) = maybe S.empty S.singleton (M.lookup "id" attr)
 
         allIDs :: S.Set T.Text
         allIDs = query queryID svg
-            where
-                queryID :: X.Element -> S.Set T.Text
-                queryID (X.Element _ attr _) = maybe S.empty S.singleton (M.lookup "id" attr)
-
-        addExtraAttrAtRoot :: X.Element -> X.Element
-        addExtraAttrAtRoot e@(X.Element nm attr nodes) =
-            if nm == "{http://www.w3.org/2000/svg}svg"
-                then X.Element nm (attr <> extraRootAttr) nodes
-                else e
-
-        extraRootAttr :: M.Map X.Name T.Text
-        extraRootAttr =
-            case typ of
-                DisplayMath -> M.fromList
-                    [ ( "class", "displayed-equation" )
-                    ]
-                InlineMath -> M.fromList
-                    [ ( "class", "inline-equation" )
-                    , ( "style"
-                      , T.pack $ "transform: translateY(" ++
-                                 show (dp + 0.5) ++ "pt);" )
-                    ]
 
         transformID :: X.Element -> X.Element
         transformID e@(X.Element nm attr nodes) =
@@ -402,125 +392,39 @@ transformAndRenderImage num (svg, ImageInfo dp _ _) typ =
                 Just t ->
                     X.Element
                         nm
-                        (M.insert "id" (T.concat ["equation-", T.pack (show num), "-", t]) attr)
+                        (M.insert "id" (T.concat ["eqn", T.pack (show num), "-", t]) attr)
                         nodes
                 Nothing -> e
 
-        -- return $ foldr (M.adjust transformID) attr ["id", "{http://www.w3.org/1999/xlink}href"]
+        transformTags :: X.Element -> X.Element
+        transformTags (X.Element nm attr nodes) =
+            X.Element nm (fmap transformAttrValue attr) nodes
 
-        transformTags :: X.Element -> R.Reader (S.Set T.Text) X.Element
-        transformTags (X.Element nm attr nodes) = do
-            transAttr <- traverse transformAttrValue attr
-            return $ X.Element nm transAttr nodes
-
-        transformAttrValue :: T.Text -> R.Reader (S.Set T.Text) T.Text
-        transformAttrValue s = do
-            trans <- mapM transformTag (tail splitup)
-            return $ T.concat $ head splitup:trans
+        transformAttrValue :: T.Text -> T.Text
+        transformAttrValue s =
+            T.concat $ intersperse "#" $ head splitup:map transformTag (tail splitup)
             where
                 splitup :: [T.Text]
                 splitup = T.splitOn "#" s
 
-                transformTag :: T.Text -> R.Reader (S.Set T.Text) T.Text
-                transformTag s  = do
-                    ids <- R.ask
-                    if S.member (T.takeWhile (\c -> C.isAlphaNum c || c == '-') s) ids
-                        then return $ T.concat ["#", "equation-", T.pack (show num), "-", s]
-                        else return $ T.concat ["#", s]
+                transformTag :: T.Text -> T.Text
+                transformTag s  =
+                    if S.member (T.takeWhile (\c -> C.isAlphaNum c || c == '-') s) allIDs
+                        then T.concat ["eqn", T.pack (show num), "-", s]
+                        else s
 
--- Walker for XML documents
--- Incomplete: only walks Document, Node and Element nodes
+        extraRootAttr :: M.Map X.Name T.Text
+        extraRootAttr = case typ of
+            InlineMath -> M.fromList
+                [ ("style", T.concat ["transform: translateY(", T.pack (show dp), "pt);"])
+                , ("class", "inline-equation")
+                ]
+            DisplayMath -> M.fromList
+                [ ("class", "displayed-equation") ]
 
--- Walkable instance declarations
--- Walk Document
-instance Walkable X.Document X.Document where
-    walkM f = f
-    query f = f
-
-instance Walkable X.Element X.Document where
-    walkM = walkDocumentM
-    query = queryDocument
-
-instance Walkable [X.Node] X.Document where
-    walkM = walkDocumentM
-    query = queryDocument
-
-instance Walkable X.Node X.Document where
-    walkM = walkDocumentM
-    query = queryDocument
-
--- Walk Element
-instance Walkable X.Element X.Element where
-    walkM f e = walkElementM f e >>= f
-    query f e = f e <> queryElement f e
-
-instance Walkable [X.Node] X.Element where
-    walkM = walkElementM
-    query = queryElement
-
-instance Walkable X.Node X.Element where
-    walkM = walkElementM
-    query = queryElement
-
--- Walk node list
-instance {-# OVERLAPPING #-}
-         Walkable [X.Node] [X.Node] where
-    walkM f = traverse (walkNodeM f) >=> f
-    query f nodes = f nodes <> mconcat (map (queryNode f) nodes)
-
--- Walk node
-instance Walkable X.Node X.Node where
-    walkM f n = walkNodeM f n >>= f
-    query f n = f n <> queryNode f n
-
-instance Walkable X.Element X.Node where
-    walkM = walkNodeM
-    query = queryNode
-
--- Concrete walkers
-
--- Helper methods to walk and query the components of a Document
-walkDocumentM :: (Walkable a X.Element, Applicative m, Monad m) =>
-    (a -> m a) -> X.Document -> m X.Document
-walkDocumentM f (X.Document p e ms) = do
-    e' <- walkM f e
-    return $ X.Document p e' ms
-
-queryDocument :: (Walkable a X.Element, Monoid c) =>
-    (a -> c) -> X.Document -> c
-queryDocument f (X.Document p e ms) = query f e
-
--- Helper methods to walk and query the components of an Elemement
-walkElementM :: (Walkable a [X.Node], Applicative m, Monad m) =>
-    (a -> m a) -> X.Element -> m X.Element
-walkElementM f (X.Element nm attr nodes) = do
-    nodes' <- walkM f nodes
-    return $ X.Element nm attr nodes'
-
-queryElement :: (Walkable a [X.Node], Monoid c) =>
-    (a -> c) -> X.Element -> c
-queryElement f (X.Element _ _ nodes) = query f nodes
-
--- Helper methods to walk and query the components of an Node
-walkNodeM :: (Walkable a X.Element, Applicative m, Monad m) =>
-    (a -> m a) -> X.Node -> m X.Node
-walkNodeM f (X.NodeElement e) = do
-    e' <- walkM f e
-    return $ X.NodeElement e'
-walkNodeM _ e = return e
-
-queryNode :: (Walkable a X.Element, Monoid c) =>
-    (a -> c) -> X.Node -> c
-queryNode f (X.NodeElement e) = query f e
-queryNode _ e = mempty
-
-
-
-
-
-
-
-
-
-
-
+        transformedSVG :: X.Document
+        transformedSVG = case walk (transformID . transformTags) svg of
+            X.Document pro (X.Element nm attr nodes) epi | 
+                nm == "{http://www.w3.org/2000/svg}svg" ->
+                X.Document pro (X.Element nm (attr <> extraRootAttr) nodes) epi 
+            d -> d 

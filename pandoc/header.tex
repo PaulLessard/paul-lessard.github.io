@@ -4,7 +4,6 @@
 \usepackage{wrapfig}
 \usepackage{graphicx}
 \usepackage{realscripts}
-\usepackage{transparent}
 \usepackage{etoolbox}
 \usepackage{amsxtra}
 \usepackage{mathtools}
@@ -23,24 +22,25 @@
 \usetikzlibrary{graphs}
 \usetikzlibrary{calc}
 
-% Setup preview package for generation of equation images
-\usepackage[tightpage,pdftex,delayed]{preview}
+% Conditional set if we are generating images
+\newif\ifgenimages
+\makeatletter
+\@ifclassloaded{standalone}\genimagestrue
+\makeatother
 
-\ifPreview%
+% Setup macros and environments for generation of equation images
+\ifgenimages
     \makeatletter
-    \newenvironment{doms@math}{\(}{\)}
-    \PreviewEnvironment{doms@math}
-    \newcounter{doms@page}    
-    \newenvironment{shipper}[2]{%
-        \gdef\doms@eqnno{#2}%
-        \stepcounter{doms@page}
-        \hbox{\begingroup\aftergroup}\begin{doms@math}\m@th#1{\begingroup\aftergroup}}{%
-        \endgroup\end{doms@math}\endgroup}
-    \pretocmd{\pr@ship@end}{%
-    \typeout{Preview: img#\arabic{doms@page} eqn#\doms@eqnno\space dims \the\dp\pr@box,\the\ht\pr@box,\the\wd\pr@box.}}{%
-    \typeout{Preview: box dimension printer successfully installed.}}{%
-    \typeout{Preview: box dimension printer not installed!}}
-    \typeout{Preview: border \the\PreviewBorder.}
+    \newbox\doms@ship@box
+    \newcounter{doms@eqnno}
+    \newenvironment{shipper}[1]{%
+        \stepcounter{doms@eqnno}%
+        \setbox\doms@ship@box=%
+            \hbox{\begingroup\aftergroup}\(#1{\begingroup\aftergroup}}{\endgroup\)\endgroup%
+        \typeout{Preview: eqn (\arabic{doms@eqnno})\space%
+            dims \the\dp\doms@ship@box,\the\ht\doms@ship@box,\the\wd\doms@ship@box.}%
+        \box\doms@ship@box}
+    \standaloneenv{shipper}
     \makeatother
 \else
     \newenvironment{shipper}[2]{}{}
@@ -53,10 +53,10 @@
 %}
 
 % Differential styling of diagrams, colours, font sizes and so
-% forth in normal and preview modes
+% forth in normal and image generation modes
 
-\ifPreview%
-    \def\adjustcolor{\color[HTML]{515151}\transparent{1}}
+\ifgenimages%
+    \def\adjustcolor{\color[HTML]{515151}}
     \AtBeginDocument{\adjustcolor}
     \everymath{\adjustcolor}
     \everydisplay{\adjustcolor}

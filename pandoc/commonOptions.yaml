@@ -4,13 +4,10 @@ header-includes:
   \input{pandoc/header.tex}
   \input{pandoc/macros.tex}
   ```
- 
-documentclass: extarticle
-fontsize: 12pt
-papersize: a4
 
 mainfont: Garamond Premier Pro
 mainfontoptions:
+- Scale = 1
 - Numbers = Lining
 - Ligatures = Common
 - Kerning = On
@@ -29,6 +26,3 @@ mathfontoptions:
 - Scale = 1
 - StylisticSet = 8
 - StylisticSet = 9
-
-geometry:
-- scale = 0.8
