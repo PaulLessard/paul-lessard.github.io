@@ -31,7 +31,7 @@ import qualified Data.ByteString.Lazy as LB
 import qualified Data.Map as M
 import           Data.Char                     (isDigit, isSpace, isAlpha)
 import           Data.Maybe                    (fromMaybe, mapMaybe)
-import           Data.List                     (isPrefixOf, stripPrefix, sort, intersperse)
+import           Data.List                     (isPrefixOf, stripPrefix, sort, intersperse, zipWith4)
 import           Data.Fixed                    (Fixed)
 import           Data.Functor                  ((<&>))
 import           Data.Traversable
@@ -41,14 +41,14 @@ import qualified Data.Char as C
 
 import           GHC.IO                        (unsafePerformIO)
 
-import           System.Process                (system)
+import           System.Process                (system, readProcessWithExitCode)
 import           System.Exit                   (ExitCode(..))
 import           System.Directory              (createDirectory, setCurrentDirectory, listDirectory,
                                                 renameFile, copyFile, doesFileExist)
 import           System.FilePath               (replaceExtension, takeDirectory,
                                                 dropExtensions, takeFileName, takeBaseName,
                                                 replaceBaseName, takeExtension, (</>), (<.>), (-<.>),
-                                                replaceDirectory)
+                                                replaceDirectory, dropExtension, stripExtension)
 
 import           Control.Monad
 import           Control.Applicative
@@ -65,7 +65,6 @@ import           Text.Pandoc.Parsing           (runF, defaultParserState, extrac
 import           Text.Pandoc.Readers.Markdown  (yamlToMeta)
 import           Text.Blaze.Html5.Attributes   (xmlns, item)
 import qualified Text.XML as X
-import qualified GHC.TypeLits as T
 
 buildLatex :: Item String -> Compiler (Item TmpFile)
 buildLatex item = do
@@ -94,22 +93,45 @@ runLuaLaTeX latexPath = do
         ExitSuccess ->
             return $ latexPath -<.> "pdf"
         ExitFailure err ->
-            throwError [ "LaTeX compiler: failed while processing item " ++
-                show id ++ " exit code " ++ show err ++ "." ]
+            throwError ["LaTeX compiler: failed while processing item " ++
+                show id ++ " exit code " ++ show err ++ "."]
 
-pdfToSVG :: FilePath -> Compiler FilePath
-pdfToSVG pdfPath = do
+pdfToSVGs :: FilePath -> Compiler [FilePath]
+pdfToSVGs pdfPath = do
     exitCode <- unsafeCompiler $ system $ unwords
-        ["pdftocairo", "-svg", "-origpagesizes", pdfPath, svgPath]
+        ["pdf2svg", pdfPath, svgPath, "all"]
     case exitCode of
-        ExitSuccess -> return svgPath
+        ExitSuccess ->
+            map snd . sort . mapMaybe processSVGFileNo <$>
+                unsafeCompiler (listDirectory (takeDirectory pdfPath))
         ExitFailure err -> do
             id <- getUnderlying
-            throwError [ "PDFtoSVG compiler: failed while processing item " ++
+            throwError ["PDFtoSVG compiler: failed while processing item " ++
                 show id ++ " exit code " ++ show err ++ "."]
     where
         svgPath :: FilePath
-        svgPath = pdfPath -<.> "svg"
+        svgPath =
+            replaceBaseName
+                (pdfPath -<.> "svg")
+                (takeBaseName pdfPath ++ "-eqn-%i")
+
+        processSVGFileNo :: FilePath -> Maybe (Integer, FilePath)
+        processSVGFileNo fp = do
+            bare <- stripExtension "svg" fp
+            num <- stripPrefix (takeBaseName pdfPath ++ "-eqn-") bare
+            guard $ not (null num) && all isDigit num
+            return (read num, takeDirectory pdfPath </> fp)
+
+cleanImageSVG :: Integer -> T.Text -> Compiler T.Text
+cleanImageSVG num svg = do
+    (exitCode, svgout, _) <- unsafeCompiler $ 
+        readProcessWithExitCode "svgcleaner" ["--remove-nonsvg-attributes=no","-c", "-"] (T.unpack svg)
+    case exitCode of
+        ExitSuccess -> return $ T.pack svgout
+        ExitFailure err -> do
+            id <- getUnderlying
+            throwError ["SVGCleaner: failed while processing image " ++ show num ++ 
+                " from item " ++ show id ++ " exit code " ++ show err ++ "."]
 
 --------------------------------------------------------------------------------
 
@@ -288,14 +310,9 @@ renderPandocHTML item = do
     Item _ body <- readPandocWith domsDefaultReaderOptions item
     svgs <- makeEquationSVGs body
     makeItem $ writePandocHTML $ embedEquationImages svgs body
-    where
-        inputFile :: FilePath
-        inputFile = toFilePath (itemIdentifier item)
 
-embedEquationImages :: Maybe (T.Text, [T.Text]) -> Pandoc -> Pandoc
-embedEquationImages Nothing p = p
-embedEquationImages (Just (defs, imgs)) (Pandoc meta body) =
-    Pandoc meta (RawBlock "html" defs : evalState (walkM transformEquation body) imgs)
+embedEquationImages :: [T.Text] -> Pandoc -> Pandoc
+embedEquationImages imgs doc = evalState (walkM transformEquation doc) imgs
     where
         transformEquation :: Inline -> State [T.Text] Inline
         transformEquation (Math typ body) = do
@@ -319,17 +336,17 @@ prependMeta pmeta (Pandoc meta body) = Pandoc (pmeta <> meta) body
 getMeta :: Pandoc -> Meta
 getMeta (Pandoc meta _) = meta
 
-makeEquationSVGs :: Pandoc -> Compiler (Maybe (T.Text, [T.Text]))
+makeEquationSVGs :: Pandoc -> Compiler [T.Text]
 makeEquationSVGs inputDoc =
     if null eqnBlocks
-    then return Nothing
+    then return []
     else do
         TmpFile latexPath <- newTmpFile "eqnimages.tex"
         unsafeCompiler $ writeFile latexPath imgGenLaTeX
-        svgPath <- runLuaLaTeX latexPath >>= pdfToSVG
+        svgDocs <- runLuaLaTeX latexPath >>= 
+            pdfToSVGs >>= traverse (unsafeCompiler . X.readFile X.def)
         imgInfo <- getEqnDimens $ latexPath -<.> "log"
-        svg <- unsafeCompiler $ X.readFile X.def svgPath
-        return $ Just $ splitSVG (zip (map fst eqnBlocks) imgInfo) svg
+        sequenceA $ zipWith4 processImage [1..] svgDocs imgInfo eqnTypes
     where
         queryEquation :: Inline -> [(MathType, Block)]
         queryEquation (Math typ text) =
@@ -346,111 +363,68 @@ makeEquationSVGs inputDoc =
             )]
         queryEquation x = []
 
-        eqnBlocks :: [(MathType, Block)]
-        eqnBlocks = query queryEquation inputDoc
+        eqnTypes :: [MathType]
+        eqnBlocks :: [Block]
+        (eqnTypes, eqnBlocks) = unzip $ query queryEquation inputDoc
 
         imgGenDoc :: Pandoc
         imgGenDoc =
             prependMeta imgGenOptions $
                 prependMeta (getMeta inputDoc) $
-                doc $ B.fromList $ map snd eqnBlocks
+                doc $ B.fromList eqnBlocks
 
         imgGenLaTeX :: String
         imgGenLaTeX = writePandocLaTeX imgGenDoc
 
-splitSVG :: [(MathType, ImageInfo)] -> X.Document -> (T.Text, [T.Text])
-splitSVG imgInfo svg = (renderer defsDoc, map renderer allEqnImages)
+processImage :: Integer -> X.Document -> ImageInfo -> MathType -> Compiler T.Text
+processImage num svg (ImageInfo dp _ _) typ = 
+    return $ (LT.toStrict . X.renderText domsDefaultXMLRenderSettings) transformedSVG
     where
-        renderer :: X.Document -> T.Text
-        renderer = LT.toStrict . X.renderText domsDefaultXMLRenderSettings
+        queryID :: X.Element -> S.Set T.Text
+        queryID (X.Element _ attr _) = maybe S.empty S.singleton (M.lookup "id" attr)
 
-        namedElementNodes :: X.Name -> X.Element -> [[X.Node]]
-        namedElementNodes nm (X.Element enm _ nodes) | nm == enm = [nodes]
-        namedElementNodes _ _ = []
+        allIDs :: S.Set T.Text
+        allIDs = query queryID svg
 
-        allEqnImages :: [X.Document]
-        allEqnImages =
-            zipWith3 mkImageSVG [1..] imgInfo $
-                query (namedElementNodes "{http://www.w3.org/2000/svg}page") svg
-
-        mkImageSVG :: Integer -> (MathType, ImageInfo) -> [X.Node] -> X.Document
-        mkImageSVG num (typ, ImageInfo dp ht wd) nodes =
-            X.Document
-                (X.Prologue [] Nothing [])
-                (X.Element
-                    "{http://www.w3.org/2000/svg}svg"
-                    (M.fromList
-                        [ ("version", "1.2")
-                        , ("height", T.pack (show (dp + ht) ++ "pt"))
-                        , ("width", T.pack (show wd ++ "pt"))
-                        , ("viewBox",
-                            T.concat ["0 0 ", T.pack (show wd), " ", T.pack (show (dp + ht))])
-                        , ("style",
-                            T.concat ["transform: translateY(", T.pack (show dp), "pt);"])
-                        , ("class",
-                            case typ of
-                                InlineMath -> "inline-equation"
-                                DisplayMath -> "displayed-equation")
-                        ]) transformedNodes) []
-            where
-                transformedNodes :: [X.Node]
-                transformedNodes = walk (transformTags . transformID) nodes
-
-                queryID :: X.Element -> S.Set T.Text
-                queryID (X.Element _ attr _) = maybe S.empty S.singleton (M.lookup "id" attr)
-
-                allIDs :: S.Set T.Text
-                allIDs = query queryID nodes
-
-                transformID :: X.Element -> X.Element
-                transformID e@(X.Element nm attr nodes) =
-                    case M.lookup "id" attr of
-                        Just t ->
-                            X.Element
-                                nm
-                                (M.insert "id" (T.concat ["equation", T.pack (show num), "-", t]) attr)
-                                nodes
-                        Nothing -> e
-
-                transformTags :: X.Element -> X.Element
-                transformTags (X.Element nm attr nodes) =
-                    X.Element nm (fmap transformAttrValue attr) nodes
-
-                transformAttrValue :: T.Text -> T.Text
-                transformAttrValue s =
-                    T.concat $ intersperse "#" $ head splitup:map transformTag (tail splitup)
-                    where
-                        splitup :: [T.Text]
-                        splitup = T.splitOn "#" s
-
-                        transformTag :: T.Text -> T.Text
-                        transformTag s  =
-                            if S.member (T.takeWhile (\c -> C.isAlphaNum c || c == '-') s) allIDs
-                                then T.concat ["equation-", T.pack (show num), "-", s]
-                                else s
-
-        defsDoc :: X.Document
-        defsDoc =
-            X.Document
-                (X.Prologue [] Nothing [])
-                (X.Element
-                    "{http://www.w3.org/2000/svg}svg"
-                    (M.fromList
-                        [ ("version", "1.2")
-                        , ("height", "0pt")
-                        , ("width",  "0pt")
-                        , ("viewBox", "0 0 0 0")
-                        , ("style", "display: none;")
-                        ])
-                    [X.NodeElement defsElement]) []
-            where
-                defsElement :: X.Element
-                defsElement =
+        transformID :: X.Element -> X.Element
+        transformID e@(X.Element nm attr nodes) =
+            case M.lookup "id" attr of
+                Just t ->
                     X.Element
-                        "{http://www.w3.org/2000/svg}defs"
-                        M.empty
-                        (concat $ query (namedElementNodes "{http://www.w3.org/2000/svg}defs") svg)
+                        nm
+                        (M.insert "id" (T.concat ["eqn", T.pack (show num), "-", t]) attr)
+                        nodes
+                Nothing -> e
 
+        transformTags :: X.Element -> X.Element
+        transformTags (X.Element nm attr nodes) =
+            X.Element nm (fmap transformAttrValue attr) nodes
 
+        transformAttrValue :: T.Text -> T.Text
+        transformAttrValue s =
+            T.concat $ intersperse "#" $ head splitup:map transformTag (tail splitup)
+            where
+                splitup :: [T.Text]
+                splitup = T.splitOn "#" s
 
+                transformTag :: T.Text -> T.Text
+                transformTag s  =
+                    if S.member (T.takeWhile (\c -> C.isAlphaNum c || c == '-') s) allIDs
+                        then T.concat ["eqn", T.pack (show num), "-", s]
+                        else s
 
+        extraRootAttr :: M.Map X.Name T.Text
+        extraRootAttr = case typ of
+            InlineMath -> M.fromList
+                [ ("style", T.concat ["transform: translateY(", T.pack (show dp), "pt);"])
+                , ("class", "inline-equation")
+                ]
+            DisplayMath -> M.fromList
+                [ ("class", "displayed-equation") ]
+
+        transformedSVG :: X.Document
+        transformedSVG = case walk (transformID . transformTags) svg of
+            X.Document pro (X.Element nm attr nodes) epi | 
+                nm == "{http://www.w3.org/2000/svg}svg" ->
+                X.Document pro (X.Element nm (attr <> extraRootAttr) nodes) epi 
+            d -> d 
