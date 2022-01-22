@@ -61,6 +61,81 @@
 \newmop{el}
 \newmop{im}
 
+% ***************************************************************
+% ** Description:      General categorical notations
+% ***************************************************************
+
+\newcommand{\comma}{\mathbin{\downarrow}}
+
+%iso-commas
+
+%\newcommand{\itimes}{%
+%  \mathrel{\vbox{\offinterlineskip\ialign{%
+ %   \hfil##\hfil\cr
+ %   $\scriptscriptstyle\sim$\cr
+
+%    $\times$\cr
+%}}}}
+\newcommand{\icomma}[1]{\mathbin{\mathop{\dottimes}\limits_{#1}}}
+
+\newcommand{\timesdot}{%
+            \mathrel{\raisebox{-.1em}{%
+            \reflectbox{\rotatebox[origin=c]{180}{$\dottimes$}}}}}
+
+\newcommand{\unit}{\eta}
+\newcommand{\counit}{\epsilon}
+
+\newcommand{\pwr}{\pitchfork}
+
+%tensor and cotensor bifunctors
+\newcommand{\ctns}[2]{{{#2}^{#1}}}%weight first, then variable
+\newcommand{\tns}[2]{{#1\otimes #2}}
+
+%weighted limit and colimit bifunctors
+\newcommand{\wlim}[3][]{{\lim\nolimits_{#2}^{#1}{#3}}}
+\newcommand{\hlim}[2]{{\lim\nolimits_{#1}^{\simeq}{#2}}}
+\newcommand{\wcolim}[3][]{{\colim\nolimits_{#2}^{#1}{#3}}}
+\newcommand{\leibwlim}[3][]{{\widehat{\lim}_{#2}^{#1}{#3}}}
+\newcommand{\leibwcolim}[3][]{{\widehat{\colim}_{#2}^{#1}{#3}}}
+\newmop*{oplax}
+
+% for yoneda - this is the Unicode character "HIRAGANA LETTER YO" (よねだ).
+\newcommand{\yo}{\text{\japanese よ}}
+
+% Duals / Superscripted postfix ops
+
+\newcommand{\op}{^{\mathord{\text{\rm op}}}}
+\newcommand{\co}{^{\mathord{\text{\rm co}}}}
+\newcommand{\coop}{^{\mathord{\text{\rm coop}}}}
+
+%for fiber and cofiber sequences
+%\newmop{ker}
+\newmop[\fiber]{fib}
+\newmop{coker}
+\newmop{cofib}
+
+% ***************************************************************
+% ** Description:      Standard categories.
+% ***************************************************************
+
+\newcommand{\catfour}{{\Bbbfour}}%texdoc unimath-symbols.pdf
+\newcommand{\catthree}{{\Bbbthree}}%texdoc unimath-symbols.pdf
+\newcommand{\cattwo}{{\Bbbtwo}}
+\newcommand{\catone}{{\Bbbone}}
+\newcommand{\catn}{{\mathbb{n}}}
+\newcommand{\catnone}{{\catn\!+\!\catone}}
+\newcommand{\catntwo}{{\catn\!+\!\cattwo}}
+\newcommand{\iso}{{\BbbI}}
+
+\newcommand{\Del}{\mbfDelta}
+\newcommand{\eDel}{\mbfDelta_{\mathord{\text{\rm epi}}}}
+\newcommand{\Delt}{\mbfDelta_{\top}}%formerly_{\infty}
+\newcommand{\Delb}{\mbfDelta_{\bot}}%formerly_{-\infty}
+\newcommand{\Delbt}{\mbfDelta_{\bot,\top}}%for the intersection
+
+\newcommand{\NN}{{\mathbb{N}}}%for the graph underlying \mbfomega
+
+\newcommand{\Thet}{\mbfTheta}
 % *****************************************************************
 % ** Description: Notation for quasi-categories and cosmoi
 % *****************************************************************
