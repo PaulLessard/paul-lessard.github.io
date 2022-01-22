@@ -65,6 +65,7 @@ import           Text.Pandoc.Parsing           (runF, defaultParserState, extrac
 import           Text.Pandoc.Readers.Markdown  (yamlToMeta)
 import           Text.Blaze.Html5.Attributes   (xmlns, item)
 import qualified Text.XML as X
+import Text.Pandoc.Citeproc (processCitations)
 
 buildLatex :: Item String -> Compiler (Item TmpFile)
 buildLatex item = do
@@ -213,7 +214,8 @@ pandocCompilerTyped ropt writer = pandocCompilerTypedTransformM ropt writer retu
 --------------------------------------------------------------------------------
 
 renderPandocLaTeX :: Item String -> Compiler (Item String)
-renderPandocLaTeX = renderPandocTypedTransformM defaultHakyllReaderOptions (writeLaTeX def) return
+renderPandocLaTeX = 
+    renderPandocTypedTransformM defaultHakyllReaderOptions (writeLaTeX def) return
 
 pandocLaTeXCompiler :: Compiler (Item String)
 pandocLaTeXCompiler = getResourceBody >>= renderPandocLaTeX

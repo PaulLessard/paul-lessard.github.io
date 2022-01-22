@@ -26,3 +26,6 @@ mathfontoptions:
 - Scale = 1
 - StylisticSet = 8
 - StylisticSet = 9
+
+bibliography: pandoc/literature.bib
+csl: pandoc/aims-mathematics
