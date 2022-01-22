@@ -7,8 +7,21 @@
         <description><![CDATA[A blog about higher category theory and life]]></description>
         <atom:link href="https://dom-verity.github.io/rss.xml" rel="self"
                    type="application/rss+xml" />
-        <lastBuildDate>Sat, 15 Jan 2022 00:00:00 UT</lastBuildDate>
+        <lastBuildDate>Sat, 22 Jan 2022 00:00:00 UT</lastBuildDate>
         <item>
+    <title>Publication of "The Elements" (hooray!)</title>
+    <link>https://dom-verity.github.io/posts/2022-01-22-the-elements.html</link>
+    <description><![CDATA[<p>The book <a href="https://www.cambridge.org/core/books/elements-of-category-theory/DAC48C449AB8C2C1B1E528A49D27FC6D"><em>Elements of ∞-Category Theory</em></a> by Emily Riehl and Dom Verity has just been published (online, January 2022) by <a href="https://www.cambridge.org">Cambridge University Press</a> as volume 194 of the series <a href="https://www.cambridge.org/core/series/cambridge-studies-in-advanced-mathematics/0A5F361E5A5E9D3EFE58F53613C0D307">Cambridge Studies in Advanced Mathematic</a>. Here’s what the reviewers are saying:</p>
+<blockquote>
+<p><em>‘Emily and Dom have done what many thought impossible: they have written an introductory text on a model-independent approach to higher category theory. This self-contained text is ideal for both end-users and architects of higher category theory. Every page is bursting at the seams with gorgeous insights and the refreshingly candid delight the authors take in their subject.’</em><br />
+<u>Clark Barwick - University of Edinburgh</u></p>
+</blockquote>
+]]></description>
+    <pubDate>Sat, 22 Jan 2022 00:00:00 UT</pubDate>
+    <guid>https://dom-verity.github.io/posts/2022-01-22-the-elements.html</guid>
+    <dc:creator>Dominic Verity</dc:creator>
+</item>
+<item>
     <title>The Comprehension Construction</title>
     <link>https://dom-verity.github.io/posts/2022-01-15-comprehension-construction.html</link>
     <description><![CDATA[<p>In 2017 <a href="https://emilyriehl.github.io/">Emily Riehl</a> and I posted a paper on the <a href="https://arxiv.org/abs/1706.10023">arXiv</a> entitled “The comprehension construction.” and we blogged about it on the <a href="https://golem.ph.utexas.edu/category/">n-Category Café</a>. That post explains the use of the term <em>comprehension</em> in the title of that paper.</p>
