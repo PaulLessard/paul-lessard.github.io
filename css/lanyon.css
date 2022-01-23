@@ -513,11 +513,36 @@ a.pagination-item:hover {
 }
 
 /*
- * Extras, styles
+ * Styles for classes used by Pandoc
  */
 
 .smallcaps {
   font-family: "Cormorant SC", "Cormorant Garamond", Georgia, "Times New Roman", serif;
+}
+
+.citation {
+  font-weight: bold;
+}
+
+.csl-bib-body {
+  line-height: 150%;
+}
+
+.csl-entry {
+  clear: left;
+  margin-bottom: 0.5em;
+}
+
+.csl-right-inline {
+  margin-left: 2.5em;
+}
+
+.csl-left-margin {
+  float: left;
+  font-weight: bold;
+  padding-right: 0.4em;
+  text-align: right; 
+  width: 2.55em;
 }
 
 /*

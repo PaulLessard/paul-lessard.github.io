@@ -6,19 +6,19 @@
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE ScopedTypeVariables #-}
 {-# LANGUAGE CPP #-}
+{-# LANGUAGE StandaloneDeriving #-}
+{-# LANGUAGE DeriveAnyClass #-}
 
 {-# OPTIONS_GHC -Wno-incomplete-patterns #-}
 {-# OPTIONS_GHC -fno-warn-redundant-constraints -O2 #-}
 --------------------------------------------------------------------------------
 
 module Compilers
-    ( pandocHTMLCompiler
-    , renderPandocHTML
-    , pandocLaTeXCompiler
-    , renderPandocLaTeX
-    , pandocPDFCompiler
-    , renderPandocPDF
-    , buildLatex
+    ( compileToPandocAST
+    , renderPandocASTtoLaTeX
+    , renderPandocASTtoPDF
+    , renderPandocASTtoHTML
+    , buildLaTeX
     ) where
 
 import           Hakyll
@@ -38,6 +38,7 @@ import           Data.Traversable
 import           Data.Foldable
 import qualified Data.Set as S
 import qualified Data.Char as C
+import qualified Data.Binary as B
 
 import           GHC.IO                        (unsafePerformIO)
 
@@ -67,8 +68,8 @@ import           Text.Blaze.Html5.Attributes   (xmlns, item)
 import qualified Text.XML as X
 import Text.Pandoc.Citeproc (processCitations)
 
-buildLatex :: Item String -> Compiler (Item TmpFile)
-buildLatex item = do
+buildLaTeX :: Item String -> Compiler (Item TmpFile)
+buildLaTeX item = do
     latexFile@(TmpFile latexPath) <- newTmpFile "lualatex.tex"
     unsafeCompiler $ writeFile latexPath $ itemBody item
     runLuaLaTeX latexPath >>= makeItem . TmpFile
@@ -125,13 +126,13 @@ pdfToSVGs pdfPath = do
 
 cleanImageSVG :: Integer -> T.Text -> Compiler T.Text
 cleanImageSVG num svg = do
-    (exitCode, svgout, _) <- unsafeCompiler $ 
+    (exitCode, svgout, _) <- unsafeCompiler $
         readProcessWithExitCode "svgcleaner" ["--remove-nonsvg-attributes=no","-c", "-"] (T.unpack svg)
     case exitCode of
         ExitSuccess -> return $ T.pack svgout
         ExitFailure err -> do
             id <- getUnderlying
-            throwError ["SVGCleaner: failed while processing image " ++ show num ++ 
+            throwError ["SVGCleaner: failed while processing image " ++ show num ++
                 " from item " ++ show id ++ " exit code " ++ show err ++ "."]
 
 --------------------------------------------------------------------------------
@@ -142,9 +143,12 @@ domsDefaultReaderOptions = defaultHakyllReaderOptions
 domsDefaultHTMLWriterOptions :: WriterOptions
 domsDefaultHTMLWriterOptions = defaultHakyllWriterOptions
 
-{-# NOINLINE domsDefaultLaTeXWriterOptions #-}
 domsDefaultLaTeXWriterOptions :: WriterOptions
-domsDefaultLaTeXWriterOptions = unsafePerformIO $ do
+domsDefaultLaTeXWriterOptions = defaultHakyllWriterOptions
+
+{-# NOINLINE domsDefaultStandaloneLaTeXWriterOptions #-}
+domsDefaultStandaloneLaTeXWriterOptions :: WriterOptions
+domsDefaultStandaloneLaTeXWriterOptions = unsafePerformIO $ do
     templ <- runIO (compileDefaultTemplate "latex") >>= handleError
     return $ def
         {   writerTemplate = Just templ
@@ -187,52 +191,60 @@ writePandocTyped writer doc =
         Left err    -> error $ "Compiler.writePandocTyped: " ++ show err
         Right doc' -> T.unpack doc'
 
-writePandocLaTeX :: Pandoc -> String
-writePandocLaTeX = writePandocTyped $ writeLaTeX domsDefaultLaTeXWriterOptions
+writePandocToLaTeX :: Pandoc -> String
+writePandocToLaTeX = writePandocTyped $ writeLaTeX domsDefaultLaTeXWriterOptions
 
-writePandocHTML :: Pandoc -> String
-writePandocHTML = writePandocTyped $ writeHtml5String domsDefaultHTMLWriterOptions
+writePandocToStandaloneLaTeX :: Pandoc -> String
+writePandocToStandaloneLaTeX = 
+    writePandocTyped $ writeLaTeX domsDefaultStandaloneLaTeXWriterOptions
 
---------------------------------------------------------------------------------
-
-renderPandocTypedTransformM :: ReaderOptions -> (Pandoc -> PandocPure T.Text)
-                            -> (Pandoc -> Compiler Pandoc)
-                            -> Item String -> Compiler (Item String)
-renderPandocTypedTransformM ropt writer trans item =
-    fmap (writePandocTyped writer) <$> (readPandocWith ropt item >>= traverse trans)
-
-pandocCompilerTypedTransformM :: ReaderOptions -> (Pandoc -> PandocPure T.Text)
-                              -> (Pandoc -> Compiler Pandoc)
-                              -> Compiler (Item String)
-pandocCompilerTypedTransformM ropt writer f =
-    getResourceBody >>= renderPandocTypedTransformM ropt writer f
-
-pandocCompilerTyped :: ReaderOptions -> (Pandoc -> PandocPure T.Text)
-                    -> Compiler (Item String)
-pandocCompilerTyped ropt writer = pandocCompilerTypedTransformM ropt writer return
+writePandocToHTML :: Pandoc -> String
+writePandocToHTML = writePandocTyped $ writeHtml5String domsDefaultHTMLWriterOptions
 
 --------------------------------------------------------------------------------
 
-renderPandocLaTeX :: Item String -> Compiler (Item String)
-renderPandocLaTeX = 
-    renderPandocTypedTransformM defaultHakyllReaderOptions (writeLaTeX def) return
+compileToPandocAST :: Compiler (Item Pandoc)
+compileToPandocAST = do
+    bibs <- loadAll "pandoc/*.bib"
+    csl <- load "pandoc/elsevier.csl"
+    getResourceString >>= readPandocBiblios domsDefaultReaderOptions csl bibs
 
-pandocLaTeXCompiler :: Compiler (Item String)
-pandocLaTeXCompiler = getResourceBody >>= renderPandocLaTeX
+-- Generate LaTeX body only
+renderPandocASTtoLaTeX :: Item Pandoc -> Compiler (Item String)
+renderPandocASTtoLaTeX =
+    return . fmap writePandocToLaTeX
 
-pandocHTMLCompiler :: Compiler (Item String)
-pandocHTMLCompiler = getResourceBody >>= renderPandocHTML
+-- Apply standard pandoc LaTeX template and compile 
+renderPandocASTtoPDF :: Item Pandoc -> Compiler (Item TmpFile)
+renderPandocASTtoPDF =
+    buildLaTeX . fmap (writePandocToStandaloneLaTeX . prependMeta pdfGenOptions)
 
-renderPandocPDF :: Item String -> Compiler (Item TmpFile)
-renderPandocPDF =
-    renderPandocTypedTransformM defaultHakyllReaderOptions
-        (writeLaTeX domsDefaultLaTeXWriterOptions) addOpts >=> buildLatex
-    where
-        addOpts :: Pandoc -> Compiler Pandoc
-        addOpts (Pandoc meta body) = return $ Pandoc (meta <> pdfGenOptions) body
+-------------------------------------------------------------------------------
+-- Standalone Binary instances for pandoc types
 
-pandocPDFCompiler :: Compiler (Item TmpFile)
-pandocPDFCompiler = getResourceBody >>= renderPandocPDF
+deriving instance B.Binary Pandoc
+deriving instance B.Binary CitationMode
+deriving instance B.Binary Citation
+deriving instance B.Binary Inline
+deriving instance B.Binary Block
+deriving instance B.Binary QuoteType
+deriving instance B.Binary MathType
+deriving instance B.Binary Format
+deriving instance B.Binary ListNumberStyle
+deriving instance B.Binary ListNumberDelim
+deriving instance B.Binary Caption
+deriving instance B.Binary Alignment
+deriving instance B.Binary ColWidth
+deriving instance B.Binary TableHead
+deriving instance B.Binary TableBody
+deriving instance B.Binary TableFoot
+deriving instance B.Binary Row
+deriving instance B.Binary Cell
+deriving instance B.Binary RowSpan
+deriving instance B.Binary ColSpan
+deriving instance B.Binary RowHeadColumns
+deriving instance B.Binary Meta
+deriving instance B.Binary MetaValue
 
 -------------------------------------------------------------------------------
 -- Very simple backtracking parser monad.
@@ -307,11 +319,10 @@ getEqnDimens fp = unsafeCompiler $
 -- Build an HTML file with embedded SVG sections from an input containing 
 -- LaTeX equations
 
-renderPandocHTML :: Item String -> Compiler (Item String)
-renderPandocHTML item = do
-    Item _ body <- readPandocWith domsDefaultReaderOptions item
+renderPandocASTtoHTML :: Item Pandoc -> Compiler (Item String)
+renderPandocASTtoHTML (Item _ body) = do
     svgs <- makeEquationSVGs body
-    makeItem $ writePandocHTML $ embedEquationImages svgs body
+    makeItem (writePandocToHTML $ embedEquationImages svgs body)
 
 embedEquationImages :: [T.Text] -> Pandoc -> Pandoc
 embedEquationImages imgs doc = evalState (walkM transformEquation doc) imgs
@@ -345,7 +356,7 @@ makeEquationSVGs inputDoc =
     else do
         TmpFile latexPath <- newTmpFile "eqnimages.tex"
         unsafeCompiler $ writeFile latexPath imgGenLaTeX
-        svgDocs <- runLuaLaTeX latexPath >>= 
+        svgDocs <- runLuaLaTeX latexPath >>=
             pdfToSVGs >>= traverse (unsafeCompiler . X.readFile X.def)
         imgInfo <- getEqnDimens $ latexPath -<.> "log"
         sequenceA $ zipWith4 processImage [1..] svgDocs imgInfo eqnTypes
@@ -372,14 +383,13 @@ makeEquationSVGs inputDoc =
         imgGenDoc :: Pandoc
         imgGenDoc =
             prependMeta imgGenOptions $
-                prependMeta (getMeta inputDoc) $
                 doc $ B.fromList eqnBlocks
 
         imgGenLaTeX :: String
-        imgGenLaTeX = writePandocLaTeX imgGenDoc
+        imgGenLaTeX = writePandocToStandaloneLaTeX imgGenDoc
 
 processImage :: Integer -> X.Document -> ImageInfo -> MathType -> Compiler T.Text
-processImage num svg (ImageInfo dp _ _) typ = 
+processImage num svg (ImageInfo dp _ _) typ =
     return $ (LT.toStrict . X.renderText domsDefaultXMLRenderSettings) transformedSVG
     where
         queryID :: X.Element -> S.Set T.Text
@@ -426,7 +436,7 @@ processImage num svg (ImageInfo dp _ _) typ =
 
         transformedSVG :: X.Document
         transformedSVG = case walk (transformID . transformTags) svg of
-            X.Document pro (X.Element nm attr nodes) epi | 
+            X.Document pro (X.Element nm attr nodes) epi |
                 nm == "{http://www.w3.org/2000/svg}svg" ->
-                X.Document pro (X.Element nm (attr <> extraRootAttr) nodes) epi 
-            d -> d 
+                X.Document pro (X.Element nm (attr <> extraRootAttr) nodes) epi
+            d -> d

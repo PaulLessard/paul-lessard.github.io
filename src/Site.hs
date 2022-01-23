@@ -33,9 +33,16 @@ main = hakyllWith config $ do
 
     match "error/*" $ do
         route $ gsubRoute "error/" (const "") `composeRoutes` setExtension "html"
-        compile $ pandocHTMLCompiler
+        compile $ compileToPandocAST 
+            >>= renderPandocASTtoHTML
             >>= applyAsTemplate siteCtx
             >>= loadAndApplyTemplate "templates/default.html" (baseSidebarCtx <> siteCtx)
+    
+    match "pandoc/*.bib" $ 
+        compile biblioCompiler
+
+    match "pandoc/elsevier.csl" $
+        compile cslCompiler
 
     match "pages/*" $ do
         route $ setExtension "html"
@@ -47,7 +54,9 @@ main = hakyllWith config $ do
                         functionField "eval" (evalCtxKey pageCtx)
             let activeSidebarCtx = sidebarCtx (evalCtx <> pageCtx)
 
-            pandocHTMLCompiler
+            compileToPandocAST
+                >>= saveSnapshot "pandoc-ast"
+                >>= renderPandocASTtoHTML
                 >>= saveSnapshot "page-content"
                 >>= loadAndApplyTemplate "templates/page.html"    siteCtx
                 >>= loadAndApplyTemplate "templates/default.html" (activeSidebarCtx <> siteCtx)
@@ -55,10 +64,12 @@ main = hakyllWith config $ do
 
     match "pages/CV.markdown" $ version "pdf" $ do
         route $ setExtension "pdf"
-        compile $ pandocLaTeXCompiler
+        compile $ getUnderlying 
+            >>= flip loadSnapshot "pandoc-ast" . setVersion Nothing
+            >>= renderPandocASTtoLaTeX
             >>= loadAndApplyTemplate "templates/CV.tex"
                                      (siteCtx <> modificationTimeField "modified" "%B %e, %Y")
-            >>= buildLatex
+            >>= buildLaTeX
 
     tags <- buildTags "posts/*" (fromCapture "tags/*.html")
 
@@ -79,7 +90,9 @@ main = hakyllWith config $ do
         route $ setExtension "html"
         compile $ do
             pdfFileName <- flip replaceExtension "pdf" . takeFileName . toFilePath <$> getUnderlying
-            pandocHTMLCompiler
+            compileToPandocAST
+                >>= saveSnapshot "pandoc-ast"
+                >>= renderPandocASTtoHTML
                 >>= \post -> do
                         teaser <- makeTeaser post
                         saveSnapshot "teaser" teaser
@@ -91,7 +104,9 @@ main = hakyllWith config $ do
 
     match "posts/*" $ version "pdf" $ do
         route $ setExtension "pdf"
-        compile $ getResourceString >>= renderPandocPDF
+        compile $ getUnderlying 
+            >>= flip loadSnapshot "pandoc-ast" .  setVersion Nothing
+            >>= renderPandocASTtoPDF
 
     create ["index.html"] $ do
         route idRoute
