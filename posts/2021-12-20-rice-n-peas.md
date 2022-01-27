@@ -17,7 +17,7 @@ Beyond our geographic proximity, it seems to me that we have only ever been boun
 
 When I was a child in Kingston, my grandfather was known universally as "Uncle Bob". He was someone who was recognised, and regarded with much affection, by everyone in the city at that time, or so it seemed to me.
 
-`<img style="float: right; width: 25%" src="/images/Institute_of_Jamaica.png"/>`{=html}
+`<img style="float: right; width: 25%; margin-left: 1em;" src="/images/Institute_of_Jamaica.png"/>`{=html}
 `\begin{wrapfigure}[7]{r}{0pt}\includegraphics[width=0.2\textwidth]{images/Institute_of_Jamaica.png}\end{wrapfigure}`{=latex}
 
 He had been a broadcaster and lecturer for many years but was much better known for the many cultural institutions he had helped found, all to the end of furthering the lot of Kingston's poor. This included the central public market, where those from the country came to sell their produce, and his beloved [_Junior Centre of the Institute of Jamaica_](http://juniorcentre-ioj.org.jm/index.php/about-us).
@@ -40,8 +40,8 @@ While I cannot say that my mathematical and technical interests stem from this s
 ## Rice 'n' Peas
 
 ```{=html}
-<table style="float: right; width: 40%">
-    <tr><td><img  src="/images/rice-and-peas.png" title="Image (c) 2020 sweetandsorrel.com"/></td></tr>
+<table style="float: right; width: 40%; margin-left: 1em;">
+    <tr><td><img src="/images/rice-and-peas.png" title="Image (c) 2020 sweetandsorrel.com"/></td></tr>
     <tr><td style="font-family: Roboto; font-size: 50%;">Image (c) 2020 <a href="https://www.sweetandsorrel.com">Sweet and Sorrel</a></td></tr>
 </table>
 ```
@@ -68,7 +68,7 @@ Ingredients
 This recipe can be made vegetarian or Kosher friendly by leaving out the bacon. But if you aren't worried about such things a good bacon bone really does lift this dish.
 
 ```{=html}
-<table style="float: right; width: 30%" >
+<table style="float: right; width: 30%; margin-left: 1em;" >
     <tr><td><img src="/images/anansi.jpg"/></td></tr>
     <tr><td style="font-family: Roboto; font-size: 50%;">Image (c) 1954 Marcia Brown</td></tr>
 </table>
@@ -93,7 +93,7 @@ Since most of us don't have a magic pot to fall back on, we're going to have to 
 ### Movement One
 
 ```{=html}
-<table style="float: right; width: 40%">
+<table style="float: right; width: 35%; margin-left:1em;">
     <tr><td><img src="/images/XKCD_tasks.png" title="In the 60s, Marvin Minsky assigned a couple of undergrads to spend the summer programming a computer to use a camera to identify objects in a scene. He figured they&#39;d have the problem solved by the end of the summer. Half a century later, we&#39;re still working on it."/></td></tr>
     <tr><td style="font-family: Roboto; font-size: 50%;">Image (c) 2021 <a href="https://xkcd.com/1425">XKCD</a></td></tr>
 </table>

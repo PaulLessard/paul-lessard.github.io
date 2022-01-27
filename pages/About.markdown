@@ -6,7 +6,12 @@ date: 21^st^ December 2021
 
 *\"I have the audacity to believe that peoples everywhere can have three meals a day for their bodies, education and culture for their minds, and dignity, equality, and freedom for their spirits.\"* - Dr. Martin Luther King Jr., Norway 1964
 
-Dom Verity is a research Mathematician whose side gigs include Programming, Electronics, (incredibly bad) Drumming, and University Governance.
+Dom Verity is a Research Mathematician whose side gigs include Programming, Electronics, (incredibly bad) Drumming, and University Governance.
+
+<a href="https://www.cambridge.org/core/books/elements-of-category-theory/DAC48C449AB8C2C1B1E528A49D27FC6D">
+    <img style="float: right; width: 20%; margin-left: 1em;"
+         alt="Book cover image 'Elements of ∞-category theory'" src="/images/elements.jpg"/>
+</a>
 
 His research interests lie in the mathematical fields of Homotopy Theory, sometimes known as “rubber sheet geometry”, and Category Theory, a kind of “theory of everything” for pure mathematics. He is also active in exploring applications of this work to the Computer Science of Programming Languages. His most cited paper introduced [_Traced Monoidal Categories_](https://ncatlab.org/nlab/show/traced+monoidal+category#JoyalStreetVerity96), structures that have become a key component in modern accounts of iterative processes in traditional and quantum computation. 
 
@@ -26,7 +31,7 @@ Dom started his computational career in the early 1980s as a software developer 
 
 ### University career
 
-<table style="float: right; width: 40%">
+<table style="float: right; width: 40%; margin-left: 1em;">
 <tr><td><img src="../images/dom_at_CT14.jpg" title="Image (c) 2014 
  Jürgen Koslowski"/></td></tr>
 <tr><td style="font-family: Roboto; font-size: 50%;">Image (c) 2014 
