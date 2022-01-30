@@ -64,9 +64,9 @@ import           Text.Pandoc.Shared            (filteredFilesFromArchive)
 import           Text.Pandoc.Builder as B
 import           Text.Pandoc.Parsing           (runF, defaultParserState, extractIdClass)
 import           Text.Pandoc.Readers.Markdown  (yamlToMeta)
+import           Text.Pandoc.CrossRef
 import           Text.Blaze.Html5.Attributes   (xmlns, item)
 import qualified Text.XML as X
-import Text.Pandoc.Citeproc (processCitations)
 
 buildLaTeX :: Item String -> Compiler (Item TmpFile)
 buildLaTeX item = do
@@ -160,10 +160,10 @@ domsDefaultXMLRenderSettings = X.def { X.rsXMLDeclaration = False }
 -------------------------------------------------------------------------------
 -- Load standard pandoc option sets
 
-{-# NOINLINE commonOptions #-}
-commonOptions :: Meta
-commonOptions = unsafePerformIO $ do
-    yaml <- LB.readFile "pandoc/commonOptions.yaml"
+{-# NOINLINE commonLaTeXOptions #-}
+commonLaTeXOptions :: Meta
+commonLaTeXOptions = unsafePerformIO $ do
+    yaml <- LB.readFile "pandoc/commonLaTeXOptions.yaml"
     runIOorExplode $ yamlToMeta domsDefaultReaderOptions Nothing yaml
 
 {-# NOINLINE pdfGenOptions #-}
@@ -171,14 +171,20 @@ pdfGenOptions :: Meta
 pdfGenOptions = unsafePerformIO $ do
     yaml <- LB.readFile "pandoc/pdfGenOptions.yaml"
     meta <- runIOorExplode $ yamlToMeta domsDefaultReaderOptions Nothing yaml
-    return (meta <> commonOptions)
+    return (commonLaTeXOptions <> meta)
 
 {-# NOINLINE imgGenOptions #-}
 imgGenOptions :: Meta
 imgGenOptions = unsafePerformIO $ do
     yaml <- LB.readFile "pandoc/imgGenOptions.yaml"
     meta <- runIOorExplode $ yamlToMeta domsDefaultReaderOptions Nothing yaml
-    return (meta <> commonOptions)
+    return (commonLaTeXOptions <> meta)
+
+{-# NOINLINE htmlOptions #-}
+htmlOptions :: Meta
+htmlOptions = unsafePerformIO $ do
+    yaml <- LB.readFile "pandoc/htmlOptions.yaml"
+    runIOorExplode $ yamlToMeta domsDefaultReaderOptions Nothing yaml
 
 -- Meta is a monoid and when applying <> options in its rhs override corresponding 
 -- options in its lhs.
@@ -195,7 +201,7 @@ writePandocToLaTeX :: Pandoc -> String
 writePandocToLaTeX = writePandocTyped $ writeLaTeX domsDefaultLaTeXWriterOptions
 
 writePandocToStandaloneLaTeX :: Pandoc -> String
-writePandocToStandaloneLaTeX = 
+writePandocToStandaloneLaTeX =
     writePandocTyped $ writeLaTeX domsDefaultStandaloneLaTeXWriterOptions
 
 writePandocToHTML :: Pandoc -> String
@@ -205,19 +211,27 @@ writePandocToHTML = writePandocTyped $ writeHtml5String domsDefaultHTMLWriterOpt
 
 compileToPandocAST :: Compiler (Item Pandoc)
 compileToPandocAST = do
+    getResourceString >>= readPandocWith domsDefaultReaderOptions
+
+-- Apply citeproc and crossref filters
+applyPandocFilters :: Meta -> Maybe Format -> Item Pandoc -> Compiler (Item Pandoc)
+applyPandocFilters opts fmt item = do
     bibs <- loadAll "pandoc/*.bib"
     csl <- load "pandoc/elsevier.csl"
-    getResourceString >>= readPandocBiblios domsDefaultReaderOptions csl bibs
+    processPandocBiblios csl bibs $
+        fmap (runCrossRef (getMeta (itemBody item) <> opts)
+            fmt defaultCrossRefAction) item
 
--- Generate LaTeX body only
+-- Generate LaTeX body only, not pandoc filters applied
 renderPandocASTtoLaTeX :: Item Pandoc -> Compiler (Item String)
 renderPandocASTtoLaTeX =
     return . fmap writePandocToLaTeX
 
 -- Apply standard pandoc LaTeX template and compile 
 renderPandocASTtoPDF :: Item Pandoc -> Compiler (Item TmpFile)
-renderPandocASTtoPDF =
-    buildLaTeX . fmap (writePandocToStandaloneLaTeX . prependMeta pdfGenOptions)
+renderPandocASTtoPDF doc =
+    applyPandocFilters pdfGenOptions (Just "latex") doc
+        >>= buildLaTeX . fmap writePandocToStandaloneLaTeX
 
 -------------------------------------------------------------------------------
 -- Standalone Binary instances for pandoc types
@@ -275,82 +289,98 @@ number = read <$> word isDigit
 -------------------------------------------------------------------------------
 -- Parser to read the image dimensions recorded in a LaTeX log file.
 
-type Points = Fixed 100000
+-- Dimensions in em, for conversion from LaTeX pts we assume a 17 point fontsize here.
 
-ptConvFactor :: Points
-ptConvFactor = 1.00375
+type Dimen = Fixed 1000000
+
+fontSize :: Fixed 1000000
+fontSize = 17
 
 data ImageInfo = ImageInfo
-    { depth :: Points
-    , height :: Points
-    , width :: Points
+    { depth :: Dimen
+    , height :: Dimen
+    , width :: Dimen
     } deriving (Show)
 
 getEqnDimens :: FilePath -> Compiler [ImageInfo]
 getEqnDimens fp = unsafeCompiler $
         mapMaybe (evalStateT parseImageDimens) . lines <$> readFile fp
     where
-        parseDimen :: ParserMonad Points
+        parseDimen :: ParserMonad Dimen
         parseDimen = do
             n1 <- word isDigit
             n2 <- (token "." >> word isDigit) <|> return "0"
             token "pt"
-            return $ read $ n1 ++ "." ++ n2
+            return $ read (n1 ++ "." ++ n2) / fontSize
 
         parseImageDimens :: ParserMonad ImageInfo
         parseImageDimens = do
-            token "Preview: eqn" >> stripSpaces
-            token "("
+            token "Preview: eqn" >> stripSpaces >> token "("
             e <- number
-            stripSpaces
-            token ")" >> stripSpaces
-            token "dims" >> stripSpaces
+            stripSpaces >> token ")" >> stripSpaces >> token "dims" >> stripSpaces
             d1 <- parseDimen
             token ","
             d2 <- parseDimen
             token ","
-            d3 <- parseDimen
-            return $ ImageInfo
-                (d1 / ptConvFactor)
-                (d2 / ptConvFactor)
-                (d3 / ptConvFactor)
+            ImageInfo d1 d2 <$> parseDimen  -- depth, height, width
 
 -------------------------------------------------------------------------------
 -- Build an HTML file with embedded SVG sections from an input containing 
--- LaTeX equations
+-- LaTeX equations.
 
 renderPandocASTtoHTML :: Item Pandoc -> Compiler (Item String)
-renderPandocASTtoHTML (Item _ body) = do
-    svgs <- makeEquationSVGs body
-    makeItem (writePandocToHTML $ embedEquationImages svgs body)
+renderPandocASTtoHTML doc = do
+    svgs <- makeEquationSVGs doc
+    fmap (writePandocToHTML . embedEquationImages svgs) <$>
+        applyPandocFilters htmlOptions (Just "html5") doc
 
 embedEquationImages :: [T.Text] -> Pandoc -> Pandoc
-embedEquationImages imgs doc = evalState (walkM transformEquation doc) imgs
+embedEquationImages imgs (Pandoc meta body) =
+    Pandoc meta (evalState (walkM transformEquation body) imgs)
     where
         transformEquation :: Inline -> State [T.Text] Inline
         transformEquation (Math typ body) = do
             imgs <- get
             case imgs of
                 [] ->
-                    let classes = case typ of
-                            InlineMath -> ["inline-equation"]
-                            DisplayMath -> ["displayed-equation"]
-                    in return $
-                        Span ("", classes, [("style", "color: red;")])
-                            [Str "<missing image>"]
+                    return $ Span
+                        ( ""
+                        , case typ of
+                            InlineMath -> ["inline-eqn"]
+                            DisplayMath -> ["display-eqn"]
+                        , [("style", "color: red;")]
+                        )
+                        [Str "<missing image>"]
                 (img:imgs') -> do
                     put imgs'
-                    return $ RawInline "html" img
+                    case typ of
+                        InlineMath -> return $ Span
+                            ("", ["inline-eqn"], [])
+                            [RawInline "html" img]
+                        DisplayMath -> return $ Span
+                            ("", ["display-eqn"], [])
+                            [ Span ("", ["display-eqn-left"], []) []
+                            , Span
+                                ("", ["display-eqn-center"], [])
+                                [RawInline "html" img]
+                            , Span
+                                ("", ["display-eqn-right"], [])
+                                (case T.breakOnEnd "\\doms@tag{" body of
+                                    ("", _) -> []
+                                    (_, label) -> 
+                                        [ Str "("
+                                        , Str (T.takeWhile (/= '}') label)
+                                        , Str ")"
+                                        ]
+                                )
+                            ]
         transformEquation x = return x
-
-prependMeta :: Meta -> Pandoc -> Pandoc
-prependMeta pmeta (Pandoc meta body) = Pandoc (pmeta <> meta) body
 
 getMeta :: Pandoc -> Meta
 getMeta (Pandoc meta _) = meta
 
-makeEquationSVGs :: Pandoc -> Compiler [T.Text]
-makeEquationSVGs inputDoc =
+makeEquationSVGs :: Item Pandoc -> Compiler [T.Text]
+makeEquationSVGs (Item _ (Pandoc meta body)) =
     if null eqnBlocks
     then return []
     else do
@@ -359,12 +389,11 @@ makeEquationSVGs inputDoc =
         svgDocs <- runLuaLaTeX latexPath >>=
             pdfToSVGs >>= traverse (unsafeCompiler . X.readFile X.def)
         imgInfo <- getEqnDimens $ latexPath -<.> "log"
-        sequenceA $ zipWith4 processImage [1..] svgDocs imgInfo eqnTypes
+        sequenceA (zipWith3 processImage [1..] svgDocs imgInfo)
     where
-        queryEquation :: Inline -> [(MathType, Block)]
+        queryEquation :: Inline -> [Block]
         queryEquation (Math typ text) =
-            [( typ
-            , RawBlock "latex" $ T.concat
+            [ RawBlock "latex" $ T.concat
                 [ "\\begin{shipper}{"
                 , case typ of
                     InlineMath -> "\\textstyle"
@@ -373,23 +402,20 @@ makeEquationSVGs inputDoc =
                 , text
                 , "\\end{shipper}\n"
                 ]
-            )]
+            ]
         queryEquation x = []
 
-        eqnTypes :: [MathType]
         eqnBlocks :: [Block]
-        (eqnTypes, eqnBlocks) = unzip $ query queryEquation inputDoc
+        eqnBlocks = query queryEquation body
 
         imgGenDoc :: Pandoc
-        imgGenDoc =
-            prependMeta imgGenOptions $
-                doc $ B.fromList eqnBlocks
+        imgGenDoc = Pandoc imgGenOptions eqnBlocks
 
         imgGenLaTeX :: String
         imgGenLaTeX = writePandocToStandaloneLaTeX imgGenDoc
 
-processImage :: Integer -> X.Document -> ImageInfo -> MathType -> Compiler T.Text
-processImage num svg (ImageInfo dp _ _) typ =
+processImage :: Integer -> X.Document -> ImageInfo -> Compiler T.Text
+processImage num svg (ImageInfo dp ht wd) =
     return $ (LT.toStrict . X.renderText domsDefaultXMLRenderSettings) transformedSVG
     where
         queryID :: X.Element -> S.Set T.Text
@@ -425,18 +451,16 @@ processImage num svg (ImageInfo dp _ _) typ =
                         then T.concat ["eqn", T.pack (show num), "-", s]
                         else s
 
-        extraRootAttr :: M.Map X.Name T.Text
-        extraRootAttr = case typ of
-            InlineMath -> M.fromList
-                [ ("style", T.concat ["transform: translateY(", T.pack (show dp), "pt);"])
-                , ("class", "inline-equation")
-                ]
-            DisplayMath -> M.fromList
-                [ ("class", "displayed-equation") ]
+        adjustedDimens :: M.Map X.Name T.Text
+        adjustedDimens= M.fromList
+            [ ("width", T.pack $ show wd ++ "em")
+            , ("height", T.pack $ show (dp + ht) ++ "em")
+            , ("style", T.pack $ "vertical-align: -" ++ show dp ++ "em;")
+            ]
 
         transformedSVG :: X.Document
         transformedSVG = case walk (transformID . transformTags) svg of
             X.Document pro (X.Element nm attr nodes) epi |
                 nm == "{http://www.w3.org/2000/svg}svg" ->
-                X.Document pro (X.Element nm (attr <> extraRootAttr) nodes) epi
+                    X.Document pro (X.Element nm (adjustedDimens <> attr) nodes) epi
             d -> d

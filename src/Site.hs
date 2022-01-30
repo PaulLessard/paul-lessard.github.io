@@ -105,7 +105,7 @@ main = hakyllWith config $ do
     match "posts/*" $ version "pdf" $ do
         route $ setExtension "pdf"
         compile $ getUnderlying 
-            >>= flip loadSnapshot "pandoc-ast" .  setVersion Nothing
+            >>= flip loadSnapshot "pandoc-ast" . setVersion Nothing
             >>= renderPandocASTtoPDF
 
     create ["index.html"] $ do

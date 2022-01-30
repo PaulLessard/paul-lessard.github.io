@@ -479,26 +479,36 @@ a.pagination-item:hover {
  * Style images generated from inline and displayed equations
  */
 
-.inline-equation {
-  vertical-align: baseline; 
+.inline-eqn {
   display: inline; 
+  vertical-align: baseline; 
   margin: 0;
   border-radius: 0;
   border: 0;
 }
 
-.displayed-equation {
-  display: block;
-  height: auto; 
-  width: auto; 
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 0.75rem;
-  margin-bottom: 0.75rem;
-  max-width: 100%; 
-  max-height: 100%;
-  text-align: center;
+.display-eqn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row; /* row-reverse to get labels on left */
+  margin-top: 0.75em;
+  margin-bottom: 0.75em;
 }
+
+.display-eqn-left {
+  flex: none;
+}
+
+.display-eqn-center {
+  flex: 0 1 auto;
+}
+
+.display-eqn-right {
+  flex: none;
+}
+
+
 
 /*
  * PDF versions
