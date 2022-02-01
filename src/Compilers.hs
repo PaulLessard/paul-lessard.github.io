@@ -19,6 +19,7 @@ module Compilers
     , renderPandocASTtoPDF
     , renderPandocASTtoHTML
     , buildLaTeX
+    , metadataCompiler
     ) where
 
 import           Hakyll
@@ -135,6 +136,11 @@ cleanImageSVG num svg = do
             throwError ["SVGCleaner: failed while processing image " ++ show num ++
                 " from item " ++ show id ++ " exit code " ++ show err ++ "."]
 
+metadataCompiler :: Compiler (Item Meta)
+metadataCompiler =
+    getResourceLBS >>= withItemBody (
+        unsafeCompiler . runIOorExplode . yamlToMeta domsDefaultReaderOptions Nothing)
+
 --------------------------------------------------------------------------------
 
 domsDefaultReaderOptions :: ReaderOptions
@@ -156,38 +162,6 @@ domsDefaultStandaloneLaTeXWriterOptions = unsafePerformIO $ do
 
 domsDefaultXMLRenderSettings :: X.RenderSettings
 domsDefaultXMLRenderSettings = X.def { X.rsXMLDeclaration = False }
-
--------------------------------------------------------------------------------
--- Load standard pandoc option sets
-
-{-# NOINLINE commonLaTeXOptions #-}
-commonLaTeXOptions :: Meta
-commonLaTeXOptions = unsafePerformIO $ do
-    yaml <- LB.readFile "pandoc/commonLaTeXOptions.yaml"
-    runIOorExplode $ yamlToMeta domsDefaultReaderOptions Nothing yaml
-
-{-# NOINLINE pdfGenOptions #-}
-pdfGenOptions :: Meta
-pdfGenOptions = unsafePerformIO $ do
-    yaml <- LB.readFile "pandoc/pdfGenOptions.yaml"
-    meta <- runIOorExplode $ yamlToMeta domsDefaultReaderOptions Nothing yaml
-    return (commonLaTeXOptions <> meta)
-
-{-# NOINLINE imgGenOptions #-}
-imgGenOptions :: Meta
-imgGenOptions = unsafePerformIO $ do
-    yaml <- LB.readFile "pandoc/imgGenOptions.yaml"
-    meta <- runIOorExplode $ yamlToMeta domsDefaultReaderOptions Nothing yaml
-    return (commonLaTeXOptions <> meta)
-
-{-# NOINLINE htmlOptions #-}
-htmlOptions :: Meta
-htmlOptions = unsafePerformIO $ do
-    yaml <- LB.readFile "pandoc/htmlOptions.yaml"
-    runIOorExplode $ yamlToMeta domsDefaultReaderOptions Nothing yaml
-
--- Meta is a monoid and when applying <> options in its rhs override corresponding 
--- options in its lhs.
 
 --------------------------------------------------------------------------------
 
@@ -229,8 +203,10 @@ renderPandocASTtoLaTeX =
 
 -- Apply standard pandoc LaTeX template and compile 
 renderPandocASTtoPDF :: Item Pandoc -> Compiler (Item TmpFile)
-renderPandocASTtoPDF doc =
-    applyPandocFilters pdfGenOptions (Just "latex") doc
+renderPandocASTtoPDF doc = do
+    latexOpts <- load "pandoc/commonLaTeXOptions.yaml"
+    pdfOpts <- load "pandoc/pdfGenOptions.yaml"
+    applyPandocFilters (itemBody latexOpts <> itemBody pdfOpts) (Just "latex") doc
         >>= buildLaTeX . fmap writePandocToStandaloneLaTeX
 
 -------------------------------------------------------------------------------
@@ -259,6 +235,10 @@ deriving instance B.Binary ColSpan
 deriving instance B.Binary RowHeadColumns
 deriving instance B.Binary Meta
 deriving instance B.Binary MetaValue
+
+instance Writable Meta where
+    -- Shouldn't be written.
+    write _ _ = return ()
 
 -------------------------------------------------------------------------------
 -- Very simple backtracking parser monad.
@@ -331,8 +311,9 @@ getEqnDimens fp = unsafeCompiler $
 renderPandocASTtoHTML :: Item Pandoc -> Compiler (Item String)
 renderPandocASTtoHTML doc = do
     svgs <- makeEquationSVGs doc
+    htmlOpts <- load "pandoc/htmlOptions.yaml"
     fmap (writePandocToHTML . embedEquationImages svgs) <$>
-        applyPandocFilters htmlOptions (Just "html5") doc
+        applyPandocFilters (itemBody htmlOpts) (Just "html5") doc
 
 embedEquationImages :: [T.Text] -> Pandoc -> Pandoc
 embedEquationImages imgs (Pandoc meta body) =
@@ -367,7 +348,7 @@ embedEquationImages imgs (Pandoc meta body) =
                                 ("", ["display-eqn-right"], [])
                                 (case T.breakOnEnd "\\doms@tag{" body of
                                     ("", _) -> []
-                                    (_, label) -> 
+                                    (_, label) ->
                                         [ Str "("
                                         , Str (T.takeWhile (/= '}') label)
                                         , Str ")"
@@ -385,7 +366,10 @@ makeEquationSVGs (Item _ (Pandoc meta body)) =
     then return []
     else do
         TmpFile latexPath <- newTmpFile "eqnimages.tex"
-        unsafeCompiler $ writeFile latexPath imgGenLaTeX
+        latexOpts <- load "pandoc/commonLaTeXOptions.yaml"
+        imgOpts <- load "pandoc/imgGenOptions.yaml"
+        unsafeCompiler $ writeFile latexPath $ 
+            imgGenLaTeX (itemBody latexOpts <> itemBody imgOpts)
         svgDocs <- runLuaLaTeX latexPath >>=
             pdfToSVGs >>= traverse (unsafeCompiler . X.readFile X.def)
         imgInfo <- getEqnDimens $ latexPath -<.> "log"
@@ -408,11 +392,9 @@ makeEquationSVGs (Item _ (Pandoc meta body)) =
         eqnBlocks :: [Block]
         eqnBlocks = query queryEquation body
 
-        imgGenDoc :: Pandoc
-        imgGenDoc = Pandoc imgGenOptions eqnBlocks
-
-        imgGenLaTeX :: String
-        imgGenLaTeX = writePandocToStandaloneLaTeX imgGenDoc
+        imgGenLaTeX :: Meta -> String
+        imgGenLaTeX opts = 
+            writePandocToStandaloneLaTeX $ Pandoc opts eqnBlocks
 
 processImage :: Integer -> X.Document -> ImageInfo -> Compiler T.Text
 processImage num svg (ImageInfo dp ht wd) =
@@ -464,3 +446,4 @@ processImage num svg (ImageInfo dp ht wd) =
                 nm == "{http://www.w3.org/2000/svg}svg" ->
                     X.Document pro (X.Element nm (adjustedDimens <> attr) nodes) epi
             d -> d
+

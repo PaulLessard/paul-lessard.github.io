@@ -2,4 +2,3 @@ equationNumberTeX: \\doms@tag
 eqnPrefix: 
   - "Equation" 
   - "Equations"
-eqnPrefixTemplate: "$$p$$&nbsp;($$i$$)"

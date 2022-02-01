@@ -44,6 +44,9 @@ main = hakyllWith config $ do
     match "pandoc/elsevier.csl" $
         compile cslCompiler
 
+    match "pandoc/*.yaml" $
+        compile metadataCompiler
+
     match "pages/*" $ do
         route $ setExtension "html"
         compile $ do
