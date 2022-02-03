@@ -3,7 +3,6 @@ title: The Comprehension Construction
 author: Emily Riehl and Dom Verity
 date: January 15, 2022
 tags: mathematics, ∞-cosmoi
-citeproc: true
 ---
 
 In 2017 [Emily Riehl](https://emilyriehl.github.io/) and I posted a paper [@RiehlVerity:2018cc] on the [arXiv](https://arxiv.org/abs/1706.10023) entitled "The comprehension construction." and we blogged about it on the [n-Category Café](https://golem.ph.utexas.edu/category/). That post explains the use of the term *comprehension* in the title of that paper.
@@ -158,7 +157,9 @@ defines a quasi-categorical analogue of Lurie's unstraightening construction. In
 Applying the comprehension construction to the cocartesian fibration $\cod\colon A^2\to A$ in the slice ∞-cosmos $\cK_{/A}$, we obtain a map
 $$
     \yo\colon\Fun_{\cK}(1,A)\to\hN(\Cart(\cK)_{/A})
-$$
+$$ {#eq:test}
 that carries an element $a \colon 1 \to A$ to the groupoidal cartesian fibration $\dom\colon A\downarrow a \to A$. This provides us with a particularly explicit model of the Yoneda embedding, whose action on hom-spaces is easily computed. In particular, this allows us to easily demonstrate that the Yoneda embedding is fully-faithful and thus that every quasi-category is equivalent to the homotopy coherent nerve of some Kan complex enriched category.
+
+Yoneda embedding is [@eq:test].
 
 ## References

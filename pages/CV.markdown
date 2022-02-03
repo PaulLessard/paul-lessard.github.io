@@ -56,7 +56,7 @@ Higher Category Theory • Homotopy Theory • Programming Languages
 
 |    |    |    |
 |:-------|:--------------------------------------------|
-| **1988-1992** | _PhD in Mathematics_, Fitzwilliam College, Cambridge University, UK |
+| **1988-1992** | _PhD in Mathematics_, Fitzwilliam College, Cambridge University, UK. **PhD Supervisor:** Professor J. M. E. Hyland |
 | **1987-1988** | _Part III Mathematics_, awarded with Distinction, Fitzwilliam College, Cambridge University, UK |
 | **1984-1987** | _BSc (Hons) Mathematics_, Double 1^st^ Class, Fitzwilliam College, Cambridge University, UK |
 
@@ -64,6 +64,7 @@ Higher Category Theory • Homotopy Theory • Programming Languages
 
 |    |    |    |
 |:-------|:--------------------------------------------|
+| **2021-** | *Professor Emeritus* Macquarie University, Australia, unanimously elected by University Council, 19^th^ August 2021. |
 | **2020, 2022** | *Research Professor and Program Organiser*, Mathematical Sciences Research Institute (MSRI) program *"Higher Categories and Categorification"*, Berkeley (CA) USA. |
 | **2019** | *Visiting Research Fellow*, Dept. of Mathematics, Johns Hopkins University, Baltimore (MD) USA |
 | **2018** | *Invited Mentor*, Mass. Institute of Technology, [Talbot Workshop](http://math.mit.edu/conferences/talbot/), Course title: *"Model-independent theory of ∞-Categories"*, Portland (OR) USA |

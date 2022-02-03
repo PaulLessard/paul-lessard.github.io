@@ -78,8 +78,8 @@ buildLaTeX item = do
 runLuaLaTeX :: FilePath  -> Compiler FilePath
 runLuaLaTeX latexPath = do
     exitCode <- unsafeCompiler $ system $ unwords
-        ["lualatex", "-halt-on-error", "-output-directory"
-        , takeDirectory latexPath, latexPath, ">/dev/null", "2>&1"]
+        [ "latexmk", "-lualatex", "-outdir=" ++ takeDirectory latexPath
+        , latexPath, ">/dev/null", "2>&1"]
     id <- getUnderlying
     let idPath = toFilePath id
         logDir = takeDirectory idPath </> "_texlog"
