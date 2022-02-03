@@ -204,10 +204,11 @@ renderPandocASTtoLaTeX =
 -- Apply standard pandoc LaTeX template and compile 
 renderPandocASTtoPDF :: Item Pandoc -> Compiler (Item TmpFile)
 renderPandocASTtoPDF doc = do
-    latexOpts <- load "pandoc/commonLaTeXOptions.yaml"
+    latexOpts <- load "pandoc/latexOptions.yaml"
     pdfOpts <- load "pandoc/pdfGenOptions.yaml"
-    applyPandocFilters (itemBody latexOpts <> itemBody pdfOpts) (Just "latex") doc
-        >>= buildLaTeX . fmap writePandocToStandaloneLaTeX
+    crossOpts <- load "pandoc/crossrefOptions.yaml"
+    applyPandocFilters (itemBody latexOpts <> itemBody pdfOpts <> itemBody crossOpts)
+        (Just "latex") doc >>= buildLaTeX . fmap writePandocToStandaloneLaTeX
 
 -------------------------------------------------------------------------------
 -- Standalone Binary instances for pandoc types
@@ -312,8 +313,9 @@ renderPandocASTtoHTML :: Item Pandoc -> Compiler (Item String)
 renderPandocASTtoHTML doc = do
     svgs <- makeEquationSVGs doc
     htmlOpts <- load "pandoc/htmlOptions.yaml"
+    crossOpts <- load "pandoc/crossrefOptions.yaml"
     fmap (writePandocToHTML . embedEquationImages svgs) <$>
-        applyPandocFilters (itemBody htmlOpts) (Just "html5") doc
+        applyPandocFilters (itemBody htmlOpts <> itemBody crossOpts) (Just "html5") doc
 
 embedEquationImages :: [T.Text] -> Pandoc -> Pandoc
 embedEquationImages imgs (Pandoc meta body) =
@@ -366,9 +368,9 @@ makeEquationSVGs (Item _ (Pandoc meta body)) =
     then return []
     else do
         TmpFile latexPath <- newTmpFile "eqnimages.tex"
-        latexOpts <- load "pandoc/commonLaTeXOptions.yaml"
+        latexOpts <- load "pandoc/latexOptions.yaml"
         imgOpts <- load "pandoc/imgGenOptions.yaml"
-        unsafeCompiler $ writeFile latexPath $ 
+        unsafeCompiler $ writeFile latexPath $
             imgGenLaTeX (itemBody latexOpts <> itemBody imgOpts)
         svgDocs <- runLuaLaTeX latexPath >>=
             pdfToSVGs >>= traverse (unsafeCompiler . X.readFile X.def)
@@ -393,7 +395,7 @@ makeEquationSVGs (Item _ (Pandoc meta body)) =
         eqnBlocks = query queryEquation body
 
         imgGenLaTeX :: Meta -> String
-        imgGenLaTeX opts = 
+        imgGenLaTeX opts =
             writePandocToStandaloneLaTeX $ Pandoc opts eqnBlocks
 
 processImage :: Integer -> X.Document -> ImageInfo -> Compiler T.Text
@@ -446,4 +448,6 @@ processImage num svg (ImageInfo dp ht wd) =
                 nm == "{http://www.w3.org/2000/svg}svg" ->
                     X.Document pro (X.Element nm (adjustedDimens <> attr) nodes) epi
             d -> d
+
+
 

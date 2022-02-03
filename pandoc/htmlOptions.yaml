@@ -1,4 +1,4 @@
 equationNumberTeX: \\doms@tag
-eqnPrefix: 
-  - "Equation" 
-  - "Equations"
+linkReferences: true
+rangeDelim: "&nbsp;to&nbsp;"
+lastDelim: "&nbsp;and&nbsp;"

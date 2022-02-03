@@ -121,15 +121,15 @@ In an early draft of our paper, our narrative followed just this kind of route. 
 In an [∞-cosmos](https://ncatlab.org/nlab/show/infinity-cosmos) $\cK$, by which we mean a category enriched over quasi-categories that admits a specified class of isofibrations and certain simplicially enriched limits, we may again define $p \colon E \twoheadrightarrow B$ to be a cocartesian fibration representably. That is to say, $p$ is a *cocartesian fibration* if it is an isofibration in the specified class and if
 $$
     \Fun_{\cK}(X,p) \colon \Fun_{\cK}(X,E) \to \Fun_{\cK}(X,B)
-$$
+$$ {#eq:test1}
 is a cocartesian fibration of quasi-categories for every ∞-category $X$. Then a direct "homotopy coherent" generalisation of the 2-categorical construction discussed above demonstrates that we define an associated comprehension functor:
 $$
     c_{p,A} \colon \mathfrak{C}\Fun_{\cK}(A,B)\to \coCart(\cK)_{/A}.
-$$
+$$ {#eq:test2}
 The image lands in the maximal Kan complex enriched subcategory of the quasi-categorically enriched category of cocartesian fibrations and cartesian functors over $A$, so the comprehension functor transposes to define a map of quasi-categories
 $$
     c_{p,A} \colon \Fun_{\cK}(A,B) \to \hN(\coCart(\cK)_{/A})
-$$
+$$ {#eq:test3}
 whose codomain is defined by applying the homotopy coherent nerve.
 
 ### Straightening as comprehension
@@ -139,7 +139,7 @@ The "straightening" of a cocartesian fibration into a homotopy coherent diagram 
 We may deploy the ∞-categorical comprehension to provide a alternative approach to straightening. To that end we work in the ∞-cosmos of quasi-categories $\qCat$ and let $A=1$, then observe that the comprehension functor $c_{p,1}\colon \mathfrak{C}B \to \qCat$ is itself the straightening of $p$. Indeed, it is possible to use the constructions in our paper to extend this variant of unstraightening to give a functor of quasi-categories:
 $$
     \hN(\coCart(\cK)_{/B}) \to \Fun(B,Q)
-$$
+$$ {#eq:test4}
 Here $Q$ is the (large) quasi-category constructed by taking the homotopy coherent nerve of (the maximal Kan complex enriched subcategory of) $\qCat$. So the objects of $\Fun(B,Q)$ correspond bijectively to "straight" simplicial functors $\mathfrak{C}B\to\qCat$. We should confess, however, that we do not explicitly pursue the full construction of this straightening functor there.
 
 ### Unstraightening as comprehension
@@ -149,7 +149,7 @@ In the ∞-categorical context, the Grothendieck construction is christened [uns
 We may also realise unstraightening as comprehension. To that end we follow Ross Street's lead by taking $Q_{\ast}$ to be a quasi-category of pointed quasi-categories and apply the comprehension construction to the "forget the point" projection $Q_{\ast}\to Q$. The comprehension functor thus derived
 $$
     c_{p,A} \colon Fun(A,Q) \to \hN\left(\dCoCart(\cK)_{/A}\right)
-$$
+$$ {#eq:test5}
 defines a quasi-categorical analogue of Lurie's unstraightening construction. In an upcoming paper we use the quasi-categorical variant of Beck's monadicity theorem to prove that this functor is an equivalence. We also extend this result to certain other ∞-cosmoi, such as the ∞-cosmos of (co)cartesian fibrations over a fixed quasi-category.
 
 ### Constructing the Yoneda embedding
@@ -157,9 +157,9 @@ defines a quasi-categorical analogue of Lurie's unstraightening construction. In
 Applying the comprehension construction to the cocartesian fibration $\cod\colon A^2\to A$ in the slice ∞-cosmos $\cK_{/A}$, we obtain a map
 $$
     \yo\colon\Fun_{\cK}(1,A)\to\hN(\Cart(\cK)_{/A})
-$$ {#eq:test}
+$$ {#eq:test6}
 that carries an element $a \colon 1 \to A$ to the groupoidal cartesian fibration $\dom\colon A\downarrow a \to A$. This provides us with a particularly explicit model of the Yoneda embedding, whose action on hom-spaces is easily computed. In particular, this allows us to easily demonstrate that the Yoneda embedding is fully-faithful and thus that every quasi-category is equivalent to the homotopy coherent nerve of some Kan complex enriched category.
 
-Yoneda embedding is [@eq:test].
+Yoneda embedding is [@eq:test1;@eq:test2;@eq:test3;@eq:test5;@eq:test6].
 
 ## References
