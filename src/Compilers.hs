@@ -241,6 +241,10 @@ instance Writable Meta where
     -- Shouldn't be written.
     write _ _ = return ()
 
+instance Writable Pandoc where
+    -- Shouldn't be written.
+    write _ _ = return ()
+
 -------------------------------------------------------------------------------
 -- Very simple backtracking parser monad.
 

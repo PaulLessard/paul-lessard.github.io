@@ -47,6 +47,9 @@ main = hakyllWith config $ do
     match "pandoc/*.yaml" $
         compile metadataCompiler
 
+    match "pages/*" $ version "ast" $
+        compile compileToPandocAST
+
     match "pages/*" $ do
         route $ setExtension "html"
         compile $ do
@@ -57,8 +60,9 @@ main = hakyllWith config $ do
                         functionField "eval" (evalCtxKey pageCtx)
             let activeSidebarCtx = sidebarCtx (evalCtx <> pageCtx)
 
-            compileToPandocAST
-                >>= saveSnapshot "pandoc-ast"
+            getUnderlying
+                >>= loadBody . setVersion (Just "ast")
+                >>= makeItem
                 >>= renderPandocASTtoHTML
                 >>= saveSnapshot "page-content"
                 >>= loadAndApplyTemplate "templates/page.html"    siteCtx
@@ -68,7 +72,8 @@ main = hakyllWith config $ do
     match "pages/CV.markdown" $ version "pdf" $ do
         route $ setExtension "pdf"
         compile $ getUnderlying 
-            >>= flip loadSnapshot "pandoc-ast" . setVersion Nothing
+            >>= loadBody . setVersion (Just "ast")
+            >>= makeItem
             >>= renderPandocASTtoLaTeX
             >>= loadAndApplyTemplate "templates/CV.tex"
                                      (siteCtx <> modificationTimeField "modified" "%B %e, %Y")
@@ -89,12 +94,16 @@ main = hakyllWith config $ do
                 >>= loadAndApplyTemplate "templates/default.html" (baseSidebarCtx <> siteCtx)
                 >>= relativizeUrls
 
+    match "posts/*" $ version "ast" $
+        compile compileToPandocAST
+
     match "posts/*" $ do
         route $ setExtension "html"
         compile $ do
             pdfFileName <- flip replaceExtension "pdf" . takeFileName . toFilePath <$> getUnderlying
-            compileToPandocAST
-                >>= saveSnapshot "pandoc-ast"
+            getUnderlying
+                >>= loadBody . setVersion (Just "ast")
+                >>= makeItem
                 >>= renderPandocASTtoHTML
                 >>= \post -> do
                         teaser <- makeTeaser post
@@ -108,7 +117,8 @@ main = hakyllWith config $ do
     match "posts/*" $ version "pdf" $ do
         route $ setExtension "pdf"
         compile $ getUnderlying 
-            >>= flip loadSnapshot "pandoc-ast" . setVersion Nothing
+            >>= loadBody . setVersion (Just "ast")
+            >>= makeItem
             >>= renderPandocASTtoPDF
 
     create ["index.html"] $ do
