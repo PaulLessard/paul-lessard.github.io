@@ -69,7 +69,7 @@ main = hakyllWith config $ do
                 >>= loadAndApplyTemplate "templates/default.html" (activeSidebarCtx <> siteCtx)
                 >>= relativizeUrls
 
-    match "pages/CV.markdown" $ version "pdf" $ do
+    match "pages/CV.md" $ version "pdf" $ do
         route $ setExtension "pdf"
         compile $ getUnderlying 
             >>= loadBody . setVersion (Just "ast")
@@ -134,7 +134,7 @@ main = hakyllWith config $ do
                     constField "title" "About"               <>
                     siteCtx
 
-            body <- loadSnapshotBody "pages/About.markdown" "page-content"
+            body <- loadSnapshotBody "pages/About.md" "page-content"
 
             makeItem body
                 >>= makeTeaser
