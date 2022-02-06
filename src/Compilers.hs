@@ -23,7 +23,8 @@ module Compilers
     ) where
 
 import           Hakyll
-import           XMLWalker
+import           Hakyll.Core.Compiler.Internal
+import           XMLWalker ()
 
 import qualified Data.Text as T
 import qualified Data.Text.IO as TIO
@@ -75,14 +76,19 @@ buildLaTeX item = do
     unsafeCompiler $ writeFile latexPath $ itemBody item
     runLuaLaTeX latexPath >>= makeItem . TmpFile
 
+getConfig :: Compiler Configuration
+getConfig = compilerConfig <$> compilerAsk
+
 runLuaLaTeX :: FilePath  -> Compiler FilePath
 runLuaLaTeX latexPath = do
     exitCode <- unsafeCompiler $ system $ unwords
         [ "latexmk", "-lualatex", "-outdir=" ++ takeDirectory latexPath
         , latexPath, ">/dev/null", "2>&1"]
     id <- getUnderlying
+    conf <- getConfig
     let idPath = toFilePath id
-        logDir = takeDirectory idPath </> "_texlog"
+        logDir = providerDirectory conf </> storeDirectory conf 
+            </> "texlog" </> takeDirectory idPath
         logDestinationPath = case identifierVersion id of
             Nothing -> logDir </> takeBaseName idPath <.> "log"
             Just v -> logDir </> (takeBaseName idPath ++ "#" ++ v) <.> "log"
@@ -452,6 +458,7 @@ processImage num svg (ImageInfo dp ht wd) =
                 nm == "{http://www.w3.org/2000/svg}svg" ->
                     X.Document pro (X.Element nm (adjustedDimens <> attr) nodes) epi
             d -> d
+
 
 
 
