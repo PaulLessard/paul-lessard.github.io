@@ -38,7 +38,7 @@ Higher Category Theory • Homotopy Theory • Programming Languages
 |:-------|:--------------------------------------------|
 | **2020-2021** | _Professor of Pure Mathematics_, Department of Mathematics and Statistics, Faculty of Science and Engineering, Macquarie University, Australia|
 | **2012-2020** | _Professor of Computing_, Department of Computing, Faculty of Science and Engineering, Macquarie University, Australia|
-| **2013-2017** | _Chair of Academic Senate_, Vice-Chancellor's Office, Macquarie University, Australia |
+| **2013-2016** | _Chair of Academic Senate_, Vice-Chancellor's Office, Macquarie University, Australia |
 | **2001-2007** | _Director of Postgraduate Programs_, Division of ICS, Macquarie University, Australia |
 | **2001-2012** | _Associate Professor_, Department of Computing, Macquarie University, Australia |
 | **2000-2001** | _Senior Lecturer_, Department of Computing, Macquarie University, Australia |
@@ -117,7 +117,7 @@ Higher Category Theory • Homotopy Theory • Programming Languages
 |    |    |    |
 |:-------|:--------------------------------------------|
 | **2022-** | (with E. Riehl) [More elements of ∞-category theory]{.smallcaps}, <https://emilyriehl.github.io/files/more-elements.pdf>, book draft under development. |
-| **2022** | (with E. Riehl) [[The elements of ∞-category theory]{.smallcaps}](https://www.cambridge.org/core/books/elements-of-category-theory/DAC48C449AB8C2C1B1E528A49D27FC6D), volume 194 of *Cambridge Studies in Advanced Mathematics*, Cambridge University Press, frontmatter i--xx, pages 1--760. (online publication January 2022) |
+| **2022** | (with E. Riehl) [[The elements of ∞-category theory]{.smallcaps}](https://www.cambridge.org/core/books/elements-of-category-theory/DAC48C449AB8C2C1B1E528A49D27FC6D), volume 194 of *Cambridge Studies in Advanced Mathematics*, Cambridge University Press, frontmatter i--xx, pages 1--760. February 2022) |
 | **2011** | [Enriched categories, internal categories and change of base]{.smallcaps}, *Reprints in Theory and Application of Categories*, 20:1--266 |
 | **2008** | [Complicial Sets, Characterising the Simplicial Nerves of Strict ω-Categories]{.smallcaps}, volume 193 of *Memoirs of the AMS*. American Mathematical Society |
 
@@ -157,7 +157,7 @@ Higher Category Theory • Homotopy Theory • Programming Languages
 | **2015** | [Invited speaker, Johns Hopkins Topology Seminar]{.smallcaps}, Baltimore MD, USA, talk entitled *"The Unbearable Lightness of 2-Being"* |
 | **2015** | [Plenary speaker, International Category Theory Conference (CT15)]{.smallcaps}, Aveiro, Portugal, talk entitled *"The calculus of modules for ∞-categories"* |
 | **2014** | [Plenary speaker, International Category Theory Conference (CT14)]{.smallcaps},Cambridge, UK, talk entitled *"The formal theory of (∞,1)-categories"* |
-| **2013** | [Invited speaker, Harvard Topology Seminar]{.smallcaps}, Cambridge MA, USA, talk entitled ["Cobordisms and weak complicial sets"]{.smallcaps} |
+| **2013** | [Invited speaker, Harvard Topology Seminar]{.smallcaps}, Cambridge MA, USA, talk entitled *"Cobordisms and weak complicial sets"* |
 | **2012** | [Invited speaker, MIT Topology Seminar]{.smallcaps}, Cambridge MA, USA, talk entitled *"Homotopy coherent adjunctions and the walking adjunction"* |
 | **2010** | [Plenary speaker, International Category Theory Conference (CT10)]{.smallcaps}, Genova, Italy, talk entitled *"On the 2-category theory of quasi-categories"* |
 | **2009** | [Plenary speaker, International Category Theory Conference (CT09)]{.smallcaps}, Cape Town, South Africa, talk entitled *"Weak complicial sets and iterated Segal spaces"* |
@@ -172,12 +172,13 @@ Higher Category Theory • Homotopy Theory • Programming Languages
 
 |    |    |    |
 |:-------|:--------------------------------------------|
+| **2021** | [Member, AustMS Medal Committee]{.smallcaps}, Australian Mathematical Society |
 | **2020-** | [Member, Emeritus Professor Panel]{.smallcaps}, responsible for making recommendations to Academic Senate regarding the appointment of Emeritus Professors, Macquarie University, Australia. |
 | **2017-** | [Member, Organising Committee]{.smallcaps}, Mathematical Sciences Research Institute (MSRI) Scientific Program: *"Higher Categories and Categorification (2020)"*, Berkeley (CA), USA. |
 | **2016-** | [Deputy Director, Centre of Australian Category Theory]{.smallcaps}, Macquarie University, Australia |
 | **2020-2021** | [Mathematics Research Lead]{.smallcaps}, Department of Mathematics and Statistics, Faculty of Science and Engineering, Macquarie University, Australia. |
 | **2017-2021** | [Chair, University Discipline Committee]{.smallcaps}, Macquarie University, Australia, responsible for chairing hearings of all serious student misconduct cases, appointed at the request of the Vice-Chancellor. |
-| **2013-2017** | [Chair of Academic Senate]{.smallcaps}, responsible for leading the academic governing body of Macquarie University, <http://senate.mq.edu.au>, elected 2012 & 2015 |
+| **2013-2016** | [Chair of Academic Senate]{.smallcaps}, responsible for leading the academic governing body of Macquarie University, <http://senate.mq.edu.au>, elected 2012 & 2015 |
 | **2013-2016** | [Member, University Council]{.smallcaps}, the overall governing body of Macquarie University, elected 2012 & 2015 |
 | **2013-2016** | [Member, University Council Management, Appointments & Awards, Remuneration, and Discipline Committees]{.smallcaps} |
 | **2011-2016** | [Elected Member, Academic Senate]{.smallcaps}, elected 2010, 2012 & 2014 |
