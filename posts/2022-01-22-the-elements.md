@@ -16,7 +16,7 @@ tags: mathematics, ∞-cosmoi
 \begin{wrapfigure}[12]{r}[0.5cm]{0pt}
     \begin{tabular}{c}
         \includegraphics[width=0.22\textwidth]{images/elements_photo.jpg} \\
-        \textsf{\tiny Image (c) Dom Verity}
+        \textsf{\tiny Image (c) 2022 Dom Verity}
     \end{tabular}
 \end{wrapfigure}
 ```
