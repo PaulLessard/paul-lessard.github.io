@@ -7,16 +7,16 @@ tags: mathematics, ∞-cosmoi
 
 ```{=html}
 <a href="https://www.cambridge.org/core/books/elements-of-category-theory/DAC48C449AB8C2C1B1E528A49D27FC6D">
-    <img style="float: right; width: 20%; margin-left: 1em;"
-         alt="Book cover image 'Elements of ∞-category theory'" src="/images/elements.jpg"/>
+    <img style="float: right; width: 22%; margin-left: 1em; margin-bottom: 0em"
+         alt="Book cover image 'Elements of ∞-category theory'" src="/images/elements_photo.jpg"/>
 </a>
 ```
 
 ```{=latex}
 \begin{wrapfigure}[12]{r}[0.5cm]{0pt}
     \begin{tabular}{c}
-        \includegraphics[width=0.2\textwidth]{images/elements.jpg} \\
-        \textsf{\tiny Image (c) 2022 CUP}
+        \includegraphics[width=0.22\textwidth]{images/elements_photo.jpg} \\
+        \textsf{\tiny Image (c) Dom Verity}
     \end{tabular}
 \end{wrapfigure}
 ```
