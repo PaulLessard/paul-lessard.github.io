@@ -7,7 +7,7 @@ tags: mathematics, ∞-cosmoi
 
 In 2017 [Emily Riehl](https://emilyriehl.github.io/) and I posted a paper [@RiehlVerity:2018cc] on the [arXiv](https://arxiv.org/abs/1706.10023) entitled "The comprehension construction." and we blogged about it on the [n-Category Café](https://golem.ph.utexas.edu/category/). That post explains the use of the term *comprehension* in the title of that paper.
 
-I have reproduced it here to show off some Haskell hacking I've been indulging in to support the typesetting of category theoretic diagrams in blog post. To do this I've used [LaTeX](https://en.wikipedia.org/wiki/LaTeX) to generate SVG images, from diagrams specified using packages such as [PGF/TikZ](https://en.wikipedia.org/wiki/PGF/TikZ), which are then inlined directly into HTML pages.
+I have reproduced it here to show off some Haskell hacking I've been indulging in to support the typesetting of category theoretic diagrams in blog posts. To do this I've used [LaTeX](https://en.wikipedia.org/wiki/LaTeX) to generate SVG images, from diagrams specified using packages such as [PGF/TikZ](https://en.wikipedia.org/wiki/PGF/TikZ), which are then inlined directly into HTML pages.
 
 <!--more-->
 
@@ -138,9 +138,9 @@ The "straightening" of a cocartesian fibration into a homotopy coherent diagram 
 
 We may deploy the ∞-categorical comprehension to provide a alternative approach to straightening. To that end we work in the ∞-cosmos of quasi-categories $\qCat$ and let $A=1$, then observe that the comprehension functor $c_{p,1}\colon \mathfrak{C}B \to \qCat$ is itself the straightening of $p$. Indeed, it is possible to use the constructions in our paper to extend this variant of unstraightening to give a functor of quasi-categories:
 $$
-    \hN(\coCart(\cK)_{/B}) \to \Fun(B,Q)
+    \hN(\coCart(\cK)_{/B}) \to \Fun_{\cK}(B,Q)
 $$
-Here $Q$ is the (large) quasi-category constructed by taking the homotopy coherent nerve of (the maximal Kan complex enriched subcategory of) $\qCat$. So the objects of $\Fun(B,Q)$ correspond bijectively to "straight" simplicial functors $\mathfrak{C}B\to\qCat$. We should confess, however, that we do not explicitly pursue the full construction of this straightening functor there.
+Here $Q$ is the (large) quasi-category constructed by taking the homotopy coherent nerve of (the maximal Kan complex enriched subcategory of) $\qCat$. So the objects of $\Fun_{\cK}(B,Q)$ correspond bijectively to "straight" simplicial functors $\mathfrak{C}B\to\qCat$. We should confess, however, that we do not explicitly pursue the full construction of this straightening functor there.
 
 ### Unstraightening as comprehension
 
@@ -148,7 +148,7 @@ In the ∞-categorical context, the Grothendieck construction is christened [uns
 
 We may also realise unstraightening as comprehension. To that end we follow Ross Street's lead by taking $Q_{\ast}$ to be a quasi-category of pointed quasi-categories and apply the comprehension construction to the "forget the point" projection $Q_{\ast}\to Q$. The comprehension functor thus derived
 $$
-    c_{p,A} \colon Fun(A,Q) \to \hN\left(\dCoCart(\cK)_{/A}\right)
+    c_{p,A} \colon \Fun_{\cK}(A,Q) \to \hN\left(\dCoCart(\cK)_{/A}\right)
 $$
 defines a quasi-categorical analogue of Lurie's unstraightening construction. In an upcoming paper we use the quasi-categorical variant of Beck's monadicity theorem to prove that this functor is an equivalence. We also extend this result to certain other ∞-cosmoi, such as the ∞-cosmos of (co)cartesian fibrations over a fixed quasi-category.
 

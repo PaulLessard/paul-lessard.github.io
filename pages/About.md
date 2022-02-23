@@ -6,7 +6,7 @@ date: 21^st^ December 2021
 
 *\"I have the audacity to believe that peoples everywhere can have three meals a day for their bodies, education and culture for their minds, and dignity, equality, and freedom for their spirits.\"* - Dr. Martin Luther King Jr., Norway 1964
 
-Dom Verity is a Research Mathematician whose side gigs include Programming, Electronics, (incredibly bad) Drumming, and University Governance.
+Dom Verity is a Research Mathematician whose side hustles include Programming, Electronics, (incredibly bad) Drumming, and University Governance.
 
 <a href="https://www.cambridge.org/core/books/elements-of-category-theory/DAC48C449AB8C2C1B1E528A49D27FC6D">
     <img style="float: right; width: 20%; margin-left: 1em;"
