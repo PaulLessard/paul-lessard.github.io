@@ -10,12 +10,16 @@
     </author>
     <updated>2022-01-22T00:00:00Z</updated>
     <entry>
-    <title>Publication of "The Elements" (hooray!)</title>
+    <title>Publication of "The Elements"</title>
     <link href="https://dom-verity.github.io/posts/2022-01-22-the-elements.html" />
     <id>https://dom-verity.github.io/posts/2022-01-22-the-elements.html</id>
     <published>2022-01-22T00:00:00Z</published>
     <updated>2022-01-22T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<p>The book <a href="https://www.cambridge.org/core/books/elements-of-category-theory/DAC48C449AB8C2C1B1E528A49D27FC6D"><em>Elements of ∞-Category Theory</em></a> by Emily Riehl and Dom Verity has just been published (online, January 2022) by <a href="https://www.cambridge.org">Cambridge University Press</a> as volume 194 of the series <a href="https://www.cambridge.org/core/series/cambridge-studies-in-advanced-mathematics/0A5F361E5A5E9D3EFE58F53613C0D307">Cambridge Studies in Advanced Mathematics</a>. Here’s what the reviewers are saying:</p>
+    <summary type="html"><![CDATA[<a href="https://www.cambridge.org/core/books/elements-of-category-theory/DAC48C449AB8C2C1B1E528A49D27FC6D">
+    <img style="float: right; width: 20%; margin-left: 1em;"
+         alt="Book cover image 'Elements of ∞-category theory'" src="/images/elements.jpg"/>
+</a>
+<p>The book <a href="https://www.cambridge.org/core/books/elements-of-category-theory/DAC48C449AB8C2C1B1E528A49D27FC6D"><em>Elements of ∞-Category Theory</em></a> by Emily Riehl and Dom Verity has just been published (February 2022) by <a href="https://www.cambridge.org">Cambridge University Press</a> as volume 194 of the series <a href="https://www.cambridge.org/core/series/cambridge-studies-in-advanced-mathematics/0A5F361E5A5E9D3EFE58F53613C0D307">Cambridge Studies in Advanced Mathematics</a>. Here’s what the reviewers are saying:</p>
 <blockquote>
 <p><em>‘Emily and Dom have done what many thought impossible: they have written an introductory text on a model-independent approach to higher category theory. This self-contained text is ideal for both end-users and architects of higher category theory. Every page is bursting at the seams with gorgeous insights and the refreshingly candid delight the authors take in their subject.’</em><br />
 <u>Clark Barwick - University of Edinburgh</u></p>

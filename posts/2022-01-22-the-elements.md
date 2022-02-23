@@ -1,11 +1,27 @@
 ---
-title: Publication of "The Elements" (hooray!)
+title: Publication of "The Elements"
 author: Dom Verity
 date: January 22, 2022
 tags: mathematics, ∞-cosmoi
 ---
 
-The book [*Elements of ∞-Category Theory*](https://www.cambridge.org/core/books/elements-of-category-theory/DAC48C449AB8C2C1B1E528A49D27FC6D) by Emily Riehl and Dom Verity has just been published (online, January 2022) by [Cambridge University Press](https://www.cambridge.org) as volume 194 of the series [Cambridge Studies in Advanced Mathematics](https://www.cambridge.org/core/series/cambridge-studies-in-advanced-mathematics/0A5F361E5A5E9D3EFE58F53613C0D307). Here's what the reviewers are saying:
+```{=html}
+<a href="https://www.cambridge.org/core/books/elements-of-category-theory/DAC48C449AB8C2C1B1E528A49D27FC6D">
+    <img style="float: right; width: 20%; margin-left: 1em;"
+         alt="Book cover image 'Elements of ∞-category theory'" src="/images/elements.jpg"/>
+</a>
+```
+
+```{=latex}
+\begin{wrapfigure}[12]{r}[0.5cm]{0pt}
+    \begin{tabular}{c}
+        \includegraphics[width=0.2\textwidth]{images/elements.jpg} \\
+        \textsf{\tiny Image (c) 2022 CUP}
+    \end{tabular}
+\end{wrapfigure}
+```
+
+The book [*Elements of ∞-Category Theory*](https://www.cambridge.org/core/books/elements-of-category-theory/DAC48C449AB8C2C1B1E528A49D27FC6D) by Emily Riehl and Dom Verity has just been published (February 2022) by [Cambridge University Press](https://www.cambridge.org) as volume 194 of the series [Cambridge Studies in Advanced Mathematics](https://www.cambridge.org/core/series/cambridge-studies-in-advanced-mathematics/0A5F361E5A5E9D3EFE58F53613C0D307). Here's what the reviewers are saying:
 
 > *'Emily and Dom have done what many thought impossible: they have written an introductory text on a model-independent approach to higher category theory. This self-contained text is ideal for both end-users and architects of higher category theory. Every page is bursting at the seams with gorgeous insights and the refreshingly candid delight the authors take in their subject.'*\
 > [Clark Barwick - University of Edinburgh]{.underline}
