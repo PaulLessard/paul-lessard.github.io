@@ -202,7 +202,7 @@ applyPandocFilters opts fmt item = do
         fmap (runCrossRef (getMeta (itemBody item) <> opts)
             fmt defaultCrossRefAction) item
 
--- Generate LaTeX body only, not pandoc filters applied
+-- Generate LaTeX body only, no pandoc filters applied
 renderPandocASTtoLaTeX :: Item Pandoc -> Compiler (Item String)
 renderPandocASTtoLaTeX =
     return . fmap writePandocToLaTeX

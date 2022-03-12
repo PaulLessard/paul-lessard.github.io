@@ -8,8 +8,21 @@
         <name>Dominic Verity</name>
         <email>dominic.verity@mq.edu.au</email>
     </author>
-    <updated>2022-01-22T00:00:00Z</updated>
+    <updated>2022-03-12T00:00:00Z</updated>
     <entry>
+    <title>Zen and the art of ∞-categories</title>
+    <link href="https://dom-verity.github.io/posts/2022-03-12-zen.html" />
+    <id>https://dom-verity.github.io/posts/2022-03-12-zen.html</id>
+    <published>2022-03-12T00:00:00Z</published>
+    <updated>2022-03-12T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<p>I will be speaking in the <a href="https://topos.site/topos-colloquium/">Topos Institute Colloquium</a> on the topic of model independent and synthetic approaches to ∞-category theory. Consider this to be part of our virtual book tour for <a href="https://www.cambridge.org/core/books/elements-of-category-theory/DAC48C449AB8C2C1B1E528A49D27FC6D"><em>The Elements</em></a>, though I promise that it won’t just be a puff piece.</p>
+<p><strong>Date:</strong> Thursday 24th of March 2022 (UTC)<br />
+<strong>Time:</strong> TBA</p>
+<h2 id="abstract">Abstract</h2>
+<p>You may well have heard the rumour that ∞-category theory is <em>“really just like category theory with a little homotopy theory thrown in”</em>. Inspired by that comment, you might even have headed to a book on ∞-categories or to the <a href="https://ncatlab.org/nlab/show/HomePage"><em>n</em>Lab</a> to find out more, only to find that things in the ∞-world are far from that simple.</p>
+]]></summary>
+</entry>
+<entry>
     <title>Publication of "The Elements"</title>
     <link href="https://dom-verity.github.io/posts/2022-01-22-the-elements.html" />
     <id>https://dom-verity.github.io/posts/2022-01-22-the-elements.html</id>
