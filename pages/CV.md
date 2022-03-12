@@ -64,7 +64,8 @@ Higher Category Theory • Homotopy Theory • Programming Languages
 
 |    |    |    |
 |:-------|:--------------------------------------------|
-| **2021-** | *Professor Emeritus* Macquarie University, Australia, unanimously elected by University Council, 19^th^ August 2021. |
+| **2021-** | *Professor Emeritus*, Macquarie University, Sydney, Australia, unanimously elected by University Council, 19^th^ August 2021. |
+| **2022-** | *Honorary Professor*, Mathematical Sciences Institute, Australian National University, Canberra, Australia |
 | **2020, 2022** | *Research Professor and Program Organiser*, Mathematical Sciences Research Institute (MSRI) program *"Higher Categories and Categorification"*, Berkeley (CA) USA. |
 | **2019** | *Visiting Research Fellow*, Dept. of Mathematics, Johns Hopkins University, Baltimore (MD) USA |
 | **2018** | *Invited Mentor*, Mass. Institute of Technology, [Talbot Workshop](http://math.mit.edu/conferences/talbot/), Course title: *"Model-independent theory of ∞-Categories"*, Portland (OR) USA |
