@@ -160,4 +160,4 @@ $$
 $$
 that carries an element $a \colon 1 \to A$ to the groupoidal cartesian fibration $\dom\colon A\downarrow a \to A$. This provides us with a particularly explicit model of the Yoneda embedding, whose action on hom-spaces is easily computed. In particular, this allows us to easily demonstrate that the Yoneda embedding is fully-faithful and thus that every quasi-category is equivalent to the homotopy coherent nerve of some Kan complex enriched category.
 
-## References
+## References\
