@@ -147,6 +147,7 @@ Higher Category Theory • Homotopy Theory • Programming Languages
 
 |    |    |    |
 |:-------|:--------------------------------------------|
+| **2022** | [Topos Institute Colloquium](https://topos.site/topos-colloquium/){.smallcaps}, Berkeley (CA) USA. [*"Zen and the Art of ∞-Categories"*](https://youtu.be/qLkRhKaw5DA). |
 | **2020** | [Invited mini-course, Higher Categories and Categorification]{.smallcaps}, Mathematical Sciences Research Institute, Berkeley (CA) USA, *"Synthetic ∞-category theory"*. |
 | **2019** | [Invited mini-course, Foundational Methods in Computer Science]{.smallcaps}, University of Calgary, Calgary Canada, *"Synthetic ∞-category theory"*. |
 | **2019** | [Invited speaker, Tercer Coloquio de Categorías, Álgebra y Temas Afines]{.smallcaps}, UNAM Oaxaca Mexico, *"Synthetic ∞-category theory and ∞-cosmology"* |
