@@ -118,7 +118,7 @@ Higher Category Theory • Homotopy Theory • Programming Languages
 |    |    |    |
 |:-------|:--------------------------------------------|
 | **2022-** | (with E. Riehl) [More elements of ∞-category theory]{.smallcaps}, <https://emilyriehl.github.io/files/more-elements.pdf>, book draft under development. |
-| **2022** | (with E. Riehl) [[The elements of ∞-category theory]{.smallcaps}](https://www.cambridge.org/core/books/elements-of-category-theory/DAC48C449AB8C2C1B1E528A49D27FC6D), volume 194 of *Cambridge Studies in Advanced Mathematics*, Cambridge University Press, frontmatter i--xx, pages 1--760. February 2022) |
+| **2022** | (with E. Riehl) [[The elements of ∞-category theory]{.smallcaps}](https://www.cambridge.org/core/books/elements-of-category-theory/DAC48C449AB8C2C1B1E528A49D27FC6D), volume 194 of *Cambridge Studies in Advanced Mathematics*, Cambridge University Press, frontmatter i--xix, pages 1--759. February 2022 |
 | **2011** | [Enriched categories, internal categories and change of base]{.smallcaps}, *Reprints in Theory and Application of Categories*, 20:1--266 |
 | **2008** | [Complicial Sets, Characterising the Simplicial Nerves of Strict ω-Categories]{.smallcaps}, volume 193 of *Memoirs of the AMS*. American Mathematical Society |
 
