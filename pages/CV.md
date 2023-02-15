@@ -64,7 +64,7 @@ Higher Category Theory • Homotopy Theory • Programming Languages
 
 |    |    |    |
 |:-------|:--------------------------------------------|
-| **2023** | [_PROSE Award winner_](https://proseawards.com/winners/2023-award-winners), Mathematics and Statistics category, Association of Amwerica Publishers, for the book [[The elements of ∞-category theory]{.smallcaps}](https://www.cambridge.org/core/books/elements-of-category-theory/DAC48C449AB8C2C1B1E528A49D27FC6D) |
+| **2023** | [_PROSE Award winner_](https://proseawards.com/winners/2023-award-winners), Mathematics and Statistics category, Association of American Publishers, for the book [[The elements of ∞-category theory]{.smallcaps}](https://www.cambridge.org/core/books/elements-of-category-theory/DAC48C449AB8C2C1B1E528A49D27FC6D) |
 | **2021-** | *Professor Emeritus*, Macquarie University, Sydney, Australia, unanimously elected by University Council, 19^th^ August 2021|
 | **2022-** | *Honorary Professor*, Mathematical Sciences Institute, Australian National University, Canberra, Australia |
 | **2020, 2022** | *Research Professor and Program Organiser*, Mathematical Sciences Research Institute (MSRI) program [*"Higher Categories and Categorification"*](https://www.msri.org/programs/323), Berkeley (CA) USA. |
@@ -72,7 +72,7 @@ Higher Category Theory • Homotopy Theory • Programming Languages
 | **2018** | *Invited Mentor*, Mass. Institute of Technology, [Talbot Workshop](http://math.mit.edu/conferences/talbot/), Course title: *"Model-independent theory of ∞-Categories"*, Portland (OR) USA |
 | **2017** | *Invited Lecturer*, AMSI Summer School 2017, Course title: *"Category Theory and Computer Science"*, Sydney University, Australia. |
 | **2016** | *Visiting Professor*, Dept. of Mathematics and Mathematical Statistics, Cambridge University, UK |
-| **2016** | *Visiting Research Fellow*, Max Planck Institute for Mathemantics, Bonn, Germany |
+| **2016** | *Visiting Research Fellow*, Max Planck Institute for Mathematics, Bonn, Germany |
 | **2015,2016** | *Visiting Research Fellow*, Dept. of Mathematics, Johns Hopkins University, Baltimore MD, USA |
 | **2012-2015** | *Associate in Mathematics*, Dept. of Mathematics, Harvard University, Cambridge MA, US (various separate appointments) |
 | **2011** | *Invited Participant*, Mathematisches Forschungsinstitut Oberwolfach, Mini-workshop: *"The homotopy interpretation of constructive type theory"*, Germany |
