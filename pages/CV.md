@@ -24,7 +24,7 @@ Homepage: <http://dom-verity.github.io>\
 ORCID: <https://orcid.org/0000-0002-4137-6982>\
 URL: <https://researchers.mq.edu.au/en/persons/dominic-verity>
 
-### Current position
+### Current positions
 
 _Emeritus Professor of Pure Mathematics, Macquarie University_
 
@@ -64,9 +64,10 @@ Higher Category Theory • Homotopy Theory • Programming Languages
 
 |    |    |    |
 |:-------|:--------------------------------------------|
-| **2021-** | *Professor Emeritus*, Macquarie University, Sydney, Australia, unanimously elected by University Council, 19^th^ August 2021. |
+| **2023** | [_PROSE Award winner_](https://proseawards.com/winners/2023-award-winners), Mathematics and Statistics category, Association of Amwerica Publishers, for the book [[The elements of ∞-category theory]{.smallcaps}](https://www.cambridge.org/core/books/elements-of-category-theory/DAC48C449AB8C2C1B1E528A49D27FC6D) |
+| **2021-** | *Professor Emeritus*, Macquarie University, Sydney, Australia, unanimously elected by University Council, 19^th^ August 2021|
 | **2022-** | *Honorary Professor*, Mathematical Sciences Institute, Australian National University, Canberra, Australia |
-| **2020, 2022** | *Research Professor and Program Organiser*, Mathematical Sciences Research Institute (MSRI) program *"Higher Categories and Categorification"*, Berkeley (CA) USA. |
+| **2020, 2022** | *Research Professor and Program Organiser*, Mathematical Sciences Research Institute (MSRI) program [*"Higher Categories and Categorification"*](https://www.msri.org/programs/323), Berkeley (CA) USA. |
 | **2019** | *Visiting Research Fellow*, Dept. of Mathematics, Johns Hopkins University, Baltimore (MD) USA |
 | **2018** | *Invited Mentor*, Mass. Institute of Technology, [Talbot Workshop](http://math.mit.edu/conferences/talbot/), Course title: *"Model-independent theory of ∞-Categories"*, Portland (OR) USA |
 | **2017** | *Invited Lecturer*, AMSI Summer School 2017, Course title: *"Category Theory and Computer Science"*, Sydney University, Australia. |
@@ -83,6 +84,7 @@ Higher Category Theory • Homotopy Theory • Programming Languages
 
 |    |    |    |
 |:-------|:--------------------------------------------|
+| **2023-2026** | US Army Research Office, BAA Fundamental Science **80600-NC-INT**, *"Towards a synthetic theory of (extended) TQFTs"*, AU$470,000 |
 | **2019-2022** | (with R. Street, S. Lack & R. Garner) Australian Research Council, Discovery Project **DP190102432**, *"Working synthetically in higher categorical structures"*, AU$453,000 |
 | **2016--2018** | (with R. Street, S. Lack & R. Garner) Australian Research Council, Discovery Project **DP160101519**, *"Monoidal categories and beyond: new contexts and new applications"*, AU$580,900 |
 | **2015--2018** | (with M. Hillier, A. Fluck et. al.) Australian Government Office of Learning and Teaching, *"Transforming exams across Australia: processes and platform for e-exams in high stakes, supervised environments"*, AU$500,000 |
@@ -94,7 +96,6 @@ Higher Category Theory • Homotopy Theory • Programming Languages
 
 |    |    |    |
 |:-------|:--------------------------------------------|
-| **2021 ongoing** | (with S. Lack) David Farrell, *"Model independent fibred ∞-category theory"* |
 | **2021 ongoing** | (with R. Garner) Yao Tang, *"Higher categories and dependently typed logics"* |
 | **2020 ongoing** | (with S. Lack) Nicola Di Vittorio, *"Higher derivators as a foundation for ∞-category theory"* |
 | **2018 ongoing** | (with R. Garner) Paula Verdugo, *"Synthetic ∞-category theory"* |
@@ -127,7 +128,7 @@ Higher Category Theory • Homotopy Theory • Programming Languages
 |    |    |    |
 |:-------|:--------------------------------------------|
 | **2021** | (with E. Riehl, submitted) [Cartesian exponentiation and monadicity]{.smallcaps}, <https://arxiv.org/abs/2108.11786>, 1--71, submitted to *Cahiers de Topologie et Géométrie Différentielle Catégoriques*. |
-| **2021** | (with M. Rovelli and V. Ozornova, submitted) [Gray tensor products and saturated n-complicial sets]{.smallcaps}, <https://arxiv.org/abs/2007.01235>, submitted to *Higher Structures*. |
+| **2023** | (with M. Rovelli and V. Ozornova, accepted) [Gray tensor products and saturated n-complicial sets]{.smallcaps}, <https://arxiv.org/abs/2007.01235>, *Higher Structures* to appear. |
 | **2020a** | (with E. Riehl) [On the construction of limits and colimits in ∞-categories]{.smallcaps} [Theory and Applications of Categories]{.smallcaps}, 35 (2020), 1101--1158. |
 | **2020b** | (with E. Riehl) [Infinity category theory from scratch]{.smallcaps}, *Higher Structures*, 4(1) (2020), 115--167. (invited publication) |
 | **2020c** | (with E. Riehl) [Recognizing quasi-categorical limits and colimits in homotopy coherent nerves]{.smallcaps}, *Applied Categorical Structures*, 28 (2020), 669--716. |
@@ -147,6 +148,7 @@ Higher Category Theory • Homotopy Theory • Programming Languages
 
 |    |    |    |
 |:-------|:--------------------------------------------|
+| **2022** | [Categories and Companions Symposium](https://www.matrix-inst.org.au/events/phd-student-symposium-categories-and-companions-symposium-2022-cacs-2022/){.smallcaps}, MATRIX Institute, University of Melbourne, Australia. *"Themes and motivations in ∞-Cosmology"*. |
 | **2022** | [Topos Institute Colloquium](https://topos.site/topos-colloquium/){.smallcaps}, Berkeley (CA) USA. [*"Zen and the Art of ∞-Categories"*](https://youtu.be/qLkRhKaw5DA). |
 | **2020** | [Invited mini-course, Higher Categories and Categorification]{.smallcaps}, Mathematical Sciences Research Institute, Berkeley (CA) USA, *"Synthetic ∞-category theory"*. |
 | **2019** | [Invited mini-course, Foundational Methods in Computer Science]{.smallcaps}, University of Calgary, Calgary Canada, *"Synthetic ∞-category theory"*. |
@@ -174,9 +176,10 @@ Higher Category Theory • Homotopy Theory • Programming Languages
 
 |    |    |    |
 |:-------|:--------------------------------------------|
+| **2022** | [Member, AustMS Annual Conference Scientific Committee]{.smallcaps}, Australian Mathematical Society and UNSW |
 | **2021** | [Member, AustMS Medal Committee]{.smallcaps}, Australian Mathematical Society |
-| **2020-** | [Member, Emeritus Professor Panel]{.smallcaps}, responsible for making recommendations to Academic Senate regarding the appointment of Emeritus Professors, Macquarie University, Australia. |
-| **2017-** | [Member, Organising Committee]{.smallcaps}, Mathematical Sciences Research Institute (MSRI) Scientific Program: *"Higher Categories and Categorification (2020)"*, Berkeley (CA), USA. |
+| **2020-** | [Member, Emeritus Professor Panel]{.smallcaps}, responsible for making recommendations to Academic Senate regarding the appointment of Emeritus Professors, Macquarie University, Australia |
+| **2017-** | [Member, Organising Committee]{.smallcaps}, Mathematical Sciences Research Institute (MSRI) Scientific Program: *"Higher Categories and Categorification (2020)"*, Berkeley (CA), USA |
 | **2016-** | [Deputy Director, Centre of Australian Category Theory]{.smallcaps}, Macquarie University, Australia |
 | **2020-2021** | [Mathematics Research Lead]{.smallcaps}, Department of Mathematics and Statistics, Faculty of Science and Engineering, Macquarie University, Australia. |
 | **2017-2021** | [Chair, University Discipline Committee]{.smallcaps}, Macquarie University, Australia, responsible for chairing hearings of all serious student misconduct cases, appointed at the request of the Vice-Chancellor. |
