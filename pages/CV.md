@@ -110,8 +110,6 @@ Higher Category Theory • Homotopy Theory • Programming Languages
 | **2010 awarded** | (with P. Watters) Wai Han Ho, *"On the evaluation of face identification systems"* |
 | **2007 awarded** | (with A. Sloane) Ekaterina Stefanov, *"Simple code compression and customisation for bytecode for interpreters"* |
 
-`\newpage`{=latex}
-
 ## Publications & talks
 
 ### Books and memoirs
@@ -143,6 +141,8 @@ Higher Category Theory • Homotopy Theory • Programming Languages
 | **2008** | [Weak complicial sets I, basic homotopy theory]{.smallcaps}. *Advances in Mathematics*, 219:1081--1149 |
 | **2007** | [Weak complicial sets II, nerves of complicial Gray-categories]{.smallcaps}. In A. Davydov et al., editors, *Categories in Algebra, Geometry and Mathematical Physics (StreetFest)*, volume 431 of *Contemporary Mathematics*, pages 441--467. American Mathematical Society. |
 | **1995** | (with A. Joyal & R. H. Street) [Traced monoidal categories]{.smallcaps}, *Mathematical Proceedings of the Cambridge Philosophical Society*, 119(3):425---446 |
+
+`\newpage`{=latex}
 
 ### Invited Keynotes, Courses and Plenaries
 
