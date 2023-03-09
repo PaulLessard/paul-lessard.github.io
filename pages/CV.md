@@ -1,7 +1,7 @@
 ---
 title: Curriculum Vitae
 author: Dominic Verity
-date: 22^nd^ December 2021
+date: 9^th^ March 2023
 ---
 
 ```{=html}
@@ -24,9 +24,20 @@ Homepage: <http://dom-verity.github.io>\
 ORCID: <https://orcid.org/0000-0002-4137-6982>\
 URL: <https://researchers.mq.edu.au/en/persons/dominic-verity>
 
-### Current positions
+### Current appointments
 
-_Emeritus Professor of Pure Mathematics, Macquarie University_
+_Emeritus Professor, School of Mathematical and Physical Sciences, Macquarie University_\
+_Honorary Professor, Mathematical Sciences Institute, Australian National University_
+
+### Synopsis
+
+Dominic Verity started his computational career in the early 1980s as a software developer for the influential British personal computing pioneer [Acorn Computers](https://en.wikipedia.org/wiki/Acorn_Computers); the company that invented the now ubiquitous ARM microprocessor. He studied at the University of Cambridge (UK) and emerged from that institution in 1992 with a PhD in Pure Mathematics. From 1993-2000 he worked in the investment banking industry, as a mathematical consultant in derivative securities valuation and hedging, as a quantitative analyst in equity derivatives for Deutsche Bank Australia and as the Head of Equity Derivatives Trading for HSBC Australia.\
+
+He returned to academe at the turn of the new millennium, and since then has worked as a mathematician, computer scientist, and senior academic administrator at Macquarie University. He is an internationally recognised pioneer in the field of _∞-Category Theory_ and is co-author of a [PROSE Award winning](https://proseawards.com/winners/2023-award-winners) graduate text on that topic.\
+
+His leadership career at Macquarie University includes 6 years as a member of the executive of the Division of Information and Communication Sciences (a precursor to the Faculty of Science and Engineering), carrying responsibility for business development and operational administration of its postgraduate programs. He served for 10 years as an elected member of the university's Academic Senate. In that time he acted as a member of its Academic Program Committee, carrying specific responsibility for standards and quality oversight of postgraduate programs throughout the university, and as the Chair of the university's Learning and Teaching Committee (SLTC).  Ultimately he assumed overall leadership of the academic governance of the university, spending 4 years as Chair of Academic Senate. In that latter rôle he also held ex officio membership of Macquarie's governing body, the University Council.\
+
+He is a passionate and engaging teacher and in 2008 his contributions in this area were recognised by the award of a Macquarie University Vice-Chancellor's Award for Teaching Excellence. In 2011 he also gained national recognition as an educator with the award of an Australian Learning and Teaching Council Citation for Outstanding Contribution to Student Learning _"For a decade of inspirational and innovative educational leadership in the field of information technology"_.
 
 ### Areas of research interest
 
@@ -44,8 +55,8 @@ Higher Category Theory • Homotopy Theory • Programming Languages
 | **2000-2001** | _Senior Lecturer_, Department of Computing, Macquarie University, Australia |
 | **1999-2000** | _Director and Lead Consultant_, Categorical Solutions Pty. Ltd., Sydney, Australia |
 | **1996-1999** | _Head of Equity Derivative Trading_, HSBC James Capel, Sydney, Australia |
-| **1995-1996** | _Senior Quantitative Analyst_, Equity Derivatives Trading, Deutsche Bank, Syndey, Australia |
-| **1993-1995** | _Consultant Quantitative Analyst_, Bain and Company, Deutsche Bank, Syndey, Australia |
+| **1995-1996** | _Senior Quantitative Analyst_, Equity Derivatives Trading, Deutsche Bank, Sydney, Australia |
+| **1993-1995** | _Consultant Quantitative Analyst_, Bain and Company, Deutsche Bank, Sydney, Australia |
 | **1993-1995** | _Lecturer_, Department of Mathematics, Macquarie University, Australia |
 | **1992-1993** | _Research Fellow_, Department of Mathematics, Macquarie University, Australia |
 | **1991-1992** | _Research Fellow_, Department of Pure Maths and Mathematical Statistics, Cambridge University, UK |

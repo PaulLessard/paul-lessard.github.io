@@ -13,9 +13,9 @@ Dom Verity is a Research Mathematician whose side hustles include Programming, E
          alt="Book cover image 'Elements of ∞-category theory'" src="/images/elements.jpg"/>
 </a>
 
-His research interests lie in the mathematical fields of Homotopy Theory, sometimes known as “rubber sheet geometry”, and Category Theory, a kind of “theory of everything” for pure mathematics. He is also active in exploring applications of this work to the Computer Science of Programming Languages. His most cited paper introduced [_Traced Monoidal Categories_](https://ncatlab.org/nlab/show/traced+monoidal+category#JoyalStreetVerity96), structures that have become a key component in modern accounts of iterative processes in traditional and quantum computation. 
+His research interests lie in the mathematical fields of Homotopy Theory, sometimes known as “rubber sheet geometry”, and Category Theory, a kind of “theory of everything” for pure mathematics. He is also active in exploring applications of this work to the Computer Science of Programming Languages. His most cited paper introduced [_Traced Monoidal Categories_](https://ncatlab.org/nlab/show/traced+monoidal+category#JoyalStreetVerity96), structures that have become a key component in modern accounts of iterative processes in traditional and quantum computation.
 
-His closest mathematical collaborator is [Emily Riehl](https://en.wikipedia.org/wiki/Emily_Riehl) (Johns Hopkins), and together they are responsible for developing and popularising **model independent** and **synthetic** approaches to (∞,1)-category theory.  
+His closest mathematical collaborator is [Emily Riehl](https://en.wikipedia.org/wiki/Emily_Riehl) (Johns Hopkins), and together they are responsible for developing and popularising **model independent** and **synthetic** approaches to (∞,1)-category theory.
 
 <!--more-->
 
@@ -32,9 +32,9 @@ Dom started his computational career in the early 1980s as a software developer 
 ### University career
 
 <table style="float: right; width: 40%; margin-left: 1em;">
-<tr><td><img src="../images/dom_at_CT14.jpg" title="Image (c) 2014 
+<tr><td><img src="../images/dom_at_CT14.jpg" title="Image (c) 2014
  Jürgen Koslowski"/></td></tr>
-<tr><td style="font-family: Roboto; font-size: 50%;">Image (c) 2014 
+<tr><td style="font-family: Roboto; font-size: 50%;">Image (c) 2014
  Jürgen Koslowski</td></tr>
 </table>
 
