@@ -52,7 +52,7 @@ Higher Category Theory • Homotopy Theory • Programming Languages
 |:-------|:--------------------------------------------|
 | **2021-** | _Emeritus Professor of Mathematics and Computing_, Faculty of Science and Engineering, Macquarie University, Australia |
 | **2022-** | _Honorary Professor of Mathematics and Casual Lecturer_, Mathematical Sciences Institute, College of Science, Australian National University |
-| **2023-2028** | _External Member, Academic Board_, Australian National Institute of Management and Commerce, Sydney, Australia |
+| **2023-2028** | [_External Member, Academic Board_](https://www.imc.edu.au/about-us/our-people/academic-board-members), Australian National Institute of Management and Commerce, Sydney, Australia |
 | **2020-2021** | _Professor of Pure Mathematics_, Department of Mathematics and Statistics, Faculty of Science and Engineering, Macquarie University, Australia |
 | **2012-2020** | _Professor of Computing_, Department of Computing, Faculty of Science and Engineering, Macquarie University, Australia |
 | **2013-2016** | _Chair of Academic Senate_, Vice-Chancellor's Office, Macquarie University, Australia |
