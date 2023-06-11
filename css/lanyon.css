@@ -522,8 +522,8 @@ a.pagination-item:hover {
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  margin-top: -4rem;
-  // margin-bottom: 1rem;
+  margin-top: -1rem;
+  margin-bottom: 1rem;
   color: #9a9a9a;
 }
 
