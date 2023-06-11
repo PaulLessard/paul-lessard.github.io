@@ -25,18 +25,18 @@
 % FONTS
 \usepackage[usenames,dvipsnames]{color}
 
-% Font packages  
-\usepackage[no-math]{fontspec} 
+% Font packages
+\usepackage[no-math]{fontspec}
 \usepackage{realscripts}
 
 \usepackage{unicode-math}
 \setmathfont{Garamond Math}[
-  Scale = 1, 
+  Scale = 1,
   StylisticSet = {8,9}
 ]
 
 \setmainfont{Garamond Premier Pro}[
-  Numbers = Lining,  
+  Numbers = Lining,
   Ligatures = Common,
   Kerning = On
 ]
@@ -98,7 +98,9 @@
 \begin{document}
 
 \begin{flushright}%
-    \vbox to 0ex{\includegraphics[scale=0.6]{images/newmulogo.png}\vss}%
+  \vbox to 0ex{
+    \includegraphics[width=0.24\textwidth]{images/newmulogo.png}\\%
+    \includegraphics[width=0.24\textwidth]{images/2x_anu_logo_small.pdf}\vss}%
 \end{flushright}%
 
 \section{Curriculum Vitae}

@@ -42,7 +42,7 @@ body {
 
 html {
   font-family: "Cormorant Garamond", "EB Garamond", Georgia, "Times New Roman", serif;
-  font-variant-numeric: lining-nums; 
+  font-variant-numeric: lining-nums;
   text-align: justify;
 }
 
@@ -189,7 +189,7 @@ a.sidebar-icon {
 }
 
 img.sidebar-icon {
-  display: inline; 
+  display: inline;
   width: 32px;
   border: 0.1rem;
 }
@@ -475,13 +475,13 @@ a.pagination-item:hover {
 
 /*
  * Equations
- * 
+ *
  * Style images generated from inline and displayed equations
  */
 
 .inline-eqn {
-  display: inline; 
-  vertical-align: baseline; 
+  display: inline;
+  vertical-align: baseline;
   margin: 0;
   border-radius: 0;
   border: 0;
@@ -515,12 +515,15 @@ a.pagination-item:hover {
  */
 
 .pdf-version {
-  float: right; 
-  width: 30%; 
+  float: right;
+  width: 25%;
   text-align: center;
-  display: block;
-  margin-top: -.5rem;
-  margin-bottom: 1rem;
+  display: block flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: -4rem;
+  // margin-bottom: 1rem;
   color: #9a9a9a;
 }
 
@@ -553,7 +556,7 @@ a.pagination-item:hover {
   float: left;
   font-weight: bold;
   padding-right: 0.4em;
-  text-align: right; 
+  text-align: right;
   width: 2.55em;
 }
 
