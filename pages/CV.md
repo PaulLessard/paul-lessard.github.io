@@ -15,9 +15,14 @@ date: 9^th^ March 2023
 
 ## Dominic Verity
 
+Mathematical Sciences Institute\
+The Australian National University\
+Canberra, ACT 2600, Australia\
+
+and\
+
 Centre of Australian Category Theory\
 School of Mathematical and Physical Sciences\
-Faculty of Science and Engineering\
 Macquarie University, Sydney, NSW 2109, Australia\
 
 Email: [dominic.verity@mq.edu.au](mailto:dominic.verity@mq.edu.au)\
@@ -27,8 +32,8 @@ URL: <https://researchers.mq.edu.au/en/persons/dominic-verity>
 
 ### Current appointments
 
+_Professor, Mathematical Sciences Institute, Australian National University_\
 _Emeritus Professor, School of Mathematical and Physical Sciences, Macquarie University_\
-_Honorary Professor, Mathematical Sciences Institute, Australian National University_
 
 ### Synopsis
 
@@ -50,8 +55,9 @@ Higher Category Theory • Homotopy Theory • Programming Languages
 
 |    |    |    |
 |:-------|:--------------------------------------------|
+| **2023-** | _Professor of Mathematics_, Mathematical Sciences Institute, College of Science, Australian National University|
 | **2021-** | _Emeritus Professor of Mathematics and Computing_, Faculty of Science and Engineering, Macquarie University, Australia |
-| **2022-** | _Honorary Professor of Mathematics and Casual Lecturer_, Mathematical Sciences Institute, College of Science, Australian National University |
+| **2022-2023** | _Honorary Professor of Mathematics_, Mathematical Sciences Institute, College of Science, Australian National University |
 | **2023-2028** | [_External Member, Academic Board_](https://www.imc.edu.au/about-us/our-people/academic-board-members), Australian National Institute of Management and Commerce, Sydney, Australia |
 | **2020-2021** | _Professor of Pure Mathematics_, Department of Mathematics and Statistics, Faculty of Science and Engineering, Macquarie University, Australia |
 | **2012-2020** | _Professor of Computing_, Department of Computing, Faculty of Science and Engineering, Macquarie University, Australia |
@@ -102,7 +108,7 @@ Higher Category Theory • Homotopy Theory • Programming Languages
 
 |    |    |    |
 |:-------|:--------------------------------------------|
-| **2023-2026** | US Army Research Office, BAA Fundamental Science **80600-NC-INT**, *"Towards a synthetic theory of (extended) TQFTs"*, AU$500,458 (awarded, yet to commence) |
+| **2023-2026** | US Army Research Office and ITC-IPAC, contract **FA520923C0004**, *"Towards a synthetic theory of (extended) TQFTs"*, AU$500,458 |
 | **2019-2022** | (with R. Street, S. Lack & R. Garner) Australian Research Council, Discovery Project **DP190102432**, *"Working synthetically in higher categorical structures"*, AU$453,000 |
 | **2016--2018** | (with R. Street, S. Lack & R. Garner) Australian Research Council, Discovery Project **DP160101519**, *"Monoidal categories and beyond: new contexts and new applications"*, AU$580,900 |
 | **2015--2018** | (with M. Hillier, A. Fluck et. al.) Australian Government Office of Learning and Teaching, *"Transforming exams across Australia: processes and platform for e-exams in high stakes, supervised environments"*, AU$500,000 |
