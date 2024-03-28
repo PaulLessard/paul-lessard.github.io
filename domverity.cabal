@@ -7,7 +7,7 @@ license:             MIT
 license-file:        LICENSE
 author:              Dom Verity
 maintainer:          dom.verity@gmail.com
-copyright:           Copyright ©2021 Dominic Verity
+copyright:           Copyright ©2021-2024 Dominic Verity
 category:            Web
 build-type:          Simple
 extra-source-files:  README.md
@@ -22,17 +22,17 @@ executable domverity
   ghc-options:       -threaded
   hs-source-dirs:    src
   build-depends:     base >= 4.7 && < 5
-                  ,  hakyll == 4.15.1.*
-                  ,  blaze-html == 0.9.1.*
-                  ,  containers == 0.6.5.*
-                  ,  filepath == 1.4.2.*
-                  ,  directory == 1.3.6.*
-                  ,  pandoc == 2.14.0.*
-                  ,  pandoc-types == 1.22.1
-                  ,  pandoc-crossref == 0.3.12.*
-                  ,  process == 1.6.13.*
-                  ,  text == 1.2.4.*
-                  ,  bytestring == 0.10.12.*
-                  ,  mtl == 2.2.2
+                  ,  hakyll == 4.16.2.*
+                  ,  blaze-html == 0.9.2.*
+                  ,  containers == 0.6.7.*
+                  ,  filepath == 1.4.200.*
+                  ,  directory == 1.3.8.*
+                  ,  pandoc == 3.1.11.*
+                  ,  pandoc-types == 1.23.1.*
+                  ,  pandoc-crossref == 0.3.17.*
+                  ,  process == 1.6.17.*
+                  ,  text == 2.0.2.*
+                  ,  bytestring == 0.11.5.*
+                  ,  mtl == 2.3.1.*
                   ,  xml-conduit == 1.9.1.*
-                  ,  binary == 0.8.8.*
+                  ,  binary == 0.8.9.*

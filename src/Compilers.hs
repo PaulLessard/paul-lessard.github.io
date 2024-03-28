@@ -57,7 +57,7 @@ import           Control.Monad
 import           Control.Applicative
 import           Control.Monad.State.Lazy
 import qualified Control.Monad.Reader as R
-import           Control.Monad.Except
+import           Control.Monad.Except hiding   (handleError)
 
 
 import           Text.Pandoc
@@ -87,7 +87,7 @@ runLuaLaTeX latexPath = do
     id <- getUnderlying
     conf <- getConfig
     let idPath = toFilePath id
-        logDir = providerDirectory conf </> storeDirectory conf 
+        logDir = providerDirectory conf </> storeDirectory conf
             </> "texlog" </> takeDirectory idPath
         logDestinationPath = case identifierVersion id of
             Nothing -> logDir </> takeBaseName idPath <.> "log"
@@ -145,7 +145,9 @@ cleanImageSVG num svg = do
 metadataCompiler :: Compiler (Item Meta)
 metadataCompiler =
     getResourceLBS >>= withItemBody (
-        unsafeCompiler . runIOorExplode . yamlToMeta domsDefaultReaderOptions Nothing)
+        unsafeCompiler . runIOorExplode .
+        yamlToMeta domsDefaultReaderOptions Nothing .
+        LB.toStrict)
 
 --------------------------------------------------------------------------------
 
@@ -207,7 +209,7 @@ renderPandocASTtoLaTeX :: Item Pandoc -> Compiler (Item String)
 renderPandocASTtoLaTeX =
     return . fmap writePandocToLaTeX
 
--- Apply standard pandoc LaTeX template and compile 
+-- Apply standard pandoc LaTeX template and compile
 renderPandocASTtoPDF :: Item Pandoc -> Compiler (Item TmpFile)
 renderPandocASTtoPDF doc = do
     latexOpts <- load "pandoc/latexOptions.yaml"
@@ -316,7 +318,7 @@ getEqnDimens fp = unsafeCompiler $
             ImageInfo d1 d2 <$> parseDimen  -- depth, height, width
 
 -------------------------------------------------------------------------------
--- Build an HTML file with embedded SVG sections from an input containing 
+-- Build an HTML file with embedded SVG sections from an input containing
 -- LaTeX equations.
 
 renderPandocASTtoHTML :: Item Pandoc -> Compiler (Item String)
@@ -458,7 +460,3 @@ processImage num svg (ImageInfo dp ht wd) =
                 nm == "{http://www.w3.org/2000/svg}svg" ->
                     X.Document pro (X.Element nm (adjustedDimens <> attr) nodes) epi
             d -> d
-
-
-
-

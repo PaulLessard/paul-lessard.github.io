@@ -20,7 +20,7 @@
 # resolver:
 #   url: https://raw.githubusercontent.com/commercialhaskell/stackage-snapshots/master/nightly/2021/12/13.yaml
 # resolver: ghc-8.10.7
-resolver: lts-18.21
+resolver: lts-22.14
 
 # User packages to be built.
 # Various formats can be used as shown in the example below.
@@ -44,8 +44,7 @@ packages:
 #
 # extra-deps: []
 extra-deps:
-- hakyll-4.15.1.0
-- pandoc-crossref-0.3.12.1
+- pandoc-crossref-0.3.17.0
 - roman-numerals-0.5.1.5
 
 # Override default flag values for local packages and extra-deps

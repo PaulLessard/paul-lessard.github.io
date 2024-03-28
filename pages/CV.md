@@ -57,7 +57,6 @@ Higher Category Theory • Homotopy Theory • Programming Languages
 |:-------|:--------------------------------------------|
 | **2023-** | _Professor of Mathematics_, Mathematical Sciences Institute, College of Science, Australian National University|
 | **2021-** | _Emeritus Professor of Mathematics and Computing_, Faculty of Science and Engineering, Macquarie University, Australia |
-| **2022-2023** | _Honorary Professor of Mathematics_, Mathematical Sciences Institute, College of Science, Australian National University |
 | **2023-2028** | [_External Member, Academic Board_](https://www.imc.edu.au/about-us/our-people/academic-board-members), Australian National Institute of Management and Commerce, Sydney, Australia |
 | **2020-2021** | _Professor of Pure Mathematics_, Department of Mathematics and Statistics, Faculty of Science and Engineering, Macquarie University, Australia |
 | **2012-2020** | _Professor of Computing_, Department of Computing, Faculty of Science and Engineering, Macquarie University, Australia |
@@ -89,7 +88,7 @@ Higher Category Theory • Homotopy Theory • Programming Languages
 |    |    |    |
 |:-------|:--------------------------------------------|
 | **2023** | [_PROSE Award winner_](https://proseawards.com/winners/2023-award-winners), Mathematics and Statistics category, Association of American Publishers, for the book [[The elements of ∞-category theory]{.smallcaps}](https://www.cambridge.org/core/books/elements-of-category-theory/DAC48C449AB8C2C1B1E528A49D27FC6D) |
-| **2022-** | *Honorary Professor*, Mathematical Sciences Institute, Australian National University, Canberra, Australia |
+| **2022-2023** | *Honorary Professor*, Mathematical Sciences Institute, Australian National University, Canberra, Australia |
 | **2021-** | *Professor Emeritus*, Macquarie University, Sydney, Australia, unanimously elected by University Council, 19^th^ August 2021|
 | **2020, 2022** | *Research Professor and Program Organiser*, Mathematical Sciences Research Institute (MSRI) program [*"Higher Categories and Categorification"*](https://www.msri.org/programs/323), Berkeley (CA) USA. |
 | **2019** | *Visiting Research Fellow*, Dept. of Mathematics, Johns Hopkins University, Baltimore (MD) USA |
@@ -152,8 +151,8 @@ Higher Category Theory • Homotopy Theory • Programming Languages
 
 |    |    |    |
 |:-------|:--------------------------------------------|
+| **2024** | (with E. Riehl) [Cartesian exponentiation and monadicity]{.smallcaps}, <https://arxiv.org/abs/2108.11786>, 1--71, to appear in *Cahiers de Topologie et Géométrie Différentielle Catégoriques*. |
 | **2023** | (with M. Rovelli and V. Ozornova) [Gray tensor products and saturated n-complicial sets]{.smallcaps}, <https://arxiv.org/abs/2007.01235>, *Higher Structures* to appear. |
-| **2021** | (with E. Riehl, submitted) [Cartesian exponentiation and monadicity]{.smallcaps}, <https://arxiv.org/abs/2108.11786>, 1--71, submitted to *Cahiers de Topologie et Géométrie Différentielle Catégoriques*. |
 | **2020a** | (with E. Riehl) [On the construction of limits and colimits in ∞-categories]{.smallcaps} [Theory and Applications of Categories]{.smallcaps}, 35 (2020), 1101--1158. |
 | **2020b** | (with E. Riehl) [Infinity category theory from scratch]{.smallcaps}, *Higher Structures*, 4(1) (2020), 115--167. (invited publication) |
 | **2020c** | (with E. Riehl) [Recognizing quasi-categorical limits and colimits in homotopy coherent nerves]{.smallcaps}, *Applied Categorical Structures*, 28 (2020), 669--716. |
