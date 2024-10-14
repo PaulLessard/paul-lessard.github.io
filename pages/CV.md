@@ -34,6 +34,7 @@ URL: <https://researchers.mq.edu.au/en/persons/dominic-verity>
 
 _Professor, Mathematical Sciences Institute, Australian National University_\
 _Emeritus Professor, School of Mathematical and Physical Sciences, Macquarie University_\
+_External Member, Academic Board, Australian National Institute of Management and Commerce_\
 
 ### Synopsis
 
@@ -47,7 +48,7 @@ He is a passionate and engaging teacher and in 2008 his contributions in this ar
 
 ### Areas of research interest
 
-Higher Category Theory • Homotopy Theory • Programming Languages
+Higher Category Theory • Homotopy Theory • Type Theory • Programming Languages
 
 `\newpage`{=latex}
 
@@ -57,7 +58,8 @@ Higher Category Theory • Homotopy Theory • Programming Languages
 |:-------|:--------------------------------------------|
 | **2023-** | _Professor of Mathematics_, Mathematical Sciences Institute, College of Science, Australian National University|
 | **2021-** | _Emeritus Professor of Mathematics and Computing_, Faculty of Science and Engineering, Macquarie University, Australia |
-| **2023-2028** | [_External Member, Academic Board_](https://www.imc.edu.au/about-us/our-people/academic-board-members), Australian National Institute of Management and Commerce, Sydney, Australia |
+| **2023-2028** | [_External Member, Academic Board_](https://www.imc.edu.au/about/academic-board/), Australian National Institute of Management and Commerce, Sydney, Australia |
+| **2024 (May-Aug)** | _Interim Director of Research_, [Symbolica AI](https://www.symbolica.ai), London, England. |
 | **2020-2021** | _Professor of Pure Mathematics_, Department of Mathematics and Statistics, Faculty of Science and Engineering, Macquarie University, Australia |
 | **2012-2020** | _Professor of Computing_, Department of Computing, Faculty of Science and Engineering, Macquarie University, Australia |
 | **2013-2016** | _Chair of Academic Senate_, Vice-Chancellor's Office, Macquarie University, Australia |
@@ -87,6 +89,7 @@ Higher Category Theory • Homotopy Theory • Programming Languages
 
 |    |    |    |
 |:-------|:--------------------------------------------|
+| **2023-2024** | *Interim CEO*, [SECEdu Partnership](https://www.sec.edu.au), Cybersecurity Network, UNSW and Commonwealth Bank, Sydney, Australia |
 | **2023** | [_PROSE Award winner_](https://proseawards.com/winners/2023-award-winners), Mathematics and Statistics category, Association of American Publishers, for the book [[The elements of ∞-category theory]{.smallcaps}](https://www.cambridge.org/core/books/elements-of-category-theory/DAC48C449AB8C2C1B1E528A49D27FC6D) |
 | **2022-2023** | *Honorary Professor*, Mathematical Sciences Institute, Australian National University, Canberra, Australia |
 | **2021-** | *Professor Emeritus*, Macquarie University, Sydney, Australia, unanimously elected by University Council, 19^th^ August 2021|
@@ -119,10 +122,10 @@ Higher Category Theory • Homotopy Theory • Programming Languages
 
 |    |    |    |
 |:-------|:--------------------------------------------|
-| **2021 ongoing** | (with R. Garner) Yao Tang, *"Higher categories and dependently typed logics"* |
-| **2020 ongoing** | (with S. Lack) Nicola Di Vittorio, *"Higher derivators as a foundation for ∞-category theory"* |
-| **2018 ongoing** | (with R. Garner) Paula Verdugo, *"Synthetic ∞-category theory"* |
+| **2024 under examination** | (with S. Lack) Nicola Di Vittorio, *"Higher derivators as a foundation for ∞-category theory"* |
+| **2024 awarded** | (with R. Garner) Paula Verdugo, *"Synthetic ∞-category theory"* |
 | **2022 awarded** | (with M. Johnson) Bryce Clarke, [*"The double category of lenses"*](https://figshare.mq.edu.au/ndownloader/files/39129827) |
+| **2021-2024 discontinued** | (with R. Garner) Yao Tang, *"Higher categories and dependently typed logics"* |
 | **2020 awarded** | (with R. Street) Yuki Maehara, *"The Gray tensor product for 2-quasi-categories"*, Vice-Chancellor's Medal for Excellence |
 | **2018 awarded** | (with R. Garner) Edoardo Lanari, *"Cylinder objects for Grothendiek-Maltsiniotis ∞-groupoids"* |
 | **2015 awarded** | (with R. Garner) Mitchell Buckley, *"Three studies in higher category theory: fibrations, skew monoidal structures and excision of extremals"* |
@@ -142,7 +145,7 @@ Higher Category Theory • Homotopy Theory • Programming Languages
 
 |    |    |    |
 |:-------|:--------------------------------------------|
-| **2022-** | (with E. Riehl) [More elements of ∞-category theory]{.smallcaps}, <https://emilyriehl.github.io/files/more-elements.pdf>, book draft under development. |
+| **2022-** | (with E. Riehl) [[More elements of ∞-category theory]{.smallcaps}](https://emilyriehl.github.io/files/more-elements.pdf), book draft under development. |
 | **2022** | (with E. Riehl) [[The elements of ∞-category theory]{.smallcaps}](https://www.cambridge.org/core/books/elements-of-category-theory/DAC48C449AB8C2C1B1E528A49D27FC6D), volume 194 of *Cambridge Studies in Advanced Mathematics*, Cambridge University Press, frontmatter i--xix, pages 1--759. February 2022. [**PROSE Award Winner 2023**](https://proseawards.com/winners/2023-award-winners/#body), Association of American Publishers, Mathematics and Statistics Category |
 | **2011** | [Enriched categories, internal categories and change of base]{.smallcaps}, *Reprints in Theory and Application of Categories*, 20:1--266 |
 | **2008** | [Complicial Sets, Characterising the Simplicial Nerves of Strict $ω$-Categories]{.smallcaps}, volume 193 of *Memoirs of the AMS*. American Mathematical Society |
@@ -151,17 +154,17 @@ Higher Category Theory • Homotopy Theory • Programming Languages
 
 |    |    |    |
 |:-------|:--------------------------------------------|
-| **2024** | (with E. Riehl) [Cartesian exponentiation and monadicity]{.smallcaps}, <https://arxiv.org/abs/2108.11786>, 1--71, to appear in *Cahiers de Topologie et Géométrie Différentielle Catégoriques*. |
-| **2023** | (with M. Rovelli and V. Ozornova) [Gray tensor products and saturated n-complicial sets]{.smallcaps}, <https://arxiv.org/abs/2007.01235>, *Higher Structures* to appear. |
-| **2020a** | (with E. Riehl) [On the construction of limits and colimits in ∞-categories]{.smallcaps} [Theory and Applications of Categories]{.smallcaps}, 35 (2020), 1101--1158. |
-| **2020b** | (with E. Riehl) [Infinity category theory from scratch]{.smallcaps}, *Higher Structures*, 4(1) (2020), 115--167. (invited publication) |
-| **2020c** | (with E. Riehl) [Recognizing quasi-categorical limits and colimits in homotopy coherent nerves]{.smallcaps}, *Applied Categorical Structures*, 28 (2020), 669--716. |
-| **2018** | (with E. Riehl) [The comprehension construction]{.smallcaps}, *Higher Structures*, 2(1) (2018), 116--190. |
-| **2017b** | (with E. Riehl) [Kan extensions and the calculus of modules for ∞-categories]{.smallcaps}, *Algebraic and Geometric Topology*, 17-1 (2017) 189--271. |
-| **2017a** | (with E. Riehl) [Fibrations and Yoneda's lemma in an ∞-cosmos]{.smallcaps}, *Journal of Pure and Applied Algebra*, 221(3) (2017) 499--564. |
-| **2016a** | (with E. Riehl) [Homotopy coherent adjunctions and the formal theory of monads]{.smallcaps}. *Advances in Mathematics*, 286:802--888 |
-| **2015b** | (with E. Riehl) [The 2-category theory of quasi-categories]{.smallcaps}. *Advances in Mathematics*, 280:549--642 |
-| **2015a** | (with E. Riehl) [Completeness results for quasi-categories of algebras, homotopy limits, and related general constructions]{.smallcaps}. *Homology, Homotopy and Applications*, 17(1):1--33 |
+| **2024** | (with E. Riehl) [[Cartesian exponentiation and monadicity]{.smallcaps}](https://cahierstgdc.com/wp-content/uploads/2024/07/E.-RIEHL-D.-VERITY_-LXV-3.pdf), *Cahiers de Topologie et Géométrie Différentielle Catégoriques*, volume LXV-3 (2024), 294--353. |
+| **2023** | (with M. Rovelli and V. Ozornova) [[Gray tensor products and saturated n-complicial sets]{.smallcaps}](https://higher-structures.math.cas.cz/api/files/issues/Vol7Iss1/OzoRovVer), *Higher Structures*, 7(1) (2023), 1--21. |
+| **2020a** | (with E. Riehl) [[On the construction of limits and colimits in ∞-categories]{.smallcaps}](http://www.tac.mta.ca/tac/volumes/35/30/35-30.pdf), *Theory and Applications of Categories*, 35 (2020), 1101--1158. |
+| **2020b** | (with E. Riehl) [[Infinity category theory from scratch]{.smallcaps}](https://higher-structures.math.cas.cz/api/files/issues/Vol4Iss1/RiehlVerity), *Higher Structures*, 4(1) (2020), 115--167. (invited publication) |
+| **2020c** | (with E. Riehl) [[Recognizing quasi-categorical limits and colimits in homotopy coherent nerves]{.smallcaps}](https://arxiv.org/pdf/1808.09834), *Applied Categorical Structures*, 28 (2020), 669--716. |
+| **2018** | (with E. Riehl) [[The comprehension construction]{.smallcaps}](https://higher-structures.math.cas.cz/api/files/issues/Vol2Iss1/RiehlVerity-2), *Higher Structures*, 2(1) (2018), 116--190. |
+| **2017b** | (with E. Riehl) [[Kan extensions and the calculus of modules for ∞-categories]{.smallcaps}](https://msp.org/agt/2017/17-1/p08.xhtml), *Algebraic and Geometric Topology*, 17-1 (2017) 189--271. |
+| **2017a** | (with E. Riehl) [[Fibrations and Yoneda's lemma in an ∞-cosmos]{.smallcaps}](https://www.sciencedirect.com/science/article/pii/S0022404916301001), *Journal of Pure and Applied Algebra*, 221(3) (2017) 499--564. |
+| **2016a** | (with E. Riehl) [[Homotopy coherent adjunctions and the formal theory of monads]{.smallcaps}](https://www.sciencedirect.com/science/article/pii/S0001870815003503). *Advances in Mathematics*, 286:802--888 |
+| **2015b** | (with E. Riehl) [[The 2-category theory of quasi-categories]{.smallcaps}](https://www.sciencedirect.com/science/article/pii/S0001870815001577). *Advances in Mathematics*, 280:549--642 |
+| **2015a** | (with E. Riehl) [[Completeness results for quasi-categories of algebras, homotopy limits, and related general constructions]{.smallcaps}](https://link.intlpress.com/JDetail/1805806407603601410). *Homology, Homotopy and Applications*, 17(1):1--33 |
 | **2014** | (with E. Riehl) [The theory and practice of Reedy categories]{.smallcaps}. *Theory and Applications of Categories*, 29(9):256--301 |
 | **2010** | (with R. Street) [The comprehensive factorisation and torsors]{.smallcaps}. *Theory and Application of Categories*, 23(3):42--75 |
 | **2008** | [Weak complicial sets I, basic homotopy theory]{.smallcaps}. *Advances in Mathematics*, 219:1081--1149 |
