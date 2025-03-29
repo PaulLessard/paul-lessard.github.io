@@ -32,9 +32,9 @@ URL: <https://researchers.mq.edu.au/en/persons/dominic-verity>
 
 ### Current appointments
 
-_Professor, Mathematical Sciences Institute, Australian National University_\
-_Emeritus Professor, School of Mathematical and Physical Sciences, Macquarie University_\
-_External Member, Academic Board, Australian National Institute of Management and Commerce_\
+_Professor_, Mathematical Sciences Institute, Australian National University\
+_Emeritus Professor_, School of Mathematical and Physical Sciences, Macquarie University\
+_Chair of the Academic Board and Independent Non-Executive Director_, Australian National Institute of Management and Commerce\
 
 ### Synopsis
 
@@ -58,7 +58,8 @@ Higher Category Theory • Homotopy Theory • Type Theory • Programming Langu
 |:-------|:--------------------------------------------|
 | **2023-** | _Professor of Mathematics_, Mathematical Sciences Institute, College of Science, Australian National University|
 | **2021-** | _Emeritus Professor of Mathematics and Computing_, Faculty of Science and Engineering, Macquarie University, Australia |
-| **2023-2028** | [_External Member, Academic Board_](https://www.imc.edu.au/about/academic-board/), Australian National Institute of Management and Commerce, Sydney, Australia |
+| **2025-** | [_Chair of the Academic Board_](https://www.imc.edu.au/about/academic-board/) and _Independent Non-Executive Director_, Australian National Institute of Management and Commerce, Sydney, Australia |
+| **2023-2025** | [_External Member, Academic Board_](https://www.imc.edu.au/about/academic-board/), Australian National Institute of Management and Commerce, Sydney, Australia |
 | **2024 (May-Aug)** | _Interim Director of Research_, [Symbolica AI](https://www.symbolica.ai), London, England. |
 | **2020-2021** | _Professor of Pure Mathematics_, Department of Mathematics and Statistics, Faculty of Science and Engineering, Macquarie University, Australia |
 | **2012-2020** | _Professor of Computing_, Department of Computing, Faculty of Science and Engineering, Macquarie University, Australia |
@@ -122,7 +123,7 @@ Higher Category Theory • Homotopy Theory • Type Theory • Programming Langu
 
 |    |    |    |
 |:-------|:--------------------------------------------|
-| **2024 under examination** | (with S. Lack) Nicola Di Vittorio, *"Higher derivators as a foundation for ∞-category theory"* |
+| **2024 awarded** | (with S. Lack) Nicola Di Vittorio, *"Higher derivators as a foundation for ∞-category theory"* |
 | **2024 awarded** | (with R. Garner) Paula Verdugo, *"Synthetic ∞-category theory"* |
 | **2022 awarded** | (with M. Johnson) Bryce Clarke, [*"The double category of lenses"*](https://figshare.mq.edu.au/ndownloader/files/39129827) |
 | **2021-2024 discontinued** | (with R. Garner) Yao Tang, *"Higher categories and dependently typed logics"* |
