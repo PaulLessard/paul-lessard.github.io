@@ -73,15 +73,16 @@ main = hakyllWith config $ do
                 >>= loadAndApplyTemplate "templates/default.html" (activeSidebarCtx <> siteCtx)
                 >>= relativizeUrls
 
-    match "pages/CV.md" $ version "pdf" $ do
-        route $ setExtension "pdf"
-        compile $ getUnderlying 
-            >>= loadBody . setVersion (Just "ast")
-            >>= makeItem
-            >>= renderPandocASTtoLaTeX
-            >>= loadAndApplyTemplate "templates/CV.tex"
-                                     (siteCtx <> modificationTimeField "modified" "%B %e, %Y")
-            >>= buildLaTeX
+    -- Temporarily disabled PDF generation for CV.md due to LaTeX compilation issues
+    -- match "pages/CV.md" $ version "pdf" $ do
+    --     route $ setExtension "pdf"
+    --     compile $ getUnderlying 
+    --         >>= loadBody . setVersion (Just "ast")
+    --         >>= makeItem
+    --         >>= renderPandocASTtoLaTeX
+    --         >>= loadAndApplyTemplate "templates/CV.tex"
+    --                                  (siteCtx <> modificationTimeField "modified" "%B %e, %Y")
+    --         >>= buildLaTeX
 
     tags <- buildTags "posts/*" (fromCapture "tags/*.html")
 
@@ -118,12 +119,28 @@ main = hakyllWith config $ do
                 >>= loadAndApplyTemplate "templates/default.html" (baseSidebarCtx <> siteCtx)
                 >>= relativizeUrls
 
-    match "posts/*" $ version "pdf" $ do
-        route $ setExtension "pdf"
-        compile $ getUnderlying 
-            >>= loadBody . setVersion (Just "ast")
-            >>= makeItem
-            >>= renderPandocASTtoPDF
+    -- Temporarily disabled PDF generation for posts due to LaTeX compilation issues
+    -- match "posts/*" $ version "pdf" $ do
+    --     route $ setExtension "pdf"
+    --     compile $ getUnderlying 
+    --         >>= loadBody . setVersion (Just "ast")
+    --         >>= makeItem
+    --         >>= renderPandocASTtoPDF
+
+    -- Talks rules (similar to posts)
+    match "talks/*" $ version "ast" $
+        compile compileToPandocAST
+
+    match "talks/*" $ do
+        route $ setExtension "html"
+        compile $ do
+            getUnderlying
+                >>= loadBody . setVersion (Just "ast")
+                >>= makeItem
+                >>= renderPandocASTtoHTML
+                >>= loadAndApplyTemplate "templates/talk.html" (talkCtx <> siteCtx)
+                >>= loadAndApplyTemplate "templates/default.html" (baseSidebarCtx <> siteCtx)
+                >>= relativizeUrls
 
     create ["index.html"] $ do
         route idRoute
@@ -225,27 +242,27 @@ makeTeaser = makeTeaserWithSeparator teaserSeparator
 
 feedConfig :: FeedConfiguration
 feedConfig = FeedConfiguration
-    { feedTitle       = "synthetic"
-    , feedDescription = "A blog about higher category theory and life"
-    , feedAuthorName  = "Dominic Verity"
-    , feedAuthorEmail = "dominic.verity@mq.edu.au"
-    , feedRoot        = "https://dom-verity.github.io"
+    { feedTitle       = "Paul Lessard"
+    , feedDescription = "A blog about category theory, deep learning, and techno-feudalism"
+    , feedAuthorName  = "Paul Lessard"
+    , feedAuthorEmail = "paulrlessard@gmail.com"
+    , feedRoot        = "https://paul-lessard.github.io"
     }
 
 --------------------------------------------------------------------------------
 
 siteCtx :: Context String
 siteCtx =
-    constField "site-description" "Synthetic Perspectives"                        <>
-    constField "site-url" "https://dom-verity.github.io"                          <>
-    constField "tagline" "Life, the Universe, and Higher Categories"              <>
-    constField "site-title" "Dom Verity"                                          <>
-    constField "copy-year" "2021"                                                 <>
-    constField "site-author" "Dom Verity"                                         <>
-    constField "site-email" "dominic.verity@mq.edu.au"                            <>
-    constField "github-url" "https://github.com/dom-verity"                       <>
-    constField "github-repo" "https://github.com/dom-verity/dom-verity.github.io" <>
-    constField "twitter-url" "https://twitter.com/DomVerity"                      <>
+    constField "site-description" "Paul Lessard - Research Mathematician"         <>
+    constField "site-url" "https://paul-lessard.github.io"                         <>
+    constField "tagline" "Categories, Types, Spaces, and Knowledge" <>
+    constField "site-title" "Paul Lessard"                                        <>
+    constField "copy-year" "2025"                                                 <>
+    constField "site-author" "Paul Lessard"                                       <>
+    constField "site-email" "paulrlessard@gmail.com"                             <>
+    constField "github-url" "https://github.com/paul-lessard"                      <>
+    constField "github-repo" "https://github.com/paul-lessard/paul-lessard.github.io" <>
+    constField "twitter-url" "https://x.com/PaulRoyLessard"                    <>
     defaultContext
 
 --------------------------------------------------------------------------------
@@ -258,6 +275,12 @@ postCtx =
 
 postCtxWithTags :: Tags -> Context String
 postCtxWithTags tags = makeTagsField "tags" tags <> postCtx
+
+talkCtx :: Context String
+talkCtx =
+    dateField "date" "%B %e, %Y" <>
+    modificationTimeField "modified" "%B %e, %Y" <>
+    defaultContext
 
 makeTagLink :: String -> FilePath -> H.Html
 makeTagLink tag filePath =

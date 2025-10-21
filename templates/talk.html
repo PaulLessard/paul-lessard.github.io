@@ -1,0 +1,23 @@
+<div class="talk">
+  <h1 class="talk-title">
+      <a href="$url$">
+        $title$
+      </a>
+    </h1>
+    <div class="talk-metadata">
+        <span class="talk-date">
+          Date: $date$<br/>
+          Last modified: $modified$
+        </span>
+        $if(venue)$
+          <br/>Venue: $venue$
+        $endif$
+        $if(institution)$
+          <br/>Institution: $institution$
+        $endif$
+        $if(type)$
+          <br/>Type: $type$
+        $endif$
+    </div>
+    $body$
+</div>

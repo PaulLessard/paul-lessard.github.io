@@ -1,7 +1,7 @@
 ---
 title: Curriculum Vitae
-author: Dominic Verity
-date: 9^th^ March 2023
+author: Paul Lessard
+date: 21^st^ October 2025
 ---
 
 ```{=html}
@@ -13,78 +13,45 @@ date: 9^th^ March 2023
 </div>
 ```
 
-## Dominic Verity
+## Paul Lessard
 
-Mathematical Sciences Institute\
-The Australian National University\
-Canberra, ACT 2600, Australia\
+Carlton North\
+VIC 3054, Australia\
 
-and\
+Email: [paulrlessard@gmail.com](mailto:paulrlessard@gmail.com)\
+Homepage: <https://paul-lessard.github.io>
 
-Centre of Australian Category Theory\
-School of Mathematical and Physical Sciences\
-Macquarie University, Sydney, NSW 2109, Australia\
+### Current Status
 
-Email: [dominic.verity@mq.edu.au](mailto:dominic.verity@mq.edu.au)\
-Homepage: <http://dom-verity.github.io>\
-ORCID: <https://orcid.org/0000-0002-4137-6982>\
-URL: <https://researchers.mq.edu.au/en/persons/dominic-verity>
-
-### Current appointments
-
-_Professor_, Mathematical Sciences Institute, Australian National University\
-_Emeritus Professor_, School of Mathematical and Physical Sciences, Macquarie University\
-_Chair of the Academic Board and Independent Non-Executive Director_, Australian National Institute of Management and Commerce\
+Research Mathematician with expertise in:
+- Homotopy theory
+- Category theory  
+- Algebraic and differential geometry
+- Deep learning and machine learning
 
 ### Synopsis
 
-Dominic Verity started his computational career in the early 1980s as a software developer for the influential British personal computing pioneer [Acorn Computers](https://en.wikipedia.org/wiki/Acorn_Computers); the company that invented the now ubiquitous ARM microprocessor. He studied at the University of Cambridge (UK) and emerged from that institution in 1992 with a PhD in Pure Mathematics. From 1993-2000 he worked in the investment banking industry, as a mathematical consultant in derivative securities valuation and hedging, as a quantitative analyst in equity derivatives for Deutsche Bank Australia and as the Head of Equity Derivatives Trading for HSBC Securities Australia.\
-
-He returned to academe at the turn of the new millennium, and since then has worked as a mathematician, computer scientist, and senior academic administrator at Macquarie University. He is an internationally recognised pioneer in the field of _∞-Category Theory_ and is co-author of a [PROSE Award winning](https://proseawards.com/winners/2023-award-winners) graduate text on that topic.\
-
-His leadership career at Macquarie University includes 6 years as a member of the executive of the Division of Information and Communication Sciences (a precursor to the Faculty of Science and Engineering), carrying responsibility for business development and operational administration of its postgraduate programs. He served for 10 years as an elected member of the university's Academic Senate. In that time he acted as a member of its Academic Program Committee, carrying specific responsibility for standards and quality oversight of postgraduate programs throughout the university, and as the Chair of the university's Learning and Teaching Committee (SLTC).  Ultimately he assumed overall leadership of the academic governance of the university, spending 4 years as Chair of Academic Senate. In that latter rôle he also held ex officio membership of Macquarie's governing body, the University Council.\
-
-He is a passionate and engaging teacher and in 2008 his contributions in this area were recognised by the award of a Macquarie University Vice-Chancellor's Award for Teaching Excellence. In 2011 he also gained national recognition as an educator with the award of an Australian Learning and Teaching Council Citation for Outstanding Contribution to Student Learning _"For a decade of inspirational and innovative educational leadership in the field of information technology"_.
+Paul Lessard is a Research Mathematician trained in homotopy theory, category theory, and geometry, now working in deep learning. After "seeing the light" at the centre of Australian Category Theory at Macquarie University as a postdoc (2019-2021), Paul transitioned to applied work in machine learning and AI.
 
 ### Areas of research interest
 
-Higher Category Theory • Homotopy Theory • Type Theory • Programming Languages
+Homotopy Theory • Category Theory • Algebraic Geometry • Differential Geometry • Deep Learning • Machine Learning
 
-`\newpage`{=latex}
 
 ## Appointments held
 
 |    |    |    |
 |:-------|:--------------------------------------------|
-| **2023-** | _Professor of Mathematics_, Mathematical Sciences Institute, College of Science, Australian National University|
-| **2021-** | _Emeritus Professor of Mathematics and Computing_, Faculty of Science and Engineering, Macquarie University, Australia |
-| **2025-** | [_Chair of the Academic Board_](https://www.imc.edu.au/about/academic-board/) and _Independent Non-Executive Director_, Australian National Institute of Management and Commerce, Sydney, Australia |
-| **2023-2025** | [_External Member, Academic Board_](https://www.imc.edu.au/about/academic-board/), Australian National Institute of Management and Commerce, Sydney, Australia |
-| **2024 (May-Aug)** | _Interim Director of Research_, [Symbolica AI](https://www.symbolica.ai), London, England. |
-| **2020-2021** | _Professor of Pure Mathematics_, Department of Mathematics and Statistics, Faculty of Science and Engineering, Macquarie University, Australia |
-| **2012-2020** | _Professor of Computing_, Department of Computing, Faculty of Science and Engineering, Macquarie University, Australia |
-| **2013-2016** | _Chair of Academic Senate_, Vice-Chancellor's Office, Macquarie University, Australia |
-| **2011** | _Acting Head, Department of Computing_, Division of ICS, Macquarie University, Australia |
-| **2001-2007** | _Director of Postgraduate Programs_, Division of ICS, Macquarie University, Australia |
-| **2001-2012** | _Associate Professor_, Department of Computing, Macquarie University, Australia |
-| **2000-2001** | _Senior Lecturer_, Department of Computing, Macquarie University, Australia |
-| **1999-2000** | _Director and Lead Consultant_, Categorical Solutions Pty. Ltd., Sydney, Australia |
-| **1996-1999** | _Head of Equity Derivative Trading_, HSBC James Capel, Sydney, Australia |
-| **1995-1996** | _Senior Quantitative Analyst_, Equity Derivatives Trading, Deutsche Bank, Sydney, Australia |
-| **1993-1995** | _Consultant Quantitative Analyst_, Bain and Company, Deutsche Bank, Sydney, Australia |
-| **1993-1995** | _Lecturer_, Department of Mathematics, Macquarie University, Australia |
-| **1992-1993** | _Research Fellow_, Department of Mathematics, Macquarie University, Australia |
-| **1991-1992** | _Research Fellow_, Department of Pure Maths and Mathematical Statistics, Cambridge University, UK |
-| **1983-1984** | _Computer Engineer_, BBC World Service, Bush House, London, UK |
-| **1981-1983** | _Computer Programmer_, Acorn Computers Limited (now ARM Limited), Cambridge, UK |
+| **2023-2025** | _Principal Scientist - Categorical Deep Learning_, [Symbolica AI](https://www.symbolica.ai). |
+| **2021-2023** | _Honorary Postdoctoral Researcher_, [Macquarie University](https://www.mq.edu.au), North Ryde, New South Wales, AUS. |
 
 ## Education
 
 |    |    |    |
 |:-------|:--------------------------------------------|
-| **1988-1992** | _PhD in Mathematics_, Fitzwilliam College, Cambridge University, UK. **PhD Supervisor:** Professor J. M. E. Hyland |
-| **1987-1988** | _Part III Mathematics_, awarded with Distinction, Fitzwilliam College, Cambridge University, UK |
-| **1984-1987** | _BSc (Hons) Mathematics_, Double 1^st^ Class, Fitzwilliam College, Cambridge University, UK |
+| **2019** | _PhD in Mathematics_, Univeristy of Colorado, Boulder, Colorado, USA. **PhD Supervisor:** [Assistant Professor Jonathan Wise](https://math.colorado.edu/~jonathan.wise/) |
+| **2013** | _MS in Mathematics_, University of Vermont, Burlington, Vermont, USA |
+| **2008** | _BS_, The Evergreen State College, Olympia, Washington, USA |
 
 ## Awards, invitations & honorary appointments
 
@@ -119,37 +86,74 @@ Higher Category Theory • Homotopy Theory • Type Theory • Programming Langu
 | **2010-2012** | (with R. Street, M. Johnson & S. Lack) Australian Research Council, Discovery Project **DP1094883**, *"Applicable Categorical Structures"*. AU$290,000 |
 | **2007-2009** | (with R. Street, M. Johnson & S. Lack) Australian Research Council, Discovery Project **DP0771252**, *"Cohomology enhanced: an application of enriched and higher categories"*. AU$276,000 |
 
-## PhD students
-
-|    |    |    |
-|:-------|:--------------------------------------------|
-| **2024 awarded** | (with S. Lack) Nicola Di Vittorio, *"Higher derivators as a foundation for ∞-category theory"* |
-| **2024 awarded** | (with R. Garner) Paula Verdugo, *"Synthetic ∞-category theory"* |
-| **2022 awarded** | (with M. Johnson) Bryce Clarke, [*"The double category of lenses"*](https://figshare.mq.edu.au/ndownloader/files/39129827) |
-| **2021-2024 discontinued** | (with R. Garner) Yao Tang, *"Higher categories and dependently typed logics"* |
-| **2020 awarded** | (with R. Street) Yuki Maehara, *"The Gray tensor product for 2-quasi-categories"*, Vice-Chancellor's Medal for Excellence |
-| **2018 awarded** | (with R. Garner) Edoardo Lanari, *"Cylinder objects for Grothendiek-Maltsiniotis ∞-groupoids"* |
-| **2015 awarded** | (with R. Garner) Mitchell Buckley, *"Three studies in higher category theory: fibrations, skew monoidal structures and excision of extremals"* |
-| **2015 awarded** | (with R. Garner) Matthew Burke, *"Synthetic Lie Theory"* |
-| **2012 awarded** | (with R. Street) Thomas Booker, *"Generalized and particular monoidal categories, and structures therein"* |
-| **2012 awarded** | (with R. Street) David Oury, *"Duality for Joyal's category Θ and homotopy concepts for Θ-sets"* |
-| **2011 awarded** | (with M. Johnson) Micah McCurdy, *"Cyclic \*-autonomous categories and the Tannaka adjunction via graphical methods"* |
-| **2011 awarded** | (with A. Sloane) Matthew Roberts, *"Compiled generics for functional programming languages"* |
-| **2010 awarded** | (with P. Watters) Wai Han Ho, *"On the evaluation of face identification systems"* |
-| **2007 awarded** | (with A. Sloane) Ekaterina Stefanov, *"Simple code compression and customisation for bytecode for interpreters"* |
-
-`\newpage`{=latex}
-
 ## Publications & talks
 
-### Books and memoirs
+
+### Published
 
 |    |    |    |
 |:-------|:--------------------------------------------|
-| **2022-** | (with E. Riehl) [[More elements of ∞-category theory]{.smallcaps}](https://emilyriehl.github.io/files/more-elements.pdf), book draft under development. |
-| **2022** | (with E. Riehl) [[The elements of ∞-category theory]{.smallcaps}](https://www.cambridge.org/core/books/elements-of-category-theory/DAC48C449AB8C2C1B1E528A49D27FC6D), volume 194 of *Cambridge Studies in Advanced Mathematics*, Cambridge University Press, frontmatter i--xix, pages 1--759. February 2022. [**PROSE Award Winner 2023**](https://proseawards.com/winners/2023-award-winners/#body), Association of American Publishers, Mathematics and Statistics Category |
-| **2011** | [Enriched categories, internal categories and change of base]{.smallcaps}, *Reprints in Theory and Application of Categories*, 20:1--266 |
-| **2008** | [Complicial Sets, Characterising the Simplicial Nerves of Strict $ω$-Categories]{.smallcaps}, volume 193 of *Memoirs of the AMS*. American Mathematical Society |
+
+### Accepted
+
+|    |    |    |
+|:-------|:--------------------------------------------|
+
+### In Revision
+
+|    |    |    |
+|:-------|:--------------------------------------------|
+
+### Preprint
+
+|    |    |    |
+|:-------|:--------------------------------------------|
+
+### Posts
+
+|    |    |    |
+|:-------|:--------------------------------------------|
+
+### Talks
+
+#### Invited, conference and summer school talks
+
+|    |    |    |
+|:-------|:--------------------------------------------|
+| **2022** | [A Computadic Introduction to Shulman's Practical Type Theory and Variations for Semicartesian and Markov Categories](/talks/2022-12-19-computadic-intro-to-shulmans-ptt.html). Berkeley Seminar, Topos Institute. |
+| **2021** | [Weighted Limits in the 2-Category of Categories with Arities and a 2-Categorical Treatment of Spectrification](/talks/2021-12-15-weighted-limits-categories-arities.html). Australian Kittens 2021: an ECR Conference, University of Melbourne. |
+| **2021** | [Spectra as Locally Finite Pointed Z-groupoids](/talks/2021-11-10-spectra-locally-finite-groupoids.html). Melbourne Topology Seminar, University of Melbourne. |
+| **2020** | Progress Towards a ‘Practical Type Theory’ for Symmetric Monoidal Bi-categories. Séminaire Sémantique, IRIF. |
+| **2020** | A Revisionist History of (Cisinski) Model Categories. Pure Math Seminar, University of New South Wales. |
+| **2020** | Shulman’s Practical Type Theory for Symmetric Monoidal Categories (with N. Dicaire). Applied Category Theory Adjoint School, Massachusetts Institute of Technology. |
+| **2019** | Spectra are Locally Finite Z-groupoids. Geometry in Modal Homotopy Type Theory, Carnegie Mellon University. |
+| **2018** | Fibrations and the Yoneda Lemma in Synthetic Higher Category Theory. Talbot 2018: Model-independent theory of ∞-categories, Massachusetts Institute of Technology. |
+| **2015** | The Unstable A¹-homotopy category. K-Theory Summer School, University of Southern California. |
+| **2014** | “Semi-simplicial complexes and Postnikov systems” (after Moore). Algebraic Topology Summer School, Mathematical Sciences Research Institute. |
+
+#### Selected talks
+
+|    |    |    |
+|:-------|:--------------------------------------------|
+| **2021** | The Lax-Shuffle Decomposition and the Cartesian←Gray→Shift Span. Australian Category Theory Seminar, Macquarie University. |
+| **2021** | A Question About Homotopies of Product Systems, prefaced with an introduction to A¹/Motivic Homotopy Theory and Østvaer’s motivic-style homotopy theory of C⋆-algebras. Australian Category Theory Seminar, Macquarie University. |
+| **2020** | Elements for Structuralists, Shulman’s Practical Type Theory for Symmetric Monoidal Categories, and sketches of a 2‑PTT for Symmetric Monoidal Bi‑Categories (pt. 3). Australian Category Theory Seminar, Macquarie University. |
+| **2020** | Elements for Structuralists, Shulman’s Practical Type Theory for Symmetric Monoidal Categories, and sketches of a 2‑PTT for Symmetric Monoidal Bi‑Categories (pt. 2). Australian Category Theory Seminar, Macquarie University. |
+| **2020** | Elements for Structuralists, Shulman’s Practical Type Theory for Symmetric Monoidal Categories, and sketches of a 2‑PTT for Symmetric Monoidal Bi‑Categories (pt. 1). Australian Category Theory Seminar, Macquarie University. |
+| **2020** | Spectra as Locally Finite Z‑groupoids (pt. 5). Australian Category Theory Seminar, Macquarie University. |
+| **2020** | Spectra as Locally Finite Z‑groupoids (pt. 4). Australian Category Theory Seminar, Macquarie University. |
+| **2020** | Spectra as Locally Finite Z‑groupoids (pt. 3). Australian Category Theory Seminar, Macquarie University. |
+| **2019** | Spectra as Locally Finite Z‑groupoids (pt. 2). Australian Category Theory Seminar, Macquarie University. |
+| **2019** | Spectra as Locally Finite Z‑groupoids (pt. 1). Australian Category Theory Seminar, Macquarie University. |
+| **2019** | Higher Categories and Grothendieck’s Homotopy Hypothesis. Topology Seminar, University of Colorado, Boulder. |
+| **2018** | A Cellular Suspension Functor for a New Presentation of Spectra. Topology Seminar, University of Colorado, Boulder. |
+| **2018** | Quillen’s Theorem A and Grothendieck’s Asphericité. Topology Seminar, University of Colorado, Boulder. |
+| **2018** | Of Colimits, Sifted and Not, and the Naturalness of Algebraic Theories. Slow‑pitch Seminar, University of Colorado, Boulder. |
+| **2017** | Symmetric Spectra (Part II). Topology Seminar, University of Colorado, Boulder. |
+| **2017** | Symmetric Spectra (Part I). Topology Seminar, University of Colorado, Boulder. |
+| **2017** | Reverse Engineering Continuity from Sheaves, and Composition Laws Encoded as Sheaves: From Grothendieck Topologies to Globular Theories. Topology Seminar, University of Colorado, Boulder. |
+| **2016** | An Idiosyncratic Introduction to Homotopy Type Theory and Synthetic Algebraic Topology. Slow‑pitch Seminar, University of Colorado, Boulder. |
+| **2015** | From Taylor Series to Étale Morphisms: The étale topology for analysts. Slow‑pitch Seminar, University of Colorado, Boulder. |
 
 ### Selected articles and preprints
 
@@ -172,7 +176,6 @@ Higher Category Theory • Homotopy Theory • Type Theory • Programming Langu
 | **2007** | [Weak complicial sets II, nerves of complicial Gray-categories]{.smallcaps}. In A. Davydov et al., editors, *Categories in Algebra, Geometry and Mathematical Physics (StreetFest)*, volume 431 of *Contemporary Mathematics*, pages 441--467. American Mathematical Society. |
 | **1995** | (with A. Joyal & R. H. Street) [Traced monoidal categories]{.smallcaps}, *Mathematical Proceedings of the Cambridge Philosophical Society*, 119(3):425---446 |
 
-`\newpage`{=latex}
 
 ### Invited Keynotes, Courses and Plenaries
 
@@ -202,7 +205,6 @@ Higher Category Theory • Homotopy Theory • Type Theory • Programming Langu
 | **2006** | [Keynote speaker, 50th Anniversary Meeting of the Australian Mathematical Society]{.smallcaps}, Sydney, Australia, talk entitled *"Non-abelian cohomology as the raison d'être for higher category theory"* |
 | **2005** | [Invited speaker, Streetfest, Conference and Workshop in Honour of Ross Street's 60th Birthday]{.smallcaps}, Sydney and Canberra, Australia, talk entitled *"A simplicial weak category theory"* |
 
-`\newpage`{=latex}
 
 ## Service
 

@@ -10,75 +10,16 @@
         <email>dominic.verity@mq.edu.au</email>
         
     </author>
-    <updated>2023-02-09T00:00:00Z</updated>
+    <updated>2021-12-20T00:00:00Z</updated>
     <entry>
-    <title>The Elements wins AAP PROSE Award</title>
-    <link href="https://dom-verity.github.io/posts/2023-02-09-prose.html" />
-    <id>https://dom-verity.github.io/posts/2023-02-09-prose.html</id>
-    <published>2023-02-09T00:00:00Z</published>
-    <updated>2023-02-09T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<p>Yesterday the Association of American Publishers (AAP) unveiled the 105 finalists and 40 Category winners for the 47<sup>th</sup> Annual <a href="https://proseawards.com">PROSE Awards</a> honouring scholarly works published in 2023.</p>
-<p>We are very proud to say that the <em>Elements of ∞-Category Theory</em> won the PROSE Award in the Mathematics and Statistics category.</p>
-]]></summary>
-</entry>
-<entry>
-    <title>Themes and motifs in ∞-cosmology</title>
-    <link href="https://dom-verity.github.io/posts/2022-09-16-unlikely.html" />
-    <id>https://dom-verity.github.io/posts/2022-09-16-unlikely.html</id>
-    <published>2022-09-16T00:00:00Z</published>
-    <updated>2022-09-16T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<p>On Monday the 19th of September 2022 I will be speaking at the <a href="https://www.matrix-inst.org.au/events/phd-student-symposium-categories-and-companions-symposium-2022-cacs-2022/">Categories and Companions Symposium 2022</a> on the value of pursuing unlikely ideas in a talk entitled <em>“Themes and Motivations in ∞-Cosmology”</em>.</p>
-<h2 id="abstract">Abstract</h2>
-<p>In this talk, we review the current state of the art in <em>model agnostic</em> ∞-category theory, which seeks to provide a unified account of ∞-category theory freed from the straight jacket of a specific model.</p>
-<p>In particular, we shall focus on the theory of <em>∞-cosmoi</em> <span class="citation" data-cites="RiehlVerity:2022bb">[1]</span>, a general framework for the development of <em>fibrational ∞-category theories</em>. The key novelty of this approach is that it allows both for the model independent, <em>synthetic</em> development of ∞-categorical results and for the transport of <em>analytically</em> derived such results from one model to another.</p>
-]]></summary>
-</entry>
-<entry>
-    <title>Zen and the art of ∞-categories</title>
-    <link href="https://dom-verity.github.io/posts/2022-03-12-zen.html" />
-    <id>https://dom-verity.github.io/posts/2022-03-12-zen.html</id>
-    <published>2022-03-12T00:00:00Z</published>
-    <updated>2022-03-12T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<p>Last Friday morning I spoke in the <a href="https://topos.site/topos-colloquium/">Topos Institute Colloquium</a> on the topic of model independent and synthetic approaches to ∞-category theory. This might be considered part of our virtual book tour for <a href="https://www.cambridge.org/core/books/elements-of-category-theory/DAC48C449AB8C2C1B1E528A49D27FC6D"><em>The Elements</em></a>.</p>
-<p>You can <a href="https://youtu.be/qLkRhKaw5DA">view the video</a> of this talk and play along with my <a href="../pdfs/Zen_and_the_art_of_∞-categories.pdf">slides</a>.</p>
-<h2 id="abstract">Abstract</h2>
-<p>You may well have heard the rumour that ∞-category theory is <em>“really just like category theory with a little homotopy theory thrown in”</em>. Inspired by that comment, you might even have headed to a book on ∞-categories or to the <a href="https://ncatlab.org/nlab/show/HomePage"><em>n</em>Lab</a> to find out more, only to find that things in the ∞-world are far from that simple.</p>
-]]></summary>
-</entry>
-<entry>
-    <title>Publication of "The Elements"</title>
-    <link href="https://dom-verity.github.io/posts/2022-01-22-the-elements.html" />
-    <id>https://dom-verity.github.io/posts/2022-01-22-the-elements.html</id>
-    <published>2022-01-22T00:00:00Z</published>
-    <updated>2022-01-22T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<a href="https://www.cambridge.org/core/books/elements-of-category-theory/DAC48C449AB8C2C1B1E528A49D27FC6D">
-    <img style="float: right; width: 22%; margin-left: 1em; margin-bottom: 0em"
-         alt="Book cover image 'Elements of ∞-category theory'" src="/images/elements_photo.jpg"/>
-</a>
-<p>The book <a href="https://www.cambridge.org/core/books/elements-of-category-theory/DAC48C449AB8C2C1B1E528A49D27FC6D"><em>Elements of ∞-Category Theory</em></a> by Emily Riehl and Dom Verity has just been published (February 2022) by <a href="https://www.cambridge.org">Cambridge University Press</a> as volume 194 of the series <a href="https://www.cambridge.org/core/series/cambridge-studies-in-advanced-mathematics/0A5F361E5A5E9D3EFE58F53613C0D307">Cambridge Studies in Advanced Mathematics</a>. Here’s what the reviewers are saying:</p>
-<blockquote>
-<p><em>‘Emily and Dom have done what many thought impossible: they have written an introductory text on a model-independent approach to higher category theory. This self-contained text is ideal for both end-users and architects of higher category theory. Every page is bursting at the seams with gorgeous insights and the refreshingly candid delight the authors take in their subject.’</em><br />
-<u>Clark Barwick - University of Edinburgh</u></p>
-</blockquote>
-]]></summary>
-</entry>
-<entry>
-    <title>The Comprehension Construction</title>
-    <link href="https://dom-verity.github.io/posts/2022-01-15-comprehension-construction.html" />
-    <id>https://dom-verity.github.io/posts/2022-01-15-comprehension-construction.html</id>
-    <published>2022-01-15T00:00:00Z</published>
-    <updated>2022-01-15T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<p>In 2017 <a href="https://emilyriehl.github.io/">Emily Riehl</a> and I posted a paper <span class="citation" data-cites="RiehlVerity:2018cc">[1]</span> on the <a href="https://arxiv.org/abs/1706.10023">arXiv</a> entitled “The comprehension construction.” and we blogged about it on the <a href="https://golem.ph.utexas.edu/category/">n-Category Café</a>. That post explains the use of the term <em>comprehension</em> in the title of that paper.</p>
-<p>I have reproduced it here to show off some Haskell hacking I’ve been indulging in to support the typesetting of category theoretic diagrams in blog posts. To do this I’ve used <a href="https://en.wikipedia.org/wiki/LaTeX">LaTeX</a> to generate SVG images, from diagrams specified using packages such as <a href="https://en.wikipedia.org/wiki/PGF/TikZ">PGF/TikZ</a>, which are then inlined directly into HTML pages.</p>
-]]></summary>
-</entry>
-<entry>
-    <title>A recipe for success: Uncle Bob Verity's rice 'n' peas</title>
-    <link href="https://dom-verity.github.io/posts/2021-12-20-rice-n-peas.html" />
-    <id>https://dom-verity.github.io/posts/2021-12-20-rice-n-peas.html</id>
+    <title>We Must Add Structure to Deep Learning Because... Revisited</title>
+    <link href="https://dom-verity.github.io/posts/2025-10-21-we-must-add-structure-to-deep-learning-because-revisited.html" />
+    <id>https://dom-verity.github.io/posts/2025-10-21-we-must-add-structure-to-deep-learning-because-revisited.html</id>
     <published>2021-12-20T00:00:00Z</published>
     <updated>2021-12-20T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<p>What could be more fitting than to kick off this blog by recycling a post I wrote a few years ago about my favourite dish <em>rice ‘n’ peas</em>. Given the season, indeed, I should mention that no Jamaican Christmas would be complete without a vast pot of this staple weighing down the family lunch table. I’ll start with a little personal history, but scroll down in the full article if you’re keen to get straight to my Grandfather’s recipe for rice ‘n’ peas.</p>
+    <summary type="html"><![CDATA[<p>Back in the heady days of March 2023 I did an <a href="https://www.youtube.com/watch?v=rie-9AEhYdY">interview</a> with Tim &amp; Keith of <a href="https://www.patreon.com/mlst">Machine Learning Street Talk</a>. In the year and half since I’ve learned a great deal; about machine learning, about business, and about antibiotics as rosacea treatment.</p>
+<p>I did another brief interview with Tim and Keith in June of this year, the last time I visited Symbolica’s London office.</p>
+<p>While I think my outfit and hair are better in this second talk, the interview was far more all over the place. So I figured I’d give a shot at collecting my hard earned lessons and listing them here.</p>
 ]]></summary>
 </entry>
 

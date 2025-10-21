@@ -1,19 +1,19 @@
-name:                domverity
+name:               paullessard
 version:             0.1.0.0
 -- synopsis:
 -- description:
-homepage:            https://github.com/dom-verity/domverity#readme
+homepage:            https://github.com/paullessard/paullessard#readme
 license:             MIT
 license-file:        LICENSE
-author:              Dom Verity
-maintainer:          dom.verity@gmail.com
-copyright:           Copyright ©2021-2024 Dominic Verity
+author:              Paul Lessard
+maintainer:          paulrlessard@gmail.com
+copyright:           Copyright ©2025 Paul Lessard
 category:            Web
 build-type:          Simple
 extra-source-files:  README.md
 cabal-version:       >=1.10
 
-executable domverity
+executable paullessard
   main-is:           Site.hs
   other-modules:     Compilers
                   ,  XMLWalker
